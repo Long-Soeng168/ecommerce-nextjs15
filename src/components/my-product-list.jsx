@@ -86,7 +86,7 @@ const MyProductsList = () => {
             <Carousel>
                 <CarouselContent>
                     {products.map(product => (
-                        <CarouselItem className="basis-1/2 lg:basis-1/5" key={product.id}>
+                        <CarouselItem className="basis-1/2 md:basis-1/3 xl:basis-1/5" key={product.id}>
                             <ProductCard product={product}  />
                         </CarouselItem>
                     ))}

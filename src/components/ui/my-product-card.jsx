@@ -15,8 +15,8 @@ const ProductCard = ({ product }) => {
           src={product.image}
           alt={product.title}
         />
-        <div className="flex items-center justify-between my-2">
-          <p className="text-2xl font-bold text-red-500 max-w-[10ch] overflow-hidden text-ellipsis">{product.price}</p>
+        <div className="flex flex-col justify-between my-2 lg:items-center lg:flex-row">
+          <p className="text-2xl font-bold text-red-500 max-w-[12ch] overflow-hidden text-ellipsis">{product.price}</p>
           <span className="flex">
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
