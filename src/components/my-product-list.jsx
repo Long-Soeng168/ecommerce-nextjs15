@@ -84,7 +84,7 @@ const MyProductsList = () => {
     return (
         <>
             <Carousel>
-                <CarouselContent className='mb-4'>
+                <CarouselContent>
                     {products.map(product => (
                         <CarouselItem className="basis-1/2 lg:basis-1/5" key={product.id}>
                             <ProductCard product={product}  />
