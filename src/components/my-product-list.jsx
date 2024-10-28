@@ -7,9 +7,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 const products = [
     {
         id: 1,
-        title: 'Premium High-Quality Wireless Earbuds with Advanced Noise Cancellation Technology',
+        title: 'Premium High-Quality',
         description: 'Experience superior sound quality and block out distractions with these state-of-the-art wireless earbuds.',
-        price: '$59.99',
+        price: '$59999999999.99',
         image: '/images/products/product.png', // Your specified image URL
     },
     {
@@ -82,20 +82,19 @@ const products = [
 
 const MyProductsList = () => {
     return (
-        <div className="mt-10 ">
-            <h2 className="text-2xl font-bold mb-6">Our Products</h2>
+        <>
             <Carousel>
-                <CarouselContent>
+                <CarouselContent className='mb-4'>
                     {products.map(product => (
-                        <CarouselItem className="basis-1/5" key={product.id}>
+                        <CarouselItem className="basis-1/2 lg:basis-1/5" key={product.id}>
                             <ProductCard product={product}  />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className='-left-12 border-primary' />
-                <CarouselNext className='-right-12 border-primary' />
+                <CarouselPrevious />
+                <CarouselNext />
             </Carousel>
-        </div>
+        </>
     );
 };
 
