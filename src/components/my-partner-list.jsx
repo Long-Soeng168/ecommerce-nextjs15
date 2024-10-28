@@ -75,7 +75,7 @@ const MyPartnerList = () => {
               <Image
                 width={100}
                 height={100}
-                className="object-cover rounded-md aspect-square"
+                className="object-cover p-1 bg-white rounded-md dark:bg-gray-200 aspect-square"
                 src={partner.image}
                 alt={partner.name}
               />
