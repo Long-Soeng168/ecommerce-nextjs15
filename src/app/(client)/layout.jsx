@@ -7,12 +7,13 @@ const ClientLayout = ({ children }) => {
     <>
       <div className="px-2 mx-auto max-w-screen-2xl">
         <MyHeader key="home-header" />
-        <div className="flex">
-          {/* <div>
+        {children}
+        {/* <div className="flex">
+          <div>
             <MyHomeSidebar />
-          </div> */}
+          </div>
           {children}
-        </div>
+        </div> */}
       </div>
     </>
   );

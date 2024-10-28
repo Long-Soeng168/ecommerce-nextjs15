@@ -29,13 +29,13 @@ const MySlideShow = () => {
 
       <Carousel className='mt-4'>
         <CarouselContent>
-          <CarouselItem className=' basis-1/3'>
+          <CarouselItem className='basis-1/2 lg:basis-1/3'>
                 <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image8.png" alt="" />
           </CarouselItem>
-          <CarouselItem className=' basis-1/3'>
+          <CarouselItem className='basis-1/2 lg:basis-1/3'>
                 <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image4.png" alt="" />
           </CarouselItem>
-          <CarouselItem className=' basis-1/3'>
+          <CarouselItem className='basis-1/2 lg:basis-1/3'>
                 <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image9.png" alt="" />
           </CarouselItem>
         </CarouselContent>
