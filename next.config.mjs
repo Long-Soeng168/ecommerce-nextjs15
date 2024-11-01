@@ -5,6 +5,9 @@ const nextConfig = {
             {
                 hostname: 'via.placeholder.com',
             },
+            {
+                hostname: 'opc.webdigify.com',
+            },
         ],
     },
 };

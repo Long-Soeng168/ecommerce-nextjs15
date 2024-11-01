@@ -3,10 +3,11 @@ import React from "react";
 import { Button } from "./button";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="flex flex-col items-stretch justify-between h-full p-2 border rounded-lg shadow-sm">
+    <Link href={`/products/${product.id}`} className="flex flex-col items-stretch justify-between h-full p-2 border rounded-lg shadow-sm">
       <div>
         <Image
           width={600}
@@ -39,7 +40,7 @@ const ProductCard = ({ product }) => {
           Add to cart
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };
 

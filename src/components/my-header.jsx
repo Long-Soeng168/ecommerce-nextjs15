@@ -6,6 +6,7 @@ import { LanguageToggle } from "./language-toggle";
 import { Button } from "./ui/button";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Input } from "./ui/input";
+import Link from "next/link";
 
 const MyHeader = () => {
   return (
@@ -13,7 +14,7 @@ const MyHeader = () => {
       <div className="flex flex-col lg:gap-10 lg:items-center lg:flex-row">
         {/* Start Logo */}
         <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center">
+          <Link href='/' className="flex items-center">
             <Image
               className="object-contain w-16 p-2 aspect-square"
               src="/images/logo.png"
@@ -22,7 +23,7 @@ const MyHeader = () => {
               alt="Logo Image"
             />
             <p className="text-2xl font-bold max-w-26">LLong</p>
-          </div>
+          </Link>
           <Button variant="outline" size="icon" className='lg:hidden'>
             <Menu className="h-16" />
             <span className="sr-only">Toggle Menu</span>
