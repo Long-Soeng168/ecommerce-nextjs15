@@ -11,10 +11,10 @@ import Link from "next/link";
 const MyHeader = () => {
   return (
     <>
-      <div className="flex flex-col lg:gap-10 lg:items-center lg:flex-row">
+      <div className="flex flex-wrap lg:gap-10 lg:items-center">
         {/* Start Logo */}
         <div className="flex items-center justify-between gap-2">
-          <Link href='/' className="flex items-center">
+          <Link href="/" className="flex items-center">
             <Image
               className="object-contain w-16 p-2 aspect-square"
               src="/images/logo.png"
@@ -24,10 +24,10 @@ const MyHeader = () => {
             />
             <p className="text-2xl font-bold max-w-26">LLong</p>
           </Link>
-          <Button variant="outline" size="icon" className='lg:hidden'>
+          {/* <Button variant="outline" size="icon" className="lg:hidden">
             <Menu className="h-16" />
             <span className="sr-only">Toggle Menu</span>
-          </Button>
+          </Button> */}
         </div>
 
         {/* Start Nav Bar */}
@@ -36,8 +36,8 @@ const MyHeader = () => {
         </div>
 
         {/* Start Action  */}
-        <div className="flex items-center flex-1 w-full gap-2">
-          <div className="flex flex-1 border rounded-lg shadow-sm">
+        <div className="flex items-center justify-end flex-1 w-full gap-2">
+          {/* <div className="flex flex-1 border rounded-lg shadow-sm">
             <Input
               className="border-none shadow-none focus-visible:ring-0"
               placeholder="Search..."
@@ -46,13 +46,21 @@ const MyHeader = () => {
               <Search className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Search</span>
             </Button>
-          </div>
+          </div> */}
+          <Button variant="outline" size="icon">
+            <Search className="h-[1.2rem] w-[1.2rem] " />
+            <span className="sr-only">Search</span>
+          </Button>
           <Button variant="outline" size="icon">
             <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
             <span className="sr-only">Cart</span>
           </Button>
           <ModeToggle />
           <LanguageToggle />
+          <Button variant="outline" size="icon" className='lg:hidden'>
+            <Menu className="h-[1.2rem] w-[1.2rem] " />
+            <span className="sr-only">Menu</span>
+          </Button>
         </div>
       </div>
     </>

@@ -18,13 +18,14 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { Button } from "./ui/button";
 
 export function NavMain({
-  items
+  items, header
 }) {
   return (
     (<SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{header}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
@@ -56,9 +57,9 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
+                            <Button variant='link' onClick={() => console.log('Clicked')}>
                               <span>{subItem.title}</span>
-                            </a>
+                            </Button>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

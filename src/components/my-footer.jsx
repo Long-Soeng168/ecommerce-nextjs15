@@ -39,6 +39,7 @@ const MyFooter = () => {
                 imageUrl={item.image}
                 title={item.title}
                 link={item.link}
+                key={item.id}
               />
             ))}
             <li></li>

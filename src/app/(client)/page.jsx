@@ -46,7 +46,7 @@ export default function Home() {
 
       <div className="max-w-screen-xl mx-auto mt-16 space-y-4">
         <MyHeading
-          title="Publisher"
+          title="Shops"
         />
         <MyPartnerList />
       </div>

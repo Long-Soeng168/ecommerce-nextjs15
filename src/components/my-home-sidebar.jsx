@@ -174,9 +174,9 @@ const data = {
 
 export function MyHomeSidebar() {
   return (
-    <SidebarProvider>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
+    <SidebarProvider className='min-h-0'>
+      <SidebarContent >
+        <NavMain items={data.navMain} header='Categories' />
       </SidebarContent>
     </SidebarProvider>
   );
