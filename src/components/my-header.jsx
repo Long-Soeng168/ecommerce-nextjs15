@@ -52,12 +52,14 @@ const MyHeader = () => {
             <span className="sr-only">Search</span>
           </Button>
           <Button variant="outline" size="icon">
-            <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
-            <span className="sr-only">Cart</span>
+            <Link href='/cart'>
+              <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
+              <span className="sr-only">Cart</span>
+            </Link>
           </Button>
           <ModeToggle />
           <LanguageToggle />
-          <Button variant="outline" size="icon" className='lg:hidden'>
+          <Button variant="outline" size="icon" className="lg:hidden">
             <Menu className="h-[1.2rem] w-[1.2rem] " />
             <span className="sr-only">Menu</span>
           </Button>

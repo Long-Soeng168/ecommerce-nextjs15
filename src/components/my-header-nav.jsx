@@ -108,17 +108,17 @@ export function MyHeaderNav() {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link href="#" legacyBehavior passHref>
+          <Link href="/profiles/authors" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Biography
+              Authors
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="#" legacyBehavior passHref>
+          <Link href="/profiles/publishers" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Kid Books
+              Publishers
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

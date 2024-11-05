@@ -11,11 +11,13 @@ const categories = [
 
 const MyCategoryList = () => {
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4">
-      {categories.map((category) => (
-        <MyCategoryCard category={category} key={category.id} />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4">
+        {categories.map((category) => (
+          <MyCategoryCard category={category} key={category.id} />
+        ))}
+      </div>
+    </>
   );
 };
 
