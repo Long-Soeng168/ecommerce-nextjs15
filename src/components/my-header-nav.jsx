@@ -122,6 +122,14 @@ export function MyHeaderNav() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        
+        <NavigationMenuItem>
+          <Link href="/blogs" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Blogs
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
 
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>

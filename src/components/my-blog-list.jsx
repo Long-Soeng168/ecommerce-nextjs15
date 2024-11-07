@@ -2,6 +2,7 @@ import { Eye } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const blogs = [
   {
@@ -31,7 +32,8 @@ const MyBlogList = () => {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {blogs.map((blog) => (
-        <div
+        <Link
+          href={`blogs/${blog.id}`}
           key={blog.id}
           className="flex flex-col justify-between p-2 transition-shadow duration-300 border rounded-lg shadow cursor-pointer border-border bg-accent hover:shadow-xl"
         >
@@ -57,7 +59,7 @@ const MyBlogList = () => {
               Read More
             </Button>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
