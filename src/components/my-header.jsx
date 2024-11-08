@@ -7,6 +7,14 @@ import { Button } from "./ui/button";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Input } from "./ui/input";
 import Link from "next/link";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const MyHeader = () => {
   return (
@@ -47,12 +55,38 @@ const MyHeader = () => {
               <span className="sr-only">Search</span>
             </Button>
           </div> */}
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Search className="h-[1.2rem] w-[1.2rem] " />
+                <span className="sr-only">Search</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="top">
+              <SheetHeader>
+                <SheetTitle>Are you absolutely sure?</SheetTitle>
+                <SheetDescription>
+                  This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="flex flex-1 border rounded-lg shadow-sm border-primary">
+                <Input
+                  autoFocus
+                  className="border-none shadow-none min-w-40 focus-visible:ring-0"
+                  placeholder="Search..."
+                />
+                <Button variant="gosh" size="icon">
+                  <Search className="h-[1.2rem] w-[1.2rem] " />
+                  <span className="sr-only">Search</span>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+
           <Button variant="outline" size="icon">
-            <Search className="h-[1.2rem] w-[1.2rem] " />
-            <span className="sr-only">Search</span>
-          </Button>
-          <Button variant="outline" size="icon">
-            <Link href='/cart'>
+            <Link href="/cart">
               <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Cart</span>
             </Link>
