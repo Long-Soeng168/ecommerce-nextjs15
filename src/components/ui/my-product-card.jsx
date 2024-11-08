@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
           width={600}
           height={600}
           className="object-cover w-full rounded-md aspect-[6/9]"
-          src={product.image}
+          src='/images/books/book4.png'
           alt={product.title}
         />
         <div className="flex flex-col justify-between mt-2 mb-2 lg:mb-0 lg:items-center lg:flex-row">
