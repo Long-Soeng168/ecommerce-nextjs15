@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
         
-        <h3 className="font-semibold text-md text-foreground line-clamp-2">{product.title}</h3>
+        <h3 className="text-md text-foreground line-clamp-2">{product.title}</h3>
         {/* <p className="mb-2 text-background-foreground line-clamp-2">{product.description}</p> */}
       </div>
 

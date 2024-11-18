@@ -18,10 +18,14 @@ import {
 
 const MyHeader = () => {
   return (
-    <>
+    <div className="mb-2">
       <div className="flex flex-wrap lg:gap-10 lg:items-center">
         {/* Start Logo */}
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 mr-2">
+          {/* <Button variant="outline" size="icon" className="lg:hidden">
+            <Menu className="h-[1.2rem] w-[1.2rem] " />
+            <span className="sr-only">Menu</span>
+          </Button> */}
           <Link href="/" className="flex items-center">
             <Image
               className="object-contain w-16 p-2 aspect-square"
@@ -38,13 +42,38 @@ const MyHeader = () => {
           </Button> */}
         </div>
 
+        {/* Start Action  */}
+        <div className="flex items-center justify-end flex-1 w-full gap-2">
+          <div className="flex flex-1 border rounded-lg shadow-sm border-primary">
+            <Input
+              autoFocus
+              className="border-none shadow-none min-w-40 focus-visible:ring-0"
+              placeholder="Search..."
+            />
+            <Button variant="gosh" size="icon">
+              <Search className="h-[1.2rem] w-[1.2rem] " />
+              <span className="sr-only">Search</span>
+            </Button>
+          </div>
+          <Button variant="outline" size="icon">
+            <Link href="/cart">
+              <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
+              <span className="sr-only">Cart</span>
+            </Link>
+          </Button>
+        </div>
+      </div>
+      
+      <div className="flex flex-wrap lg:items-center">
+        {/* Start Logo */}
+
         {/* Start Nav Bar */}
-        <div className="justify-center flex-1 hidden lg:flex ">
+        <div className="hidden lg:flex">
           <MyHeaderNav />
         </div>
 
         {/* Start Action  */}
-        <div className="flex items-center justify-end flex-1 w-full gap-2">
+        <div className="flex items-center justify-end flex-1 w-full gap-2 py-2">
           {/* <div className="flex flex-1 border rounded-lg shadow-sm">
             <Input
               className="border-none shadow-none focus-visible:ring-0"
@@ -56,7 +85,7 @@ const MyHeader = () => {
             </Button>
           </div> */}
 
-          <Sheet>
+          {/* <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
                 <Search className="h-[1.2rem] w-[1.2rem] " />
@@ -83,14 +112,8 @@ const MyHeader = () => {
                 </Button>
               </div>
             </SheetContent>
-          </Sheet>
+          </Sheet> */}
 
-          <Button variant="outline" size="icon">
-            <Link href="/cart">
-              <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
-              <span className="sr-only">Cart</span>
-            </Link>
-          </Button>
           <ModeToggle />
           <LanguageToggle />
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -99,7 +122,7 @@ const MyHeader = () => {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

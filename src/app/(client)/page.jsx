@@ -19,29 +19,20 @@ export default function Home() {
         <MyCategoryList key='category-list-key' />
       </div>
 
-      <div className="flex flex-col gap-2 mb-8">
-        <MyProductHeader title="New Arrivals" />
+      <MyProductHeader title="New Arrivals" />
+      <div className="flex flex-col gap-4 mb-8">
+        <MyProductsList />
         <MyProductsList />
       </div>
-      <div className="flex flex-col gap-2 mb-4">
-        <MyProductHeader title="Best Selling" />
+      
+      <MyProductHeader title="Best Selling" />
+      <div className="flex flex-col gap-4 mb-4">
+        <MyProductsList />
         <MyProductsList />
       </div>
 
       <div className="my-16">
         <MyPromotions />
-      </div>
-
-      <div className="my-8">
-        <MyFeatureList />
-      </div>
-
-      <div className="flex flex-col gap-4 my-8 mt-16">
-        <MyHeading
-          title="From the community"
-          description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
-        />
-        <MyBlogList />
       </div>
 
       <div className="max-w-screen-xl mx-auto mt-16 space-y-4">
@@ -51,7 +42,17 @@ export default function Home() {
         <MyPartnerList />
       </div>
 
-     
+      <div className="flex flex-col gap-4 my-8 mt-16">
+        <MyHeading
+          title="From the community"
+          description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
+        />
+        <MyBlogList />
+      </div>
+      
+      <div className="my-16">
+        <MyFeatureList />
+      </div>
     </div>
   );
 }

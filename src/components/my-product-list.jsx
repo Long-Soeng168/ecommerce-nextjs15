@@ -106,7 +106,7 @@ const MyProductsList = () => {
       <CarouselContent>
         {products.map((product) => (
           <CarouselItem
-            className="basis-1/2 md:basis-1/3 xl:basis-1/5"
+            className="basis-1/2 md:basis-1/3 xl:basis-1/6"
             key={product.id}
           >
             <ProductCard product={product} />
