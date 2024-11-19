@@ -14,9 +14,9 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Thnal.com | Cambodia's Leading Bookshop & Publishing Platform",
+  title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
   description:
-    "Discover Thnal.com, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
   keywords: [
     "Online book marketplace Cambodia",
     "Cambodian bookshop platform",
@@ -26,7 +26,7 @@ export const metadata = {
     "Sell books online Cambodia",
   ],
   openGraph: {
-    title: "Thnal.com | Cambodia's Leading Bookshop & Publishing Platform",
+    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal.com, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
     url: "https://thnal.com",
@@ -36,7 +36,7 @@ export const metadata = {
         url: "/images/logo.png", // replace with the actual image URL
         width: 500,
         height: 500,
-        alt: "Thnal.com Cambodia's Leading Bookshop",
+        alt: "Thnal Cambodia's Leading Bookshop",
       },
     ],
   },
