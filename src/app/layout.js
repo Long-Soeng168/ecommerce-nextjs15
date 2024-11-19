@@ -45,7 +45,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Thnal.com | Cambodia's Leading Bookshop & Publishing Platform",
+    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal.com, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
     site: "@thnal_com", // replace with actual Twitter handle
