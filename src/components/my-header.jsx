@@ -57,11 +57,14 @@ const MyHeader = () => {
               <span className="sr-only">Search</span>
             </Button>
           </div>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className='relative'>
             <Link href="/cart">
               <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Cart</span>
             </Link>
+            <span className="absolute px-1.5 bg-yellow-400 rounded-full -right-2.5 -top-2.5">
+              2
+            </span>
           </Button>
         </div>
       </div>
