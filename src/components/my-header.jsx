@@ -21,17 +21,17 @@ const MyHeader = () => {
     <div>
       <div className="flex flex-wrap pb-4 lg:gap-10 lg:items-center lg:pb-0">
         {/* Start Logo */}
-        <div className="flex items-center justify-between w-full gap-2 lg:w-auto">
-          <Link href="/" className="flex items-center">
+        <div className="flex items-center justify-between w-full gap-2 py-4 lg:w-auto">
+          <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
-              className="object-contain w-16 p-2 aspect-square"
+              className="object-contain w-12 rounded-md aspect-square"
               src="/images/logo.png"
               width={100}
               height={100}
               alt="Logo Image"
             />
             <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
-              LLong
+              Thnal
             </p>
           </Link>
           <div className="flex items-center gap-2 lg:hidden">
@@ -62,7 +62,7 @@ const MyHeader = () => {
               <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Cart</span>
             </Link>
-            <span className="absolute px-1.5 bg-yellow-400 rounded-full -right-2.5 -top-2.5">
+            <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-3">
               2
             </span>
           </Button>
