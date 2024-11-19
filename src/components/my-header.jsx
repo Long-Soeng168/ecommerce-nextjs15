@@ -18,14 +18,10 @@ import {
 
 const MyHeader = () => {
   return (
-    <div className="mb-2">
-      <div className="flex flex-wrap lg:gap-10 lg:items-center">
+    <div>
+      <div className="flex flex-wrap pb-4 lg:gap-10 lg:items-center lg:pb-0">
         {/* Start Logo */}
-        <div className="flex items-center justify-between gap-2 mr-2">
-          {/* <Button variant="outline" size="icon" className="lg:hidden">
-            <Menu className="h-[1.2rem] w-[1.2rem] " />
-            <span className="sr-only">Menu</span>
-          </Button> */}
+        <div className="flex items-center justify-between w-full gap-2 lg:w-auto">
           <Link href="/" className="flex items-center">
             <Image
               className="object-contain w-16 p-2 aspect-square"
@@ -34,24 +30,30 @@ const MyHeader = () => {
               height={100}
               alt="Logo Image"
             />
-            <p className="text-2xl font-bold max-w-26">LLong</p>
+            <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
+              LLong
+            </p>
           </Link>
-          {/* <Button variant="outline" size="icon" className="lg:hidden">
-            <Menu className="h-16" />
-            <span className="sr-only">Toggle Menu</span>
-          </Button> */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ModeToggle />
+            <LanguageToggle />
+            <Button variant="outline" size="icon" className="lg:hidden">
+              <Menu className="h-[1.2rem] w-[1.2rem] " />
+              <span className="sr-only">Menu</span>
+            </Button>
+          </div>
         </div>
 
         {/* Start Action  */}
         <div className="flex items-center justify-end flex-1 w-full gap-2">
-          <div className="flex flex-1 border rounded-lg shadow-sm border-primary">
+          <div className="flex flex-1 bg-white border rounded-lg shadow-sm dark:text-primary border-primary">
             <Input
               autoFocus
-              className="border-none shadow-none min-w-40 focus-visible:ring-0"
+              className="border-none shadow-none dark:text-black dark:placeholder-black min-w-40 focus-visible:ring-0"
               placeholder="Search..."
             />
             <Button variant="gosh" size="icon">
-              <Search className="h-[1.2rem] w-[1.2rem] " />
+              <Search className="h-[1.2rem] w-[1.2rem] dark:text-black" />
               <span className="sr-only">Search</span>
             </Button>
           </div>
@@ -63,57 +65,17 @@ const MyHeader = () => {
           </Button>
         </div>
       </div>
-      
-      <div className="flex flex-wrap lg:items-center">
+
+      <div className="flex-wrap hidden py-4 lg:flex lg:items-center">
         {/* Start Logo */}
 
         {/* Start Nav Bar */}
-        <div className="hidden lg:flex">
+        <div className="text-primary-foreground dark:text-white">
           <MyHeaderNav />
         </div>
 
         {/* Start Action  */}
-        <div className="flex items-center justify-end flex-1 w-full gap-2 py-2">
-          {/* <div className="flex flex-1 border rounded-lg shadow-sm">
-            <Input
-              className="border-none shadow-none focus-visible:ring-0"
-              placeholder="Search..."
-            />
-            <Button variant="gosh" size="icon">
-              <Search className="h-[1.2rem] w-[1.2rem] " />
-              <span className="sr-only">Search</span>
-            </Button>
-          </div> */}
-
-          {/* <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Search className="h-[1.2rem] w-[1.2rem] " />
-                <span className="sr-only">Search</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="top">
-              <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader>
-              <div className="flex flex-1 border rounded-lg shadow-sm border-primary">
-                <Input
-                  autoFocus
-                  className="border-none shadow-none min-w-40 focus-visible:ring-0"
-                  placeholder="Search..."
-                />
-                <Button variant="gosh" size="icon">
-                  <Search className="h-[1.2rem] w-[1.2rem] " />
-                  <span className="sr-only">Search</span>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet> */}
-
+        <div className="flex items-center justify-end flex-1 w-full gap-2">
           <ModeToggle />
           <LanguageToggle />
           <Button variant="outline" size="icon" className="lg:hidden">
