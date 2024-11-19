@@ -14,6 +14,9 @@ const geistMono = localFont({
 });
 
 export const metadata = {
+  icons: {
+    icon: "/images/logo.png",
+  },
   title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
   description:
     "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
