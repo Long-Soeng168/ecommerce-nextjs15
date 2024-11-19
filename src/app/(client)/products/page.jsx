@@ -160,7 +160,7 @@ const Page = () => {
         {/* Start Products Header */}
         <div className="flex flex-wrap justify-end gap-2">
           {/* Start Search */}
-          <div className="flex flex-1 border rounded-lg shadow-sm">
+          {/* <div className="flex flex-1 border rounded-lg shadow-sm">
             <Input
               autoFocus
               className="border-none shadow-none min-w-40 focus-visible:ring-0"
@@ -170,7 +170,7 @@ const Page = () => {
               <Search className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Search</span>
             </Button>
-          </div>
+          </div> */}
           {/* End Search */}
           <div className="flex flex-wrap items-center justify-end gap-2">
             <Select>
