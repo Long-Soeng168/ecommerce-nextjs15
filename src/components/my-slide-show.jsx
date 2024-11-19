@@ -14,14 +14,14 @@ const MySlideShow = () => {
       <Carousel>
         <CarouselContent>
           <CarouselItem>
-                <Image className="w-full aspect-[21/6] object-cover" width={1050} height={300} src="/images/slides/image0.png" alt="" />
+                <Image className="w-full aspect-[21/7] object-cover" width={1050} height={300} src="/images/slides/top1.png" alt="" />
           </CarouselItem>
-          <CarouselItem>
+          {/* <CarouselItem>
                 <Image className="w-full aspect-[21/6] object-cover" width={1050} height={300} src="/images/slides/image2.webp" alt="" />
           </CarouselItem>
           <CarouselItem>
                 <Image className="w-full aspect-[21/6] object-cover" width={1050} height={300} src="/images/slides/image3.webp" alt="" />
-          </CarouselItem>
+          </CarouselItem> */}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
@@ -30,13 +30,13 @@ const MySlideShow = () => {
       <Carousel className='mt-2 lg:mt-4'>
         <CarouselContent>
           <CarouselItem className='pl-2 lg:pl-4 basis-1/2 lg:basis-1/3'>
-                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image8.png" alt="" />
+                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/bottom1.jpeg" alt="" />
           </CarouselItem>
           <CarouselItem className='pl-2 lg:pl-4 basis-1/2 lg:basis-1/3'>
-                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image4.png" alt="" />
+                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/bottom2.jpeg" alt="" />
           </CarouselItem>
           <CarouselItem className='pl-2 lg:pl-4 basis-1/2 lg:basis-1/3'>
-                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/image9.png" alt="" />
+                <Image className="w-full aspect-[16/9] object-cover" width={1050} height={300} src="/images/slides/bottom3.jpeg" alt="" />
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />

@@ -11,7 +11,7 @@ import MyPromotions from "@/components/my-promotions";
 export default function Home() {
   return (
     <div>
-      <div className="mb-8">
+      <div className="mt-2 mb-8">
         <MySlideShow />
       </div>
 
