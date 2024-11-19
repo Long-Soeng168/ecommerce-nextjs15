@@ -19,20 +19,20 @@ import {
 const MyHeader = () => {
   return (
     <div>
-      <div className="flex flex-wrap pb-4 lg:gap-10 lg:items-center lg:pb-0">
+      <div className="flex flex-wrap py-4 lg:gap-10 lg:items-center">
         {/* Start Logo */}
-        <div className="flex items-center justify-between w-full gap-2 py-4 lg:w-auto">
+        <div className="flex items-center justify-between w-full gap-2 mb-4 lg:mb-0 lg:w-auto">
           <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
-              className="object-contain w-12 rounded-md aspect-square"
+              className="object-contain w-16 rounded-md aspect-square"
               src="/images/logo.png"
               width={100}
               height={100}
               alt="Logo Image"
             />
-            <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
+            {/* <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
               Thnal
-            </p>
+            </p> */}
           </Link>
           <div className="flex items-center gap-2 lg:hidden">
             <ModeToggle />
