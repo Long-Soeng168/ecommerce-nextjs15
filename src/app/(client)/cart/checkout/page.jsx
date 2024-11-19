@@ -47,11 +47,11 @@ export default function Component() {
   const total = subtotal + shipping;
 
   return (
-    <div className="flex flex-col min-h-screen p-4">
+    <div className="flex flex-col min-h-screen lg:px-4">
       <MyStepper currentStep={2} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8">
         {/* Start Left Section */}
-        <div className="p-8 border rounded-lg shadow-lg bg-background">
+        <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
           <h1 className="mb-4 text-2xl font-bold">Checkout</h1>
           <form className="grid grid-cols-2 gap-4">
             <div className="col-span-2">

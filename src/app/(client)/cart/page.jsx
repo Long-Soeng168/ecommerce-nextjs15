@@ -55,17 +55,17 @@ const CartPage = () => {
   const total = subtotal + shipping;
 
   return (
-    <div className="flex flex-col min-h-screen p-4">
+    <div className="flex flex-col min-h-screen lg:px-4">
       <MyStepper currentStep={1} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8 ">
         {/* Start Left Section */}
-        <div className="p-8 border rounded-lg shadow-lg bg-background">
+        <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
           <div>
           <h1 className="mb-4 text-2xl font-bold">Shopping Cart</h1>
             <div className="overflow-x-auto">
               <table className="min-w-full border border-border bg-background">
                 <thead>
-                  <tr className="bg-border">
+                  <tr className="bg-primary/10 dark:bg-border">
                     <th className="p-4 font-semibold text-left ">Image</th>
                     <th className="p-4 font-semibold text-left ">Item</th>
                     <th className="p-4 font-semibold text-left ">Price</th>
@@ -123,7 +123,7 @@ const CartPage = () => {
                   ))}
                 </tbody>
               </table>
-              <h2 className="p-4 text-2xl font-bold border-b text-end">
+              <h2 className="p-4 text-2xl font-bold border-b border-l border-r text-end">
                 Total: ${getTotalPrice()}
               </h2>
             </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const MySummary = ({ total, subtotal, shipping, cartItems }) => {
   return (
-    <div className="p-8 border rounded-lg shadow-lg bg-background">
+    <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
       <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
       <div className="space-y-4">
         <div className="flex justify-between">
