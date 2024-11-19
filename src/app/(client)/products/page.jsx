@@ -49,7 +49,7 @@ const products = [
     description:
       "Experience superior sound quality and block out distractions with these state-of-the-art wireless earbuds.",
     price: "$59999999999.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book1.png", // Your specified image URL
   },
   {
     id: 2,
@@ -58,7 +58,7 @@ const products = [
     description:
       "Stay connected and monitor your health metrics effortlessly with this elegant smartwatch designed for modern lifestyles.",
     price: "$149.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book2.png", // Your specified image URL
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const products = [
     description:
       "Take your music with you on all your adventures with this lightweight Bluetooth speaker that delivers powerful sound.",
     price: "$79.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book3.png", // Your specified image URL
   },
   {
     id: 4,
@@ -76,7 +76,7 @@ const products = [
     description:
       "Transform your living room into a cinematic experience with this impressive 4K Ultra HD TV, featuring the latest smart technology.",
     price: "$499.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book4.png", // Your specified image URL
   },
   {
     id: 5,
@@ -85,7 +85,7 @@ const products = [
     description:
       "Elevate your gaming performance with this ergonomic gaming mouse, engineered for speed and accuracy.",
     price: "$39.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book1.png", // Your specified image URL
   },
   {
     id: 6,
@@ -94,7 +94,7 @@ const products = [
     description:
       "Experience the best of both worlds with this powerful 2-in-1 laptop that combines productivity and entertainment.",
     price: "$899.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book2.png", // Your specified image URL
   },
   {
     id: 7,
@@ -102,7 +102,7 @@ const products = [
     description:
       "Pamper your skin with this luxurious skincare set made from 100% organic ingredients for a natural glow.",
     price: "$89.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book3.png", // Your specified image URL
   },
   {
     id: 8,
@@ -111,7 +111,7 @@ const products = [
     description:
       "Capture stunning images and videos with this high-performance DSLR camera featuring advanced settings and features.",
     price: "$1,299.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book4.png", // Your specified image URL
   },
   {
     id: 9,
@@ -119,7 +119,7 @@ const products = [
     description:
       "Embark on your next adventure with this rugged hiking backpack, designed for comfort and convenience on the trail.",
     price: "$59.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book1.png", // Your specified image URL
   },
   {
     id: 10,
@@ -128,7 +128,7 @@ const products = [
     description:
       "Enjoy your music wirelessly with these stylish Bluetooth headphones that provide exceptional audio performance.",
     price: "$79.99",
-    image: "/images/products/book4.png", // Your specified image URL
+    image: "/images/books/book2.png", // Your specified image URL
   },
 ];
 
@@ -227,7 +227,7 @@ const Page = () => {
         {/* End Products Header */}
 
         {/* Start Products List */}
-        <div className="grid grid-cols-2 gap-4 pt-2 md:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {products.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
