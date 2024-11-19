@@ -31,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
-      "Discover Thnal.com, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
     url: "https://thnal.com",
     type: "website",
     images: [
@@ -47,7 +47,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
-      "Discover Thnal.com, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
     site: "@thnal_com", // replace with actual Twitter handle
     creator: "@thnal_com", // replace with actual Twitter handle
   },
