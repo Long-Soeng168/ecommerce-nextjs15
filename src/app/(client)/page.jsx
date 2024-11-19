@@ -20,29 +20,29 @@ export default function Home() {
       </div>
 
       <MyProductHeader title="New Arrivals" />
-      <div className="flex flex-col gap-4 mb-8">
+      <div className="flex flex-col gap-4 mb-20">
         <MyProductsList />
         <MyProductsList />
       </div>
       
       <MyProductHeader title="Best Selling" />
-      <div className="flex flex-col gap-4 mb-4">
+      <div className="flex flex-col gap-4 mb-20">
         <MyProductsList />
         <MyProductsList />
       </div>
 
-      <div className="my-16">
+      <div className="mb-20">
         <MyPromotions />
       </div>
 
-      <div className="max-w-screen-xl mx-auto mt-16 space-y-4">
+      <div className="max-w-screen-xl mx-auto mb-20 space-y-4">
         <MyHeading
           title="Shops"
         />
         <MyPartnerList />
       </div>
 
-      <div className="flex flex-col gap-4 my-8 mt-16">
+      <div className="flex flex-col gap-4 mb-20">
         <MyHeading
           title="From the community"
           description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
