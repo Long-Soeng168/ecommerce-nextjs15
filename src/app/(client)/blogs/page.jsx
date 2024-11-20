@@ -6,7 +6,8 @@ import React from "react";
 
 const Page = async () => {
   let results = await getBlogs();
-  let blogs = results?.data;
+  let blogs = results?.data || [];
+  
   return (
     <>
       <div className="flex flex-col gap-4 my-8 mt-16">
