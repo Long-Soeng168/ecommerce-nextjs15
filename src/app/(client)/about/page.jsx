@@ -8,7 +8,7 @@ const AboutPage = async () => {
     <div className="flex flex-col items-center min-h-screen mt-8">
       {about?.description ? (
         <div
-          className="w-full prose max-w-none lg:prose-xl"
+          className="no-tailwind"
           dangerouslySetInnerHTML={{ __html: about.description }}
         />
       ) : (
