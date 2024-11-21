@@ -17,7 +17,7 @@ export async function getBlog(id) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch: ${response.statusText}`);
+      throw new Error(`Failed to fetch Blogs: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {
@@ -31,7 +31,7 @@ export async function getBlogCategories() {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch: ${response.statusText}`);
+      throw new Error(`Failed to fetch Blogs: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {

@@ -21,7 +21,7 @@ const Page = async () => {
           title="From the community"
           description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
         />
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-3">
           <MyBlogCategoriesSelect categories={categories} />
           <div className="flex flex-1 bg-white border rounded-lg shadow-sm dark:bg-transparent dark:text-primary border-primary">
             <Input
