@@ -19,7 +19,7 @@ export default async function Page({ params }) {
     <div className="bg-background text-foreground">
       <section className="w-full grid grid-cols-1 gap-8 px-4 mt-8 md:grid-cols-[3fr,1fr] md:gap-12 ">
         <div>
-          <h1 className="mb-4 text-3xl font-bold tracking-tighter">
+          <h1 className="mb-4 text-2xl font-bold tracking-tighter">
             {blog.name}
           </h1>
           <div className="flex items-center space-x-4 text-muted-foreground">

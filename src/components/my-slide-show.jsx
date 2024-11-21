@@ -11,8 +11,8 @@ import { getSlides } from "@/services/slides-services";
 import Link from "next/link";
 
 const MySlideShow = async () => {
-  const topSlides = await getSlides({ position: "top" });
-  const bottomSlides = await getSlides({ position: "bottom" });
+  const topSlides = await getSlides({ position: "top" }) || [];
+  const bottomSlides = await getSlides({ position: "bottom" }) || [];
   return (
     <>
       {topSlides.length > 0 && (
@@ -23,7 +23,7 @@ const MySlideShow = async () => {
                 <Link href={slide.link || "#"}>
                   <Image
                     className={`w-full aspect-[21/7] object-cover transition-all duration-500 ${
-                      slide.link ? "hover:scale-95" : ""
+                      slide.link ? "hover:scale-95 border-primary hover:border-2" : ""
                     }`}
                     width={1050}
                     height={300}
@@ -47,7 +47,7 @@ const MySlideShow = async () => {
                 <Link href={slide.link || "#"}>
                   <Image
                     className={`object-cover w-full aspect-video transition-all duration-500 ${
-                      slide.link ? "hover:scale-95" : ""
+                      slide.link ? "hover:scale-95 border-primary hover:border-2" : ""
                     }`}
                     width={1050}
                     height={300}

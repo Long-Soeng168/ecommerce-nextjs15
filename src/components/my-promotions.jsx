@@ -3,53 +3,32 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
-const MyPromotions = () => {
-  const books = [
-    {
-      title: "Lords Of The Rings",
-      image: "/images/books/book3.png",
-      link: "#",
-    },
-    {
-      title: "Lords Of The Rings",
-      image: "/images/books/book2.png",
-      link: "#",
-    },
-    {
-      title: "The Scarlet Pimpernel Emma Orexy",
-      image: "/images/books/book1.png",
-      link: "#",
-    },
-  ];
-
+const MyPromotions = ({ promotions }) => {
   return (
     <div className="grid gap-4 overflow-hidden lg:grid-cols-3">
       {/* Left Column (Book Promotion) */}
-      <div className="w-full col-span-1 p-4 bg-green-100 dark:bg-accent">
-        <p className="text-xs sm:text-sm">Flat 30% Off On Story Book</p>
-        <h2 className="mt-2 text-lg font-semibold sm:text-xl">
-          The Most Popular Book By Vive Viajando
+      <Link href={promotions[0].link} className="w-full col-span-1 p-4 bg-green-100 dark:bg-accent">
+        <h2 className="mt-2 font-semibold text-md sm:text-lg line-clamp-3">
+          {promotions[0].name}
         </h2>
-        <Link
-          className="mt-8 text-xl text-indigo-500 uppercase hover:underline"
-          href="#"
-        >
-          Shop Now
-        </Link>
+        <p className="text-xs sm:text-sm line-clamp-6">{promotions[0].short_description}</p>
+        <p className="mt-1 text-xl text-indigo-500 uppercase hover:underline">
+          READ MORE
+        </p>
         <div className="flex items-center justify-center">
           <Image
             width={300}
             height={300}
-            src="/images/books/book4.png"
-            alt="Vive Viajando Book"
+            src={process.env.IMAGE_PROMOTION_URL + promotions[0].image}
+            alt=""
             className="object-contain w-full p-4 mt-4 aspect-square"
           />
         </div>
-      </div>
+      </Link>
 
       {/* Right Column (Other Books) */}
       <div className="grid col-span-1 gap-4 lg:grid-cols-2 lg:col-span-2">
-        {books.map((book, index) => {
+        {promotions?.slice(1)?.map((promotion, index) => {
           const backgroundClass =
             index === 2
               ? "bg-yellow-100"
@@ -59,31 +38,33 @@ const MyPromotions = () => {
           const isWideClass = index === 2 ? "sm:col-span-2" : "";
 
           return (
-            <div
+            <Link
               key={index}
+              href={promotion.link}
               className={`grid grid-cols-2 gap-2 items-center p-4 ${backgroundClass} ${isWideClass} flex-row dark:bg-accent`}
             >
               <div>
-                <h2 className="mt-2 text-lg font-semibold sm:text-xl">
-                  {book.title}
+                <h2 className="mt-2 font-semibold text-md sm:text-lg line-clamp-3">
+                  {promotion.name}
                 </h2>
-                <Link
-                  className="text-xl text-indigo-500 uppercase hover:underline"
-                  href={book.link}
-                >
-                  Shop Now
-                </Link>
+                <p className="text-xs sm:text-sm line-clamp-6">
+                  {promotion.short_description}
+                </p>
+
+                <p className="text-lg text-indigo-500 uppercase hover:underline">
+                  Read More
+                </p>
               </div>
               <div className="flex items-center justify-center flex-1">
                 <Image
                   width={150}
                   height={150}
-                  src={book.image}
-                  alt={book.title}
+                  src={process.env.IMAGE_PROMOTION_URL + promotion.image}
+                  alt=""
                   className="object-contain min-w-40"
                 />
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

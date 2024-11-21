@@ -1,5 +1,5 @@
-export async function getBlogs({categoryId} = {}) {
-  const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&page=`;
+export async function getBlogs({categoryId, perPage} = {}) {
+  const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
