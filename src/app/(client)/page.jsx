@@ -68,7 +68,7 @@ export default async function Home() {
       )}
 
       <div className="max-w-screen-xl mx-auto mb-20 space-y-4">
-        <MyHeading title="Shops" />
+        <MyHeading title="Partners" />
         <MyPartnerList />
       </div>
 
