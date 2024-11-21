@@ -50,7 +50,7 @@ const MyHeader = () => {
             <Input
               autoFocus
               className="border-none shadow-none dark:text-black dark:placeholder-black min-w-40 focus-visible:ring-0"
-              placeholder="Search..."
+              placeholder="Search Books..."
             />
             <Button variant="gosh" size="icon">
               <Search className="h-[1.2rem] w-[1.2rem] dark:text-black" />

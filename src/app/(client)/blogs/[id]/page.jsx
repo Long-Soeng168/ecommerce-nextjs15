@@ -12,7 +12,6 @@ export default async function Page({ params }) {
   const blog = await getBlog(id);
 
   const categories = await getBlogCategories();
-  console.log(categories);
 
   let results = await getBlogs({ categoryId: blog?.news_category_id });
   let relatedBlogs = results?.data || [];
@@ -62,6 +61,7 @@ export default async function Page({ params }) {
               <div className="mt-4 space-y-2">
                 {categories.map((category) => (
                   <Link
+                    key={category.id}
                     href="#"
                     className="flex items-center justify-between text-sm font-medium hover:underline"
                     prefetch={false}
