@@ -106,7 +106,7 @@ export function MyHeaderNav() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        
+{/*         
         <NavigationMenuItem>
           <Link href="/profiles/authors" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -121,7 +121,7 @@ export function MyHeaderNav() {
               Publishers
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
