@@ -104,6 +104,9 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                       <h3 className="text-md group-hover:underline text-start text-foreground line-clamp-2">
                         {categoryMostBook?.books[0].title}
                       </h3>
+                      <p className="text-sm text-gray-400 line-clamp-3">
+                        {categoryMostBook?.books[0].short_description} ៛
+                      </p>
                     </div>
                   </Link>
                 </li>
@@ -124,10 +127,13 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                       />
 
                       <div>
-                        <h4 className="font-medium text-md group-hover:underline line-clamp-3">
+                        <h4 className="font-medium text-md group-hover:underline line-clamp-2">
                           {book.title}
                         </h4>
-                        <p className="text-sm text-destructive line-clamp-2">
+                        <p className="text-sm text-gray-400 line-clamp-2">
+                          {book.short_description} ៛
+                        </p>
+                        <p className="text-sm text-destructive line-clamp-1">
                           {book.price} ៛
                         </p>
                       </div>
