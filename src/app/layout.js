@@ -19,12 +19,11 @@ export const metadata = {
   },
   title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
   description:
-    "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks.",
   keywords: [
     "Online book marketplace Cambodia",
     "Cambodian bookshop platform",
     "Authors and publishers selling books",
-    "ISBN services Cambodia",
     "eBooks and audiobooks Cambodia",
     "Sell books online Cambodia",
   ],
