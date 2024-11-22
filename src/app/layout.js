@@ -17,9 +17,9 @@ export const metadata = {
   icons: {
     icon: "/images/logo.png",
   },
-  title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+  title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
   description:
-    "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
   keywords: [
     "Online book marketplace Cambodia",
     "Cambodian bookshop platform",
@@ -29,27 +29,27 @@ export const metadata = {
     "Sell books online Cambodia",
   ],
   openGraph: {
-    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+    title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
-      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    url: "https://thnal.com",
+      "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    url: "https://scholar.com", // replace with the actual Scholar URL
     type: "website",
     images: [
       {
         url: "/images/logo.png", // replace with the actual image URL
         width: 500,
         height: 500,
-        alt: "Thnal Cambodia's Leading Bookshop",
+        alt: "Scholar Cambodia's Leading Bookshop",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+    title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
-      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    site: "@thnal_com", // replace with actual Twitter handle
-    creator: "@thnal_com", // replace with actual Twitter handle
+      "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    site: "@scholar_com", // replace with actual Twitter handle
+    creator: "@scholar_com", // replace with actual Twitter handle
   },
 };
 
