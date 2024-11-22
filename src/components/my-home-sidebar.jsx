@@ -4,7 +4,13 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { BookUser, ChevronDown, CornerDownRight } from "lucide-react";
+import {
+  ArrowRight,
+  BookUser,
+  ChevronDown,
+  CornerDownRight,
+  Minus,
+} from "lucide-react";
 import Image from "next/image";
 
 export function MyHomeSidebar({ categories }) {
@@ -33,12 +39,12 @@ export function MyHomeSidebar({ categories }) {
               )}
             </div>
             {category.sub_categories.length > 0 && (
-              <CollapsibleContent className="w-full pl-3 ml-4 text-[16px] border-l-2 border-primary">
-                <ul>
+              <CollapsibleContent className="w-full ml-4 text-[14px] border-l-2 border-primary">
+                <ul className="py-2 space-y-2">
                   {category.sub_categories?.map((subCategory) => (
                     <li
                       key={subCategory.id}
-                      className="cursor-pointer hover:underline"
+                      className="relative pl-3 max-w-[80%] cursor-pointer hover:underline"
                     >
                       {subCategory.name}
                     </li>
