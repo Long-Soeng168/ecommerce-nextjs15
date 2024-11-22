@@ -27,7 +27,7 @@ export default async function Home() {
   const promotions = resultPromotions?.data || [];
 
   const resultsBlogs = await getBlogs({ perPage: 3 });
-  const blogs = resultsBlogs.data;
+  const blogs = resultsBlogs?.data;
 
   return (
     <div>

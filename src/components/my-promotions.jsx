@@ -7,7 +7,7 @@ const MyPromotions = ({ promotions }) => {
   return (
     <div className="grid gap-4 overflow-hidden lg:grid-cols-3">
       {/* Left Column (Book Promotion) */}
-      <Link href={promotions[0].link} className="w-full col-span-1 p-4 bg-green-100 dark:bg-accent">
+      <Link href={promotions[0].link} className="w-full col-span-1 p-4 bg-green-100 border-2 border-transparent hover:border-primary dark:bg-accent">
         <h2 className="mt-2 font-semibold text-md sm:text-lg line-clamp-3">
           {promotions[0].name}
         </h2>
@@ -41,7 +41,7 @@ const MyPromotions = ({ promotions }) => {
             <Link
               key={index}
               href={promotion.link}
-              className={`grid grid-cols-2 gap-2 items-center p-4 ${backgroundClass} ${isWideClass} flex-row dark:bg-accent`}
+              className={`grid border-2 border-transparent hover:border-primary grid-cols-2 gap-2 items-center p-4 ${backgroundClass} ${isWideClass} flex-row dark:bg-accent`}
             >
               <div>
                 <h2 className="mt-2 font-semibold text-md sm:text-lg line-clamp-3">

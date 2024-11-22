@@ -66,10 +66,11 @@ const MyPartnerList = () => {
   return (
     <>
       <Carousel>
-        <CarouselContent>
+        <CarouselContent className='overflow-visible'>
           {partners.map((partner) => (
             <CarouselItem className="basis-1/3 lg:basis-1/6" key={partner.id}>
-              <Link href='/shops/1'>
+              {/* <Link href='/shops/1'> */}
+              <Link href='#'>
                 <div
                   key={partner.id}
                   className="flex flex-col items-center transition-all duration-500 rounded-lg cursor-pointer hover:scale-105"

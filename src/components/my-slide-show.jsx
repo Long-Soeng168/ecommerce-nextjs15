@@ -19,7 +19,7 @@ const MySlideShow = async () => {
         <Carousel>
           <CarouselContent>
             {topSlides.map((slide) => (
-              <CarouselItem>
+              <CarouselItem key={slide.id}>
                 <Link href={slide.link || "#"}>
                   <Image
                     className={`w-full aspect-[21/7] object-cover transition-all duration-500 ${
@@ -43,7 +43,7 @@ const MySlideShow = async () => {
         <Carousel className="mt-2 lg:mt-4">
           <CarouselContent>
             {bottomSlides.map((slide) => (
-              <CarouselItem className="pl-2 lg:pl-4 basis-1/2 lg:basis-1/3">
+              <CarouselItem key={slide.id} className="pl-2 lg:pl-4 basis-1/2 lg:basis-1/3">
                 <Link href={slide.link || "#"}>
                   <Image
                     className={`object-cover w-full aspect-video transition-all duration-500 ${

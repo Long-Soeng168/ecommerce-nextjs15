@@ -6,17 +6,11 @@ import { LanguageToggle } from "./language-toggle";
 import { Button } from "./ui/button";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Input } from "./ui/input";
-import Link from "next/link";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import Link from "next/link"; 
+import { getCategories } from "@/services/categories-services";
 
-const MyHeader = () => {
+const MyHeader = async () => {
+  const resultCateogries = await getCategories();
   return (
     <div>
       <div className="flex flex-wrap py-4 lg:gap-10 lg:items-center">
@@ -74,7 +68,7 @@ const MyHeader = () => {
 
         {/* Start Nav Bar */}
         <div className="text-primary-foreground dark:text-white">
-          <MyHeaderNav />
+          <MyHeaderNav categories={resultCateogries} />
         </div>
 
         {/* Start Action  */}

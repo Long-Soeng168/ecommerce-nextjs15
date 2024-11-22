@@ -11,7 +11,7 @@ const MyBlogList = ({ blogs }) => {
         <Link
           href={`blogs/${blog.id}`}
           key={blog.id}
-          className="flex flex-col justify-between p-2 transition-shadow duration-300 border rounded-lg shadow cursor-pointer border-border bg-accent hover:shadow-xl"
+          className="flex flex-col justify-between p-2 transition-shadow duration-300 rounded-lg cursor-pointer border-border bg-primary/5 hover:shadow-xl"
         >
           <div>
             <Image

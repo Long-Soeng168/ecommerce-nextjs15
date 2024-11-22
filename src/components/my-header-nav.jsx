@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
+import * as React from "react";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,7 +12,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
+import MyCategoryCard from "./ui/my-category-card";
+import Image from "next/image";
 
 const components = [
   {
@@ -50,26 +52,45 @@ const components = [
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
-]
+];
 
-export function MyHeaderNav() {
+export function MyHeaderNav({ categories }) {
+  const IMAGE_CATE_URL = 'https://isbn-nlc.org/assets/images/categories/';
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
+            {categories?.length > 0 && (
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                {categories?.map((category) => (
+                  <Link href="/products" key={category.id}>
+                    <div className="flex items-center h-full p-4 transition-shadow duration-300 bg-white border border-gray-200 rounded-lg shadow cursor-pointer hover:shadow-lg dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                      <div className="p-1 mr-4 text-4xl bg-white rounded-md dark:bg-gray-200">
+                        <Image
+                          className={`aspect-square object-contain`}
+                          width={40}
+                          height={40}
+                          src={IMAGE_CATE_URL + category.image}
+                          alt=""
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                          {category.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {category.books_count
+                            ? category.books_count + "+ Books"
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </ul>
+            )}
           </NavigationMenuContent>
         </NavigationMenuItem>
 
@@ -106,7 +127,7 @@ export function MyHeaderNav() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-{/*         
+        {/*         
         <NavigationMenuItem>
           <Link href="/profiles/authors" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -122,7 +143,7 @@ export function MyHeaderNav() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem> */}
-        
+
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -148,10 +169,10 @@ export function MyHeaderNav() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
 
-const ListItem = (({ className, title, children, ...props }, ref) => {
+const ListItem = ({ className, title, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -170,6 +191,6 @@ const ListItem = (({ className, title, children, ...props }, ref) => {
         </a>
       </NavigationMenuLink>
     </li>
-  )
-})
-ListItem.displayName = "ListItem"
+  );
+};
+ListItem.displayName = "ListItem";
