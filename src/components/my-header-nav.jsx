@@ -64,7 +64,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             {categoryMostBook?.books?.length > 0 && (
-              <ul className="grid p-4 space-x-4 items-start w-[550px] grid-cols-[.65fr_1fr]">
+              <ul className="grid p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
                 <li className="row-span-2">
                   <Link
                     href={`/products/${categoryMostBook?.books[0].id}`}

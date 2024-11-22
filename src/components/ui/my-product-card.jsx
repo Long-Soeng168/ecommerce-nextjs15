@@ -32,14 +32,14 @@ const ProductCard = ({ product }) => {
             </span>
           )}
         </div>
-        <div className="flex flex-col justify-between p-2 mt-2 mb-2 lg:mb-0 lg:items-center lg:flex-row">
+        <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
           {!product.discount ? (
-            <p className="overflow-hidden text-lg text-gray-400 text-ellipsis">
-              <span className="mr-2 line-through">{product.price} ៛</span>
+            <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
+              <span className="line-through">{product.price} ៛</span>
               <span className="text-red-500">8000 ៛</span>
             </p>
           ) : (
-            <p className="text-lg font-bold text-red-500 max-w-[12ch] overflow-hidden text-ellipsis">
+            <p className="max-w-full overflow-hidden text-lg font-bold text-red-500 text-ellipsis">
               {product.price} ៛
             </p>
           )}
@@ -54,8 +54,8 @@ const ProductCard = ({ product }) => {
         </div>
         <TooltipProvider delayDuration={0}>
           <Tooltip>
-            <TooltipTrigger>
-              <h3 className="text-md text-start text-foreground line-clamp-2">
+            <TooltipTrigger className="w-full">
+              <h3 className="w-full text-md text-start text-foreground line-clamp-2">
                 {product.title}
               </h3>
             </TooltipTrigger>

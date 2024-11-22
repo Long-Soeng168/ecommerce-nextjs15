@@ -13,7 +13,7 @@ import {
 } from "@/services/categories-services";
 
 const MyHeader = async () => {
-  const resultCateogries = await getCategories({ limit: 10 });
+  const resultCateogries = await getCategories({ orderBy: 'books_count', orderDir: 'desc' });
 
   const categoryMostBooks = await getCategoryHasMostBooks();
   return (

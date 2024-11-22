@@ -4,7 +4,7 @@ import MyCategoryCard from "./ui/my-category-card";
 import { getCategories } from "@/services/categories-services";
 
 const MyCategoryList = async () => {
-  const categories = await getCategories({ limit: 4 });
+  const categories = await getCategories({ limit: 4, orderBy: 'books_count', orderDir: 'desc' });
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4">
       {categories?.map((category) => (

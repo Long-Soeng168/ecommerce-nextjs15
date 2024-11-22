@@ -48,7 +48,7 @@ const Page = async () => {
   const resultBooks = await getBooks();
   const books = resultBooks?.data;
 
-  const categories = await getCategories({ withSub: 1 });
+  const categories = await getCategories({ withSub: 1, orderBy: 'name', orderDir: 'asc' });
 
   return (
     <div className="flex">
