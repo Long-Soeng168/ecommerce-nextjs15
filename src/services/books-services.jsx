@@ -25,4 +25,18 @@ export async function getBestSellingBooks() {
     return null;
   }
 }
+
+export async function getBooks() {
+  const url = process.env.BASE_API_URL + `/books`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Books : ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+}
  

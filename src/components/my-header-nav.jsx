@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import ProductCard from "./ui/my-product-card";
+import { ChevronRight } from "lucide-react";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const IMAGE_CATE_URL = "https://isbn-nlc.org/assets/images/categories/";
@@ -72,8 +73,8 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                     <div>
                       <div className="relative">
                         <Image
-                          width={300}
-                          height={300}
+                          width={100}
+                          height={100}
                           className="object-cover w-full rounded-md aspect-[6/9]"
                           src={
                             IMAGE_BOOK_URL + categoryMostBook?.books[0].image
@@ -132,6 +133,14 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                       </div>
                     </Link>
                   ))}
+                </li>
+                <li>
+                  <Link
+                    href="/products"
+                    className="flex justify-end text-primary hover:underline"
+                  >
+                    See More <ChevronRight />
+                  </Link>
                 </li>
               </ul>
             )}

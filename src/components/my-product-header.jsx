@@ -10,7 +10,7 @@ const MyProductHeader = ({ title }) => {
         {title}
       </h2>
       <Link
-        href="#"
+        href="/products"
         className="flex items-center gap-1 text-xl transition-all duration-500 hover:underline text-primary hover:translate-x-4"
       >
         See More

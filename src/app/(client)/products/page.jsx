@@ -41,98 +41,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ProductCard from "@/components/ui/my-product-card";
 import { MyHomeSidebar } from "@/components/my-home-sidebar";
+import { getBooks } from "@/services/books-services";
+import { getCategories } from "@/services/categories-services";
 
-const products = [
-  {
-    id: 1,
-    title: "Premium High-Quality",
-    description:
-      "Experience superior sound quality and block out distractions with these state-of-the-art wireless earbuds.",
-    price: "$59999999999.99",
-    image: "/images/books/book1.png", // Your specified image URL
-  },
-  {
-    id: 2,
-    title:
-      "Sleek and Stylish Smartwatch for Comprehensive Fitness Tracking and Instant Notifications",
-    description:
-      "Stay connected and monitor your health metrics effortlessly with this elegant smartwatch designed for modern lifestyles.",
-    price: "$149.99",
-    image: "/images/books/book2.png", // Your specified image URL
-  },
-  {
-    id: 3,
-    title:
-      "Compact and Portable Bluetooth Speaker for Exceptional Sound Quality Anywhere You Go",
-    description:
-      "Take your music with you on all your adventures with this lightweight Bluetooth speaker that delivers powerful sound.",
-    price: "$79.99",
-    image: "/images/books/book3.png", // Your specified image URL
-  },
-  {
-    id: 4,
-    title:
-      "State-of-the-Art 4K Ultra HD TV with Smart Features and Stunning Picture Quality",
-    description:
-      "Transform your living room into a cinematic experience with this impressive 4K Ultra HD TV, featuring the latest smart technology.",
-    price: "$499.99",
-    image: "/images/books/book4.png", // Your specified image URL
-  },
-  {
-    id: 5,
-    title:
-      "High-Precision Gaming Mouse Designed for Competitive Play with Customizable Features",
-    description:
-      "Elevate your gaming performance with this ergonomic gaming mouse, engineered for speed and accuracy.",
-    price: "$39.99",
-    image: "/images/books/book1.png", // Your specified image URL
-  },
-  {
-    id: 6,
-    title:
-      "Versatile 2-in-1 Laptop with Touchscreen and Ultra-Fast Performance",
-    description:
-      "Experience the best of both worlds with this powerful 2-in-1 laptop that combines productivity and entertainment.",
-    price: "$899.99",
-    image: "/images/books/book2.png", // Your specified image URL
-  },
-  {
-    id: 7,
-    title: "All-Natural Organic Skincare Set for Radiant and Healthy Skin",
-    description:
-      "Pamper your skin with this luxurious skincare set made from 100% organic ingredients for a natural glow.",
-    price: "$89.99",
-    image: "/images/books/book3.png", // Your specified image URL
-  },
-  {
-    id: 8,
-    title:
-      "High-Quality DSLR Camera for Professional Photography and Videography",
-    description:
-      "Capture stunning images and videos with this high-performance DSLR camera featuring advanced settings and features.",
-    price: "$1,299.99",
-    image: "/images/books/book4.png", // Your specified image URL
-  },
-  {
-    id: 9,
-    title: "Durable and Lightweight Hiking Backpack with Multiple Compartments",
-    description:
-      "Embark on your next adventure with this rugged hiking backpack, designed for comfort and convenience on the trail.",
-    price: "$59.99",
-    image: "/images/books/book1.png", // Your specified image URL
-  },
-  {
-    id: 10,
-    title:
-      "Elegant Bluetooth Headphones with Superior Sound Quality and Long Battery Life",
-    description:
-      "Enjoy your music wirelessly with these stylish Bluetooth headphones that provide exceptional audio performance.",
-    price: "$79.99",
-    image: "/images/books/book2.png", // Your specified image URL
-  },
-];
+const Page = async () => {
+  const resultBooks = await getBooks();
+  const books = resultBooks?.data;
 
-const Page = () => {
+  const categories = await getCategories({ withSub: 1 });
+
   return (
     <div className="flex">
       {/* Left Side */}
@@ -140,7 +57,7 @@ const Page = () => {
       {/* Right Side */}
       <div className="flex-1 p-4 space-y-2">
         {/* Start Bread */}
-        <Breadcrumb>
+        {/* <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -154,10 +71,10 @@ const Page = () => {
               <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
-        </Breadcrumb>
+        </Breadcrumb> */}
         {/* End Bread */}
 
-        {/* Start Products Header */}
+        {/* Start books Header */}
         <div className="flex flex-wrap justify-end gap-2">
           {/* Start Search */}
           {/* <div className="flex flex-1 border rounded-lg shadow-sm">
@@ -214,7 +131,7 @@ const Page = () => {
                     <Filter />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className='overflow-y-scroll'>
+                <SheetContent side="left" className="overflow-y-scroll">
                   <SheetHeader>
                     <SheetTitle>Filter</SheetTitle>
                   </SheetHeader>
@@ -224,15 +141,15 @@ const Page = () => {
             </span>
           </div>
         </div>
-        {/* End Products Header */}
+        {/* End books Header */}
 
-        {/* Start Products List */}
+        {/* Start books List */}
         <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {products.map((product) => (
+          {books?.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
         </div>
-        {/* End Products List */}
+        {/* End books List */}
 
         {/* Start Pagination */}
         <div className="flex flex-wrap items-center justify-between pt-4">
@@ -269,10 +186,10 @@ const Page = () => {
 
   function leftSide() {
     return (
-      <div className="flex flex-col">
-        <MyHomeSidebar />
+      <div className="flex flex-col pt-2">
+        <MyHomeSidebar categories={categories} />
         {/* Price */}
-        <div className="p-2 border-t">
+        <div className="p-2 mt-4 border-t">
           <p className="p-2 text-xs text-sidebar-foreground">Price</p>
           <div>
             <p className="text-sm">From</p>
@@ -297,9 +214,7 @@ const Page = () => {
           </div>
         </div>
 
-        <Button className='mt-4'>
-          Apply Filter
-        </Button>
+        <Button className="mt-4">Apply Filter</Button>
       </div>
     );
   }

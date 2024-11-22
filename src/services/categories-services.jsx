@@ -1,5 +1,5 @@
-export async function getCategories({ limit } = {}) {
-  const url = process.env.BASE_API_URL + `/categories?limit=${limit || ""}`;
+export async function getCategories({ limit, withSub } = {}) {
+  const url = process.env.BASE_API_URL + `/categories?limit=${limit || ""}&withSub=${withSub || ""}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

@@ -67,10 +67,10 @@ export default async function Home() {
         </div>
       )}
 
-      <div className="max-w-screen-xl mx-auto mb-20 space-y-4">
+      {/* <div className="max-w-screen-xl mx-auto mb-20 space-y-4">
         <MyHeading title="Partners" />
         <MyPartnerList />
-      </div>
+      </div> */}
 
       {blogs?.length > 0 && (
         <div className="flex flex-col gap-4 mb-20">

@@ -1,183 +1,53 @@
 "use client";
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  LifeBuoy,
-  Map,
-  PieChart,
-  Send,
-  Settings2,
-  SquareTerminal,
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  ChevronDown,
-  Plus,
-} from "lucide-react";
-import {
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupAction,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
-import { NavMain } from "./nav-main";
-import { NavProjects } from "./nav-projects";
-import { NavSecondary } from "./nav-secondary";
-import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@radix-ui/react-collapsible";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "./ui/dropdown-menu";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/collapsible";
+import { BookUser, ChevronDown, CornerDownRight } from "lucide-react";
+import Image from "next/image";
 
-// Menu items.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-};
+export function MyHomeSidebar({ categories }) {
+  const IMAGE_CATE_URL = "https://isbn-nlc.org/assets/images/categories/";
 
-export function MyHomeSidebar() {
   return (
-    <SidebarProvider className='min-h-0'>
-      <SidebarContent >
-        <NavMain items={data.navMain} header='Categories' />
-      </SidebarContent>
-    </SidebarProvider>
+    <div className="w-64 space-y-1.5">
+      {categories.length > 0 &&
+        categories.map((category) => (
+          <Collapsible key={category.id}>
+            <div className="flex items-center justify-between cursor-pointer">
+              <div className="hover:bg-primary/10 items-center flex gap-1 p-0.5 w-full text-[16px] hover:underline">
+                <Image
+                  className={`aspect-square p-0.5 bg-white dark:bg-gray-100 object-contain`}
+                  width={24}
+                  height={24}
+                  src={IMAGE_CATE_URL + category.image}
+                  alt=""
+                />
+                <span>{category.name}</span>
+              </div>
+              {category.sub_categories.length > 0 && (
+                <CollapsibleTrigger className="p-0.5 text-[16px] px-2 hover:bg-primary/10">
+                  <ChevronDown />
+                </CollapsibleTrigger>
+              )}
+            </div>
+            {category.sub_categories.length > 0 && (
+              <CollapsibleContent className="w-full pl-3 ml-4 text-[16px] border-l-2 border-primary">
+                <ul>
+                  {category.sub_categories?.map((subCategory) => (
+                    <li
+                      key={subCategory.id}
+                      className="cursor-pointer hover:underline"
+                    >
+                      {subCategory.name}
+                    </li>
+                  ))}
+                </ul>
+              </CollapsibleContent>
+            )}
+          </Collapsible>
+        ))}
+    </div>
   );
 }
