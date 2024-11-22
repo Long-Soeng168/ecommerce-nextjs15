@@ -6,11 +6,16 @@ import { LanguageToggle } from "./language-toggle";
 import { Button } from "./ui/button";
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Input } from "./ui/input";
-import Link from "next/link"; 
-import { getCategories } from "@/services/categories-services";
+import Link from "next/link";
+import {
+  getCategories,
+  getCategoryHasMostBooks,
+} from "@/services/categories-services";
 
 const MyHeader = async () => {
-  const resultCateogries = await getCategories();
+  const resultCateogries = await getCategories({ limit: 10 });
+
+  const categoryMostBooks = await getCategoryHasMostBooks();
   return (
     <div>
       <div className="flex flex-wrap py-4 lg:gap-10 lg:items-center">
@@ -51,7 +56,7 @@ const MyHeader = async () => {
               <span className="sr-only">Search</span>
             </Button>
           </div>
-          <Button variant="outline" size="icon" className='relative'>
+          <Button variant="outline" size="icon" className="relative">
             <Link href="/cart">
               <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
               <span className="sr-only">Cart</span>
@@ -68,7 +73,10 @@ const MyHeader = async () => {
 
         {/* Start Nav Bar */}
         <div className="text-primary-foreground dark:text-white">
-          <MyHeaderNav categories={resultCateogries} />
+          <MyHeaderNav
+            categories={resultCateogries}
+            categoryMostBook={categoryMostBooks}
+          />
         </div>
 
         {/* Start Action  */}
