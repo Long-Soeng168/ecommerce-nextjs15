@@ -31,7 +31,7 @@ export const metadata = {
     title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    url: "https://scholar.com", // replace with the actual Scholar URL
+    url: "https://books.scholarlibrary.com", // replace with the actual Scholar URL
     type: "website",
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "/images/logo.png",
     title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
