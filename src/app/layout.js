@@ -19,9 +19,9 @@ export const metadata = {
   },
   title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
   description:
-    "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks.",
+    "Discover Scholar, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks.",
   keywords: [
-    "Online book marketplace Cambodia",
+    "Online book shop Cambodia",
     "Cambodian bookshop platform",
     "Authors and publishers selling books",
     "eBooks and audiobooks Cambodia",
@@ -30,7 +30,7 @@ export const metadata = {
   openGraph: {
     title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
-      "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+      "Discover Scholar, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
     url: "https://books.scholarlibrary.com", // replace with the actual Scholar URL
     type: "website",
     images: [
