@@ -14,8 +14,8 @@ export async function getNewArrivalBooks() {
   }
 }
 
-export async function getBestSellingBooks() {
-  const url = process.env.BASE_API_URL + `/books_best_selling`;
+export async function getBestSellingBooks({ limit } = {}) {
+  const url = process.env.BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
   try {
     const response = await fetch(url, { cache: "no-cache" });
     if (!response.ok) {
@@ -30,8 +30,10 @@ export async function getBestSellingBooks() {
   }
 }
 
-export async function getBooks() {
-  const url = process.env.BASE_API_URL + `/books`;
+export async function getBooks({ categoryId, randomOrder } = {}) {
+  const url =
+    process.env.BASE_API_URL +
+    `/books?categoryId=${categoryId || ""}&randomOrder=${randomOrder || ""}`;
   try {
     const response = await fetch(url, { cache: "no-cache" });
     if (!response.ok) {
@@ -44,14 +46,14 @@ export async function getBooks() {
   }
 }
 
-export async function getBook({id}) {
+export async function getBook({ id }) {
   const url = process.env.BASE_API_URL + `/books/${id}`;
   try {
     const response = await fetch(url, { cache: "no-cache" });
     if (!response.ok) {
       throw new Error(`Failed to fetch Book : ${response.statusText}`);
     }
-    return  await response.json();
+    return await response.json();
   } catch (error) {
     console.log(error.message);
     return null;

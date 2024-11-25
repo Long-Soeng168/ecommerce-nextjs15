@@ -6,11 +6,11 @@ const ClientLayout = ({ children }) => {
   return (
     <>
       <div className="bg-primary dark:bg-background">
-        <div className="px-2 mx-auto max-w-screen-2xl">
+        <div className="max-w-screen-xl px-2 mx-auto">
         <MyHeader key="home-header" />
         </div>
       </div>
-      <div className="min-h-[70vh] px-2 mx-auto max-w-screen-2xl">
+      <div className="min-h-[70vh] px-2 mx-auto max-w-screen-xl">
         {children}
       </div>
       <MyFooter />

@@ -50,7 +50,7 @@ const MyGallery = ({ image, images }) => {
                   <Image
                     width={50}
                     height={50}
-                    className="w-full aspect-[1/1] hover:scale-110 transition-transform duration-500 ease-in-out object-contain p-0.5 rounded-md cursor-pointer"
+                    className="w-full aspect-[1/1] hover:scale-95 transition-transform duration-500 ease-in-out object-contain p-0.5 rounded-md cursor-pointer"
                     src={IMAGE_BOOK_URL + src}
                     alt={`Thumbnail ${index + 1}`}
                   />
