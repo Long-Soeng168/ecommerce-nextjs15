@@ -1,12 +1,14 @@
 import React from "react";
+import { Button } from "./button";
 
-const MyKeyValueCard = ({ title, value }) => {
+const MyKeyValueCard = ({ title, value, children }) => {
   return (
-    <div className="flex nowrap">
-      <p className="w-[123px] uppercase tracking-wide text-sm font-semibold border-r border-border pr-5 mr-5 flex-shrink-0">
+    <div className="flex text-sm nowrap">
+      <p className="w-[168px] uppercase tracking-wide  border-r border-border mr-5 flex-shrink-0">
         {title}
       </p>
-      <p className="text-sm ">{value}</p>
+      <p className="capitalize ">{value}</p>
+      {children}
     </div>
   );
 };

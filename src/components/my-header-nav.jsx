@@ -81,23 +81,28 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                           }
                           alt={categoryMostBook?.books[0].title}
                         />
-                        {!categoryMostBook?.books[0].discount && (
+                        {categoryMostBook?.books[0]?.discount != 0 && (
                           <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-primary/80">
-                            - 20%
+                            - {categoryMostBook?.books[0]?.discount}%
                           </span>
                         )}
                       </div>
                       <div className="flex flex-col justify-between p-1 lg:items-center lg:flex-row">
-                        {!categoryMostBook?.books[0].discount ? (
-                          <p className="overflow-hidden text-lg text-gray-400 text-ellipsis">
-                            <span className="mr-2 line-through">
-                              {categoryMostBook?.books[0].price} ៛
+                        {categoryMostBook?.books[0]?.discount != 0 ? (
+                          <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
+                            <span className="line-through">
+                              {categoryMostBook?.books[0]?.price} $
                             </span>
-                            <span className="text-red-500">8000 ៛</span>
+                            <span className="text-red-500">
+                              {categoryMostBook?.books[0]?.price -
+                                (categoryMostBook?.books[0]?.discount / 100) *
+                                  categoryMostBook?.books[0]?.price}{" "}
+                              $
+                            </span>
                           </p>
                         ) : (
-                          <p className="text-lg font-bold text-red-500 max-w-[12ch] overflow-hidden text-ellipsis">
-                            {categoryMostBook?.books[0].price} ៛
+                          <p className="max-w-full overflow-hidden text-lg font-bold text-red-500 text-ellipsis">
+                            {categoryMostBook?.books[0]?.price} $
                           </p>
                         )}
                       </div>
@@ -105,7 +110,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                         {categoryMostBook?.books[0].title}
                       </h3>
                       <p className="text-sm text-gray-400 line-clamp-3">
-                        {categoryMostBook?.books[0].short_description} ៛
+                        {categoryMostBook?.books[0].short_description} $
                       </p>
                     </div>
                   </Link>
@@ -131,11 +136,21 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                           {book.title}
                         </h4>
                         <p className="text-sm text-gray-400 line-clamp-2">
-                          {book.short_description} ៛
+                          {book.short_description} $
                         </p>
-                        <p className="text-sm text-destructive line-clamp-1">
-                          {book.price} ៛
-                        </p>
+                        {book.discount != 0 ? (
+                          <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
+                            <span className="line-through">{book.price} $</span>
+                            <span className="text-red-500">
+                              {book.price - (book.discount / 100) * book.price}{" "}
+                              $
+                            </span>
+                          </p>
+                        ) : (
+                          <p className="max-w-full overflow-hidden text-lg font-bold text-red-500 text-ellipsis">
+                            {book.price} $
+                          </p>
+                        )}
                       </div>
                     </Link>
                   ))}
