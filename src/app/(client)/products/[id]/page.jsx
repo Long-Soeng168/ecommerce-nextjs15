@@ -8,8 +8,8 @@ import moment from "moment";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import RelatedProducts from "@/app/(client)/products/[id]/components/related-products";
-import BestSelling from "./components/best-selling";
-import Categories from "./components/categories";
+// import BestSelling from "./components/best-selling";
+// import Categories from "./components/categories";
 
 // pages/product?.js
 const ProductPage = async ({ params }) => {
@@ -24,12 +24,12 @@ const ProductPage = async ({ params }) => {
 
   return (
     <div className="lg:flex">
-      <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
+      {/* <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
         <Categories />
         <hr className="my-6" />
         <Label className="text-primary">Best Selling</Label>
         <BestSelling />
-      </aside>
+      </aside> */}
       <main className="lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
@@ -41,9 +41,6 @@ const ProductPage = async ({ params }) => {
             <h1 className="block mt-1 mb-2 text-2xl leading-tight font-lg">
               {product?.title}
             </h1>
-            <MyShowMoreText text={product?.short_description} />
-
-            <hr className="w-full mt-4" />
             <div className="flex flex-col gap-6 my-6">
               <div className="flex flex-col gap-2">
                 {product?.author && (
@@ -123,7 +120,7 @@ const ProductPage = async ({ params }) => {
                 )}
               </div>
             </div>
-            <div className="mt-8">
+            <div className="my-4">
               {product?.discount != 0 ? (
                 <p className="space-x-4 text-2xl font-semibold text-gray-400 dark:text-white">
                   <span className="line-through">{product?.price} $</span>
@@ -139,7 +136,7 @@ const ProductPage = async ({ params }) => {
                 </p>
               )}
             </div>
-            <div className="mt-8">
+            <div>
               <div className="flex items-center gap-4">
                 {/* Quantity Control */}
                 <div className="flex items-center">
@@ -167,6 +164,8 @@ const ProductPage = async ({ params }) => {
                   <ShoppingCart /> ADD TO CART
                 </Button>
               </div>
+              <hr className="w-full mt-8 mb-4" />
+              <MyShowMoreText text={product?.short_description} />
             </div>
           </div>
         </div>

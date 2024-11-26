@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
           <Image
             width={600}
             height={600}
-            className="object-cover w-full rounded-md aspect-[6/9]"
+            className="object-cover w-full rounded-md aspect-[6/9] font-moul"
             src={process.env.IMAGE_BOOK_URL + product.image}
             alt={product.title}
           />
@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
           <Tooltip className="bg-blue-200">
             <TooltipTrigger>
               <h3 className="text-md text-start text-foreground line-clamp-1">
-                {product.title}
+                Title {product.title}
               </h3>
               <h3 className="text-gray-400 text-md text-start line-clamp-2">
                 {product.short_description}
