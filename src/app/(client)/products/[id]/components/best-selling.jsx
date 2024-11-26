@@ -14,7 +14,7 @@ const BestSelling = async () => {
         <Link
           key={book.id}
           href={`/products/${book.id}`}
-          className="group mb-2 bg-white overflow-hidden rounded-sm items-start grid grid-cols-[62px,1fr] gap-2"
+          className="group mb-2 bg-white dark:bg-primary/10 overflow-hidden rounded-sm items-start grid grid-cols-[62px,1fr] gap-2"
           prefetch={false}
         >
           <Image

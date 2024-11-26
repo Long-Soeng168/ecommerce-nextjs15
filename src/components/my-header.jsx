@@ -23,7 +23,7 @@ const MyHeader = async () => {
         <div className="flex items-center justify-between w-full gap-2 mb-4 lg:mb-0 lg:w-auto">
           <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
-              className="object-contain w-16 rounded-md aspect-square"
+              className="object-contain rounded-md"
               src="/images/logo.png"
               width={100}
               height={100}
