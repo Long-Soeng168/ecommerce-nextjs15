@@ -27,24 +27,24 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
           <NavigationMenuContent>
             {categories?.length > 0 && (
-              <ul className="grid w-[400px] gap-1 p-2 md:w-[600px] md:grid-cols-3 lg:w-[700px] ">
+              <ul className="grid w-[400px] gap-2 p-1 md:w-[400px] md:grid-cols-3 lg:w-[600px] ">
                 {categories?.map((category) => (
                   <Link href="/products" key={category.id}>
-                    <div className="flex items-center h-full p-2 transition-shadow duration-300 rounded-lg cursor-pointer hover:bg-primary/10 ">
-                      <div className="p-1 mr-4 text-4xl bg-white rounded-md dark:bg-gray-200">
+                    <div className="flex items-center h-full p-1 transition-shadow duration-300 rounded cursor-pointer hover:bg-primary/10 ">
+                      <div className="p-0.5 mr-1 rounded bg-white dark:bg-gray-200">
                         <Image
                           className={`aspect-square object-contain`}
-                          width={40}
-                          height={40}
+                          width={30}
+                          height={30}
                           src={IMAGE_CATE_URL + category.image}
                           alt=""
                         />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-800 text-md dark:text-gray-100">
+                        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-100">
                           {category.name}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           {category.books_count
                             ? category.books_count + "+ Books"
                             : ""}

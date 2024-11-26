@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
         <TooltipProvider delayDuration={0}>
           <Tooltip className="bg-blue-200">
             <TooltipTrigger>
-              <h3 className="text-md text-start text-foreground line-clamp-2">
+              <h3 className="text-md text-start text-foreground line-clamp-1">
                 {product.title}
               </h3>
               <h3 className="text-gray-400 text-md text-start line-clamp-2">
