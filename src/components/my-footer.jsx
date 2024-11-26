@@ -7,7 +7,7 @@ const MyFooter = async () => {
   const links = await getLinks();
   return (
     <footer className="px-4 py-8 text-white bg-gray-800 dark:bg-black dark:border-t">
-      <div className="flex flex-col items-start justify-start gap-8 px-2 mx-auto max-w-screen-2xl sm:flex-row">
+      <div className="flex flex-col items-start justify-start max-w-screen-xl gap-8 px-2 mx-auto sm:flex-row">
         <div className="flex-1 pr-10">
           <h4 className="mb-2 text-lg font-semibold">{footer?.name}</h4>
           {footer?.description && (
