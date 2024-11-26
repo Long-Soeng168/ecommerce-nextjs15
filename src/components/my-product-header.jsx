@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 const MyProductHeader = ({ title }) => {
   return (
     <div className="flex justify-between mb-4 border-b-4 border-primary">
-      <h2 className="px-12 pt-2 pb-1 text-2xl font-bold rounded-tl-full rounded-br-full text-primary-foreground bg-primary">
+      <h2 className="px-10 pt-2 pb-1 text-xl font-bold rounded-tl-full rounded-br-full lg:px-12 lg:text-2xl text-primary-foreground bg-primary">
         {title}
       </h2>
       <Link

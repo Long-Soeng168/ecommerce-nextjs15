@@ -9,7 +9,7 @@ const Loading = () => {
 
       {/* Skeleton for some text paragraphs */}
       <div className="flex h-[50vh] gap-4">
-        <div className="w-64 space-y-2">
+        <div className="hidden w-64 space-y-2 lg:inline-block">
           <Skeleton className="w-full h-full mx-auto mb-8" />
         </div>
         <div className="flex flex-1 gap-2 space-y-2">
