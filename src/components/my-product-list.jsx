@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 
-const MyProductsList = ({books}) => {
+const MyProductsList = ({ books, showNavigateButton = true }) => {
   return (
     <>
       {books?.length > 0 && (
@@ -24,8 +24,12 @@ const MyProductsList = ({books}) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          {showNavigateButton && (
+            <>
+              <CarouselPrevious />
+              <CarouselNext />
+            </>
+          )}
         </Carousel>
       )}
     </>

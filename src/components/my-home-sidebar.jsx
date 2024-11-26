@@ -13,9 +13,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { Label } from "./ui/label";
+import { IMAGE_CATE_URL } from "@/config/env";
 
 export function MyHomeSidebar({ categories }) {
-  const IMAGE_CATE_URL = "https://isbn-nlc.org/assets/images/categories/";
 
   return (
     <div className="w-64 space-y-1.5">

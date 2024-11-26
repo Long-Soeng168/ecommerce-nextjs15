@@ -1,23 +1,15 @@
 import MyGallery from "@/components/my-gallery";
-import { MyHomeSidebar } from "@/components/my-home-sidebar";
-import MyProductHeader from "@/components/my-product-header";
-import MyProductsList from "@/components/my-product-list";
 import { Button } from "@/components/ui/button";
 import MyKeyValueCard from "@/components/ui/my-key-value-card";
-import {
-  getBestSellingBooks,
-  getBook,
-  getBooks,
-} from "@/services/books-services";
-import { getCategories } from "@/services/categories-services";
-import { GripVertical, Minus, Plus, ShoppingCart, Slash } from "lucide-react";
+import { getBook } from "@/services/books-services";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
-import Image from "next/image";
-import { IMAGE_BOOK_URL } from "@/config/env";
 import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import RelatedProducts from "@/app/(client)/products/[id]/components/related-products";
+import BestSelling from "./components/best-selling";
+import Categories from "./components/categories";
 
 // pages/product?.js
 const ProductPage = async ({ params }) => {
@@ -30,103 +22,13 @@ const ProductPage = async ({ params }) => {
     images = product?.images.map((item) => item.image);
   }
 
-  const categories = await getCategories({
-    withSub: 1,
-    orderBy: "name",
-    orderDir: "asc",
-  });
-
-  const resultBooks = await getBooks({
-    categoryId: product?.category_id,
-    randomOrder: 1,
-  });
-  const relatedBooks = resultBooks?.data;
-
-  const resultBestSellingBooks = await getBestSellingBooks({ limit: 10 });
-  let bestSellingBooks = resultBestSellingBooks?.first_set || [];
-
   return (
     <div className="lg:flex">
       <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
-        <MyHomeSidebar categories={categories} />
+        <Categories />
         <hr className="my-6" />
         <Label className="text-primary">Best Selling</Label>
-        <ScrollArea className="h-[100vh] mt-2 w-64 rounded-md">
-          {bestSellingBooks?.slice(1).map((book) => (
-            <Link
-              key={book.id}
-              href={`/products/${book.id}`}
-              className="group mb-2 bg-white overflow-hidden rounded-sm items-start grid grid-cols-[62px,1fr] gap-2"
-              prefetch={false}
-            >
-              <Image
-                width={50}
-                height={50}
-                className="object-cover w-full h-full aspect-book"
-                src={IMAGE_BOOK_URL + book.image}
-                alt={"Image's book"}
-              />
-
-              <div className="py-1 pr-2">
-                <h4 className="font-medium text-md group-hover:underline line-clamp-1">
-                  {book.title}
-                </h4>
-                <p className="text-sm text-gray-400 line-clamp-2">
-                  {book.short_description} $
-                </p>
-                {book.discount != 0 ? (
-                  <p className="space-x-2 overflow-hidden text-xs text-gray-400 text-ellipsis">
-                    <span className="line-through">{book.price} $</span>
-                    <span className="text-red-400">
-                      {book.price - (book.discount / 100) * book.price} $
-                    </span>
-                  </p>
-                ) : (
-                  <p className="max-w-full overflow-hidden text-xs font-bold text-red-400 text-ellipsis">
-                    {book.price} $
-                  </p>
-                )}
-              </div>
-            </Link>
-          ))}
-          {bestSellingBooks?.slice(1).map((book) => (
-            <Link
-              key={1 + book.id}
-              href={`/products/${book.id}`}
-              className="group bg-white overflow-hidden rounded-sm items-start grid grid-cols-[62px,1fr] gap-2"
-              prefetch={false}
-            >
-              <Image
-                width={50}
-                height={50}
-                className="object-cover w-full h-full aspect-book"
-                src={IMAGE_BOOK_URL + book.image}
-                alt={"Image's book"}
-              />
-
-              <div className="py-1 pr-2">
-                <h4 className="font-medium text-md group-hover:underline line-clamp-1">
-                  {book.title}
-                </h4>
-                <p className="text-sm text-gray-400 line-clamp-2">
-                  {book.short_description} $
-                </p>
-                {book.discount != 0 ? (
-                  <p className="space-x-2 overflow-hidden text-xs text-gray-400 text-ellipsis">
-                    <span className="line-through">{book.price} $</span>
-                    <span className="text-red-400">
-                      {book.price - (book.discount / 100) * book.price} $
-                    </span>
-                  </p>
-                ) : (
-                  <p className="max-w-full overflow-hidden text-xs font-bold text-red-400 text-ellipsis">
-                    {book.price} $
-                  </p>
-                )}
-              </div>
-            </Link>
-          ))}
-        </ScrollArea>
+        <BestSelling />
       </aside>
       <main className="lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
@@ -269,10 +171,7 @@ const ProductPage = async ({ params }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-16 mb-4">
-          <MyProductHeader title="Related" />
-          <MyProductsList books={relatedBooks} />
-        </div>
+        <RelatedProducts categoryId={product?.category_id} />
       </main>
     </div>
   );
