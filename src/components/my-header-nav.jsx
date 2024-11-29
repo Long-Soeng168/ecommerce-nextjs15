@@ -18,8 +18,9 @@ import ProductCard from "./ui/my-product-card";
 import { ChevronRight } from "lucide-react";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
-  const IMAGE_CATE_URL = "https://isbn-nlc.org/assets/images/categories/";
-  const IMAGE_BOOK_URL = "https://isbn-nlc.org/assets/images/isbn/";
+  const IMAGE_CATE_URL =
+    "https://scholar.brolong.pro/assets/images/categories/";
+  const IMAGE_BOOK_URL = "https://scholar.brolong.pro/assets/images/isbn/";
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -58,12 +59,12 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            {categoryMostBook?.name}
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            {categoryMostBook?.books?.length > 0 && (
+        {categoryMostBook?.books?.length > 0 && (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              {categoryMostBook?.name}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
               <ul className="grid p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
                 <li className="row-span-2">
                   <Link
@@ -164,9 +165,10 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                   </Link>
                 </li>
               </ul>
-            )}
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        )}
+
         {/*         
         <NavigationMenuItem>
           <Link href="/profiles/authors" legacyBehavior passHref>

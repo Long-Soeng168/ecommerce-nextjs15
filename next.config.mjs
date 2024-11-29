@@ -9,7 +9,7 @@ const nextConfig = {
                 hostname: 'opc.webdigify.com',
             },
             {
-                hostname: 'isbn-nlc.org',
+                hostname: 'scholar.brolong.pro',
             },
         ],
     },

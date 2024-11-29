@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const MyCategoryCard = ({ category }) => {
+const MyCategoryCard = ({ category, bgHoverColor = "#6366f1" }) => {
   return (
     <>
       <Link href="/products">
         <div className="relative flex items-center h-full p-4 overflow-hidden transition-shadow duration-300 bg-white border border-gray-200 rounded-lg cursor-pointer group hover:shadow-lg dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <span className="absolute bottom-0 left-0 w-full h-48 mb-0 ml-0 transition-all duration-300 ease-out -translate-x-full translate-y-full bg-indigo-500 rounded group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+          <span
+            className={`absolute bottom-0 left-0 w-full h-48 mb-0 ml-0 transition-all duration-300 ease-out -translate-x-full translate-y-full rounded group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0`}
+            style={{ backgroundColor: bgHoverColor }}
+          ></span>
           <div className="z-50 p-1 mr-4 text-4xl bg-white rounded-md dark:bg-gray-200">
             <Image
               className={`aspect-square object-contain`}
