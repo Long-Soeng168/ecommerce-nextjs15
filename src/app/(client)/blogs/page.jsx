@@ -1,18 +1,17 @@
 import { MyBlogCategoriesSelect } from "@/components/my-blog-categories-select";
-import MyBlogList from "@/components/my-blog-list";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import MyBlogCard from "@/components/ui/my-blog-card";
 import MyHeading from "@/components/ui/my-heading";
-import { getBlogCategories, getBlogs } from "@/services/blogs-services";
-import { Search } from "lucide-react";
-import React from "react";
+import MySearch from "@/components/ui/my-search";
+import { getBlogCategories, getBlogs } from "@/services/blogs-services"; 
+import { Suspense } from "react";
+import DataList from "./data-list";
+import Loading from "./loading";
 
-const Page = async () => {
-  let results = await getBlogs();
-  let blogs = results?.data || [];
+const Page = async (props) => {
   const categories = await getBlogCategories();
-  console.log(categories);
+
+  const searchParams = await props.searchParams;
+  const search = searchParams?.search || "";
+  const currentPage = Number(searchParams?.page) || 1;
 
   return (
     <>
@@ -23,23 +22,16 @@ const Page = async () => {
         />
         <div className="flex flex-wrap gap-3">
           <MyBlogCategoriesSelect categories={categories} />
-          <div className="flex flex-1 bg-white border rounded-lg shadow-sm dark:bg-transparent dark:text-primary border-primary">
-            <Input
-              autoFocus
-              className="border-none shadow-none dark:text-white dark:placeholder-white min-w-40 focus-visible:ring-0"
-              placeholder="Search Blog..."
-            />
-            <Button variant="gosh" size="icon">
-              <Search className="h-[1.2rem] w-[1.2rem] dark:text-black" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </div>
+          <MySearch placeholder="Search blogs..." />
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {blogs.map((blog) => (
-            <MyBlogCard key={blog.id} blog={blog} />
-          ))}
-        </div>
+        <Suspense
+          key={search + currentPage}
+          fallback={<Loading />}
+        >
+          <DataList currentPage={currentPage} search={search} />
+        </Suspense>
+
+       
       </div>
     </>
   );

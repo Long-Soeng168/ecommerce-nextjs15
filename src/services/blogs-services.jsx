@@ -1,6 +1,9 @@
-export async function getBlogs({categoryId, perPage} = {}) {
-  const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}`;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export async function getBlogs({categoryId, perPage, currentPage, search} = {}) {
+  const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}&search=${search || ''}&page=${currentPage || ''}`;
   try {
+    await sleep(2000);
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.statusText}`);

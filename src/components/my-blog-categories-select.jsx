@@ -26,15 +26,15 @@ export function MyBlogCategoriesSelect({categories}) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="h-full">
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[200px] justify-between h-full"
         >
           {value
-            ? categories.find((category) => category.name === value)?.name
+            ? categories?.find((category) => category.name === value)?.name
             : "Select category..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -45,7 +45,7 @@ export function MyBlogCategoriesSelect({categories}) {
           <CommandList>
             <CommandEmpty>No category found.</CommandEmpty>
             <CommandGroup>
-              {categories.map((category) => (
+              {categories?.map((category) => (
                 <CommandItem
                   key={category.id}
                   value={category.id}
