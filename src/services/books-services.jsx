@@ -1,3 +1,4 @@
+
 export async function getNewArrivalBooks() {
   const url = process.env.BASE_API_URL + `/books_new_arrival`;
   try {

@@ -23,6 +23,9 @@ const MyBlogCard = ({ blog }) => {
           <p className="mb-2 text-background-foreground line-clamp-3">
             {blog.short_description}
           </p>
+          <p className="mb-2 text-background-foreground line-clamp-3">
+            CategoryId : {blog.news_category_id}
+          </p>
         </div>
       </div>
       <div className="flex justify-end">

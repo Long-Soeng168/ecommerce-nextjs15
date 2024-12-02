@@ -15,6 +15,7 @@ export default function MySearch({ placeholder }) {
     const params = new URLSearchParams(searchParams);
     if (term) {
       params.set("search", term);
+      params.set("page", 1);
     } else {
       params.delete("search");
     }

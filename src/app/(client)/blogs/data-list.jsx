@@ -1,16 +1,18 @@
 import React from "react";
 import MyBlogCard from "@/components/ui/my-blog-card";
-import Pagination from "./pagination";
 import { getBlogs } from "@/services/blogs-services";
+import MyPagination from "@/components/my-pagination";
 
-const DataList = async ({currentPage, search}) => {
+const DataList = async ({ currentPage, search, categoryId }) => {
   let results = await getBlogs({
+    categoryId: categoryId,
     search: search,
     currentPage: currentPage,
-    perPage: 2,
+    perPage: 3,
   });
   let blogs = results?.data || [];
-  let totalPages = results?.last_page;
+  const links = results?.links || [];
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -19,7 +21,7 @@ const DataList = async ({currentPage, search}) => {
         ))}
       </div>
       <div className="flex justify-center w-full mt-5">
-        <Pagination totalPages={totalPages} />
+        <MyPagination links={links} />
       </div>
     </>
   );

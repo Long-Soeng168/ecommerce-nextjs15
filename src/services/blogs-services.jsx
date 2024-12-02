@@ -1,10 +1,16 @@
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function getBlogs({categoryId, perPage, currentPage, search} = {}) {
   const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}&search=${search || ''}&page=${currentPage || ''}`;
+
+  // await sleep(3000);
+
   try {
-    await sleep(2000);
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch: ${response.statusText}`);
     }
