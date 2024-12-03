@@ -23,7 +23,7 @@ const MyPagination = ({ links, from, to, total }) => {
   // Generate the page URL with updated page parameter
   const createPageURL = (pageNumber) => {
     const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
+    params.set("page", pageNumber);
     return `${pathname}?${params.toString()}`;
   };
 

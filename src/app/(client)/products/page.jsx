@@ -32,10 +32,10 @@ const Page = async (props) => {
 
   const searchParams = await props.searchParams;
   const search = searchParams?.search || "";
-  const currentPage = Number(searchParams?.page) || 1;
-  const perPage = Number(searchParams?.perPage) || 10;
-  const categoryId = Number(searchParams?.categoryId) || "";
-  const subCategoryId = Number(searchParams?.subCategoryId) || "";
+  const currentPage = searchParams?.page || '1';
+  const perPage = searchParams?.perPage || '10';
+  const categoryId = searchParams?.categoryId || "";
+  const subCategoryId = searchParams?.subCategoryId || "";
   const orderBy = searchParams?.orderBy || "";
   const orderDir = searchParams?.orderDir || "";
   const priceFrom = searchParams?.priceFrom || "";
