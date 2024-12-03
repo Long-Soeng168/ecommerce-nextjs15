@@ -124,6 +124,7 @@ const Page = async (props) => {
         {/* Start books List */}
         <Suspense
           key={
+            ' ' +
             search +
             currentPage +
             perPage +
