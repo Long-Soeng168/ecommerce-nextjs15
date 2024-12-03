@@ -12,7 +12,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const MyPagination = ({ links }) => {
+const MyPagination = ({ links, from, to, total }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -29,7 +29,7 @@ const MyPagination = ({ links }) => {
 
   // Check if 'Next' or 'Previous' exists in the pagination
   const hasPreviousPage = currentPage > 1;
-  const lastPage = links[links.length - 2]?.label;
+  const lastPage = links && links[links?.length - 2]?.label;
   const hasNextPage = currentPage < Number(lastPage);
 
   const handlePaginationChange = (pageNumber) => {
@@ -38,58 +38,64 @@ const MyPagination = ({ links }) => {
   };
 
   return (
-    <Pagination>
-      <PaginationContent>
-        {/* Previous Button */}
-        <PaginationItem>
-          <PaginationPrevious
-            className={hasPreviousPage ? "text-primary font-bold" : ""}
-            onClick={() =>
-              hasPreviousPage && handlePaginationChange(currentPage - 1)
-            }
-          />
-        </PaginationItem>
+    <div className="flex items-center justify-center w-full md:justify-between ">
+        <p className="hidden whitespace-nowrap md:block">
+          Showing {from} to {to} of {total} results
+        </p>
+      <Pagination className="w-auto mx-0">
+        <PaginationContent>
+          {/* Previous Button */}
+          <PaginationItem>
+            <PaginationPrevious
+              className={hasPreviousPage ? "text-primary font-bold" : ""}
+              onClick={() =>
+                hasPreviousPage && handlePaginationChange(currentPage - 1)
+              }
+            />
+          </PaginationItem>
 
-        {/* Page Links */}
-        {links
-          ?.filter(
-            (link) =>
-              !link.label.includes("Previous") && !link.label.includes("Next")
-          )
-          .map((link, index) => {
-            const pageNumber = link.label === "..." ? null : Number(link.label);
+          {/* Page Links */}
+          {links
+            ?.filter(
+              (link) =>
+                !link.label.includes("Previous") && !link.label.includes("Next")
+            )
+            .map((link, index) => {
+              const pageNumber =
+                link.label === "..." ? null : Number(link.label);
 
-            return (
-              <PaginationItem
-                className={`${link.active ? "" : "hidden"}  md:block`}
-                key={index}
-              >
-                <PaginationLink
-                  onClick={() =>
-                    pageNumber && handlePaginationChange(pageNumber)
-                  }
-                  dangerouslySetInnerHTML={{ __html: link.label }}
-                  className={
-                    link.active
-                      ? "text-primary border-primary border-2 font-bold"
-                      : ""
-                  }
-                />
-              </PaginationItem>
-            );
-          })}
+              return (
+                <PaginationItem
+                  className={`${link.active ? "" : "hidden"}  md:block`}
+                  key={index}
+                >
+                  <PaginationLink
+                    onClick={() =>
+                      pageNumber && handlePaginationChange(pageNumber)
+                    }
+                    dangerouslySetInnerHTML={{ __html: link.label }}
+                    className={
+                      link.active
+                        ? "text-primary border-primary border-2 font-bold"
+                        : ""
+                    }
+                  />
+                </PaginationItem>
+              );
+            })}
 
-        {/* Next Button */}
-        <PaginationItem>
-          <PaginationNext
-            className={hasNextPage ? "text-primary font-bold" : ""}
-            onClick={() =>
-              hasNextPage && handlePaginationChange(currentPage + 1)
-            }
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+          {/* Next Button */}
+          <PaginationItem>
+            <PaginationNext
+              className={hasNextPage ? "text-primary font-bold" : ""}
+              onClick={() =>
+                hasNextPage && handlePaginationChange(currentPage + 1)
+              }
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
 };
 

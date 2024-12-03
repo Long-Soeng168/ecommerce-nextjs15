@@ -8,7 +8,7 @@ const DataList = async ({ currentPage, search, categoryId }) => {
     categoryId: categoryId,
     search: search,
     currentPage: currentPage,
-    perPage: 3,
+    // perPage: 9,
   });
   let blogs = results?.data || [];
   const links = results?.links || [];
@@ -21,7 +21,7 @@ const DataList = async ({ currentPage, search, categoryId }) => {
         ))}
       </div>
       <div className="flex justify-center w-full mt-5">
-        <MyPagination links={links} />
+        <MyPagination from={results.from} to={results.to} total={results.total} links={links} />
       </div>
     </>
   );

@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
           <Tooltip className="bg-blue-200">
             <TooltipTrigger>
               <h3 className="text-md text-start text-foreground line-clamp-1">
-                Title {product.title}
+                {product.title}
               </h3>
               <h3 className="text-gray-400 text-md text-start line-clamp-2">
                 {product.short_description}

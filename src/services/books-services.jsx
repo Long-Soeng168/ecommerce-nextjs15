@@ -1,4 +1,3 @@
-
 export async function getNewArrivalBooks() {
   const url = process.env.BASE_API_URL + `/books_new_arrival`;
   try {
@@ -16,7 +15,8 @@ export async function getNewArrivalBooks() {
 }
 
 export async function getBestSellingBooks({ limit } = {}) {
-  const url = process.env.BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
+  const url =
+    process.env.BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -31,10 +31,37 @@ export async function getBestSellingBooks({ limit } = {}) {
   }
 }
 
-export async function getBooks({ categoryId, randomOrder } = {}) {
-  const url =
-    process.env.BASE_API_URL +
-    `/books?categoryId=${categoryId || ""}&randomOrder=${randomOrder || ""}`;
+export async function getBooks({
+  categoryId = "",
+  subCategoryId = "",
+  randomOrder = "",
+  orderBy = "",
+  orderDir = "",
+  page = "",
+  perPage = "",
+  search = "",
+  priceFrom = "",
+  priceTo = "",
+  yearFrom = "",
+  yearTo = "",
+} = {}) {
+  const queryParams = new URLSearchParams({
+    categoryId,
+    subCategoryId,
+    randomOrder,
+    page,
+    search,
+    perPage,
+    orderBy,
+    orderDir,
+    priceFrom,
+    priceTo,
+    yearFrom,
+    yearTo,
+  });
+
+  const url = `${process.env.BASE_API_URL}/books?${queryParams}`;
+  console.log(url);
   try {
     const response = await fetch(url);
     if (!response.ok) {

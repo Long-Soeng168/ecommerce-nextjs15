@@ -87,12 +87,18 @@ const ProductPage = async ({ params }) => {
                   </MyKeyValueCard>
                 )}
 
-                {product?.publication_date && (
+                {/* {product?.publication_date && (
                   <MyKeyValueCard
                     title="Publication Date"
                     value={moment(product?.publication_date).format(
                       "D - MMMM - YYYY"
                     )}
+                  />
+                )} */}
+                {product?.year && (
+                  <MyKeyValueCard
+                    title="Publication Date"
+                    value={product?.year}
                   />
                 )}
                 {product?.number_of_pages && (
@@ -109,6 +115,14 @@ const ProductPage = async ({ params }) => {
                 )}
                 {product?.language && (
                   <MyKeyValueCard title="Language" value={product?.language} />
+                )}
+                {product?.created_at && (
+                  <MyKeyValueCard
+                    title="Post Date"
+                    value={moment(product?.created_at).format(
+                      "D - MMMM - YYYY"
+                    )}
+                  />
                 )}
                 {product?.updated_at && (
                   <MyKeyValueCard

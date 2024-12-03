@@ -6,7 +6,7 @@ const MyBlogCard = ({ blog }) => {
   return (
     <Link
       href={`blogs/${blog.id}`}
-      className="flex flex-col justify-between p-2 transition-shadow duration-300 border rounded-lg shadow cursor-pointer border-border bg-accent hover:shadow-xl"
+      className="flex flex-col justify-between p-2 transition-shadow duration-300 rounded-lg cursor-pointer border-border bg-accent hover:shadow-xl"
     >
       <div>
         <Image
@@ -23,9 +23,9 @@ const MyBlogCard = ({ blog }) => {
           <p className="mb-2 text-background-foreground line-clamp-3">
             {blog.short_description}
           </p>
-          <p className="mb-2 text-background-foreground line-clamp-3">
+          {/* <p className="mb-2 text-background-foreground line-clamp-3">
             CategoryId : {blog.news_category_id}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="flex justify-end">

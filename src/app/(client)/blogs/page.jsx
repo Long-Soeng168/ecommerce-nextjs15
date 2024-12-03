@@ -4,7 +4,7 @@ import MySearch from "@/components/ui/my-search";
 import { getBlogCategories } from "@/services/blogs-services";
 import { Suspense } from "react";
 import DataList from "./data-list";
-import Loading from "./loading";
+import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 
 const Page = async (props) => {
   const categories = await getBlogCategories();
@@ -25,7 +25,7 @@ const Page = async (props) => {
           <MyBlogCategoriesSelect categories={categories} />
           <MySearch placeholder="Search blogs..." />
         </div>
-        <Suspense key={categoryId + search + currentPage} fallback={<Loading />}>
+        <Suspense key={categoryId + search + currentPage} fallback={<MyLoadingAnimation />}>
           <DataList
             currentPage={currentPage}
             search={search}
