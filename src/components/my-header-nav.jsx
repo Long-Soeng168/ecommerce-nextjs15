@@ -187,6 +187,13 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         </NavigationMenuItem> */}
 
         <NavigationMenuItem>
+          <Link href="/products" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Books
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Blogs

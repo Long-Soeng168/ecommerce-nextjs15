@@ -10,7 +10,7 @@ const ClientLayout = ({ children }) => {
         <MyHeader key="home-header" />
         </div>
       </div>
-      <div className="min-h-[70vh] px-2 mx-auto max-w-screen-xl">
+      <div className="min-h-[55vh] px-2 mx-auto max-w-screen-xl">
         {children}
       </div>
       <MyFooter />

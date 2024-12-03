@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import { Input } from "@/components/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
@@ -10,15 +11,22 @@ const MyFilter = () => {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const [priceFrom, setPriceFrom] = useState("");
-  const [priceTo, setPriceTo] = useState("");
-  const [yearFrom, setYearFrom] = useState("");
-  const [yearTo, setYearTo] = useState("");
+  const [yearFrom, setYearFrom] = useState(
+    searchParams.get("yearFrom")?.toString() || ""
+  );
+  const [yearTo, setYearTo] = useState(
+    searchParams.get("yearTo")?.toString() || ""
+  );
+
+  const [values, setValues] = useState([
+    searchParams.get("priceFrom") || 0,
+    searchParams.get("priceTo") || 100,
+  ]);
 
   const handleSetFilter = () => {
     const params = new URLSearchParams(searchParams);
-    params.set("priceFrom", priceFrom);
-    params.set("priceTo", priceTo);
+    params.set("priceFrom", values[0]);
+    params.set("priceTo", values[1]);
     params.set("yearFrom", yearFrom);
     params.set("yearTo", yearTo);
     replace(`${pathname}?${params.toString()}`);
@@ -26,34 +34,8 @@ const MyFilter = () => {
 
   return (
     <div>
-      <div className="p-2 mt-4 border-t">
-        <p className="text-sm font-bold text-primary">Price ($)</p>
-        <div className="flex items-center gap-2">
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">From</p>
-            <Input
-              className="border border-primary"
-              type="number"
-              onChange={(e) => {
-                setPriceFrom(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">To</p>
-            <Input
-              type="number"
-              className="border border-primary"
-              onChange={(e) => {
-                setPriceTo(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-      </div>
-
       {/* Date */}
-      <div className="p-2 mt-4">
+      <div className="p-2 mt-4 border-t">
         <p className="text-sm font-bold text-primary">Published Year</p>
         <div className="flex items-center gap-2">
           <div>
@@ -61,6 +43,7 @@ const MyFilter = () => {
             <Input
               className="border border-primary"
               type="number"
+              value={yearFrom}
               onChange={(e) => {
                 setYearFrom(e.target.value);
               }}
@@ -71,13 +54,25 @@ const MyFilter = () => {
             <Input
               className="border border-primary"
               type="number"
+              value={yearTo}
               onChange={(e) => {
                 setYearTo(e.target.value);
               }}
             />
           </div>
         </div>
-        <Button onClick={() => handleSetFilter()} className="w-full mt-4">
+        <div className="py-2 mt-4">
+          <p className="mb-8 text-sm font-bold text-primary">Price ($)</p>
+          <DualRangeSlider
+            label={(value) => value}
+            value={values}
+            onValueChange={setValues}
+            min={0}
+            max={100}
+            step={1}
+          />
+        </div>
+        <Button onClick={() => handleSetFilter()} className="w-full mt-8">
           Apply Filter
         </Button>
       </div>

@@ -20,6 +20,8 @@ import MySetPerPage from "@/components/my-set-per-page";
 import MySetOrderBy from "@/components/my-set-order-by";
 import LoadingDataList from "./components/loading-data-list";
 import MyFilter from "./components/my-filter";
+import MySelectFilter from "./components/my-select-filter";
+import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 
 const Page = async (props) => {
   const categories = await getCategories({
@@ -40,6 +42,8 @@ const Page = async (props) => {
   const priceTo = searchParams?.priceTo || "";
   const yearFrom = searchParams?.yearFrom || "";
   const yearTo = searchParams?.yearTo || "";
+  const authorId = searchParams?.authorId || "";
+  const publisherId = searchParams?.publisherId || "";
 
   return (
     <div className="flex">
@@ -124,13 +128,15 @@ const Page = async (props) => {
             currentPage +
             perPage +
             categoryId +
-            subCategoryId + 
+            subCategoryId +
             orderBy +
             orderDir +
             priceFrom +
             priceTo +
             yearFrom +
-            yearTo
+            yearTo +
+            authorId +
+            publisherId
           }
           fallback={<LoadingDataList />}
         >
@@ -146,6 +152,8 @@ const Page = async (props) => {
             priceTo={priceTo}
             yearFrom={yearFrom}
             yearTo={yearTo}
+            authorId={authorId}
+            publisherId={publisherId}
           />
         </Suspense>
       </div>
@@ -156,10 +164,21 @@ const Page = async (props) => {
     return (
       <div className="flex flex-col w-64 pt-2 mb-10">
         <ScrollArea className="max-h-[800px] pr-2">
-          <MyHomeSidebar key={categoryId + subCategoryId} categories={categories} />
+          <MyHomeSidebar
+            key={categoryId + subCategoryId}
+            categories={categories}
+          />
         </ScrollArea>
+        <Suspense
+          key={authorId + publisherId}
+          fallback={<MyLoadingAnimation />}
+        >
+          <MySelectFilter />
+        </Suspense>
         {/* Price */}
-        <MyFilter />
+        <div key={' ' + priceFrom + priceTo + yearFrom + yearTo}>
+          <MyFilter />
+        </div>
       </div>
     );
   }

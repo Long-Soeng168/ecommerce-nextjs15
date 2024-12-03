@@ -15,6 +15,8 @@ const DataList = async ({
   priceTo,
   yearFrom,
   yearTo,
+  authorId,
+  publisherId
 }) => {
   let results = await getBooks({
     categoryId: categoryId,
@@ -28,6 +30,8 @@ const DataList = async ({
     priceTo: priceTo,
     yearFrom: yearFrom,
     yearTo: yearTo,
+    authorId: authorId,
+    publisherId: publisherId,
   });
   const books = results?.data;
   return (

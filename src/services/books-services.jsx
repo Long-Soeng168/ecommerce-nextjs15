@@ -44,6 +44,8 @@ export async function getBooks({
   priceTo = "",
   yearFrom = "",
   yearTo = "",
+  authorId = "",
+  publisherId = "",
 } = {}) {
   const queryParams = new URLSearchParams({
     categoryId,
@@ -58,10 +60,12 @@ export async function getBooks({
     priceTo,
     yearFrom,
     yearTo,
+    authorId,
+    publisherId,
   });
 
   const url = `${process.env.BASE_API_URL}/books?${queryParams}`;
-  // console.log(url);
+  console.log(url);
   try {
     const response = await fetch(url, {
       next: {
