@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
   icons: {
-    icon: "/images/logo.png",
+    icon: "/images/favicon.ico",
   },
   title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
   description:
