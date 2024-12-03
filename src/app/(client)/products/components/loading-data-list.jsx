@@ -7,7 +7,7 @@ const LoadingDataList = () => {
     <>
       <MyLoadingAnimation />
       <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <SkeletonCard key={index} ratio="6/9" />
         ))}
       </div>
