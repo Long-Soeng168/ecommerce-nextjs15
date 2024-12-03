@@ -156,7 +156,7 @@ const Page = async (props) => {
     return (
       <div className="flex flex-col w-64 pt-2 mb-10">
         <ScrollArea className="max-h-[800px] pr-2">
-          <MyHomeSidebar categories={categories} />
+          <MyHomeSidebar key={categoryId + subCategoryId} categories={categories} />
         </ScrollArea>
         {/* Price */}
         <MyFilter />
