@@ -61,9 +61,13 @@ export async function getBooks({
   });
 
   const url = `${process.env.BASE_API_URL}/books?${queryParams}`;
-  console.log(url);
+  // console.log(url);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 86400
+      }
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch Books : ${response.statusText}`);
     }
