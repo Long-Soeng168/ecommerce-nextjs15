@@ -33,7 +33,7 @@ const Page = async (props) => {
   const searchParams = await props.searchParams;
   const search = searchParams?.search || "";
   const currentPage = searchParams?.page || '1';
-  const perPage = searchParams?.perPage || '10';
+  const perPage = searchParams?.perPage || '20';
   const categoryId = searchParams?.categoryId || "";
   const subCategoryId = searchParams?.subCategoryId || "";
   const orderBy = searchParams?.orderBy || "";
