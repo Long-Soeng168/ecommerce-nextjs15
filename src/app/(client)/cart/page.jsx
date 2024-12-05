@@ -1,44 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import MyStepper from "@/components/my-stepper";
 import MySummary from "@/components/my-summary";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { IMAGE_BOOK_URL } from "@/config/env";
+import { useCart } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "MSI MEG Trident X 10SD-1012AU Intel i7 10700K,",
-      price: 4349.0,
-      quantity: 1,
-      image: "/images/products/product1.png",
-    },
-    {
-      id: 2,
-      name: "MSI MEG Trident X 10-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-      price: 4349.0,
-      quantity: 1,
-      image: "/images/products/product2.png",
-    },
-  ]);
+  const { cartItems, removeFromCart, clearCart, handleQuantityChange } = useCart();
+  const [isClient, setIsClient] = useState(false); // Track if it's client-side
 
-  const handleQuantityChange = (id, delta) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(item.quantity + delta, 1) }
-          : item
-      )
-    );
-  };
+  useEffect(() => {
+    setIsClient(true); // Set to true once the component is mounted on the client
+  }, []);
 
-  const handleRemoveItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  if (!isClient) {
+    return null; // Don't render anything until it's client-side
+  }
 
   const getTotalPrice = () => {
     return cartItems
@@ -46,22 +27,20 @@ const CartPage = () => {
       .toFixed(2);
   };
 
-  // Calculate totals
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const shipping = 5.0; // Example flat shipping rate
+  const shipping = 5.0;
   const total = subtotal + shipping;
 
   return (
-    <div className="flex flex-col min-h-screen lg:px-4">
+    <div className="flex flex-col min-h-screen mb-8 lg:px-4">
       <MyStepper currentStep={1} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8 ">
-        {/* Start Left Section */}
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
           <div>
-          <h1 className="mb-4 text-2xl font-bold">Shopping Cart</h1>
+            <h1 className="mb-4 text-2xl font-bold">Shopping Cart</h1>
             <div className="overflow-x-auto">
               <table className="min-w-full border border-border bg-background">
                 <thead>
@@ -79,17 +58,17 @@ const CartPage = () => {
                     <tr key={item.id} className="border-b border-border">
                       <td className="p-4">
                         <Image
-                          src={item.image}
-                          alt={item.name}
+                          src={IMAGE_BOOK_URL + item.image}
+                          alt={item.title}
                           width={80}
                           height={80}
                           className="rounded"
                         />
                       </td>
                       <td className="p-4 min-w-40">
-                        <h2 className="line-clamp-3">{item.name}</h2>
+                        <h2 className="line-clamp-3">{item.title}</h2>
                       </td>
-                      <td className="p-4 ">${item.price.toFixed(2)}</td>
+                      <td className="p-4">${item.price.toFixed(2)}</td>
                       <td className="p-4">
                         <div className="flex items-center space-x-2">
                           <button
@@ -113,7 +92,7 @@ const CartPage = () => {
                       </td>
                       <td className="p-4">
                         <button
-                          onClick={() => handleRemoveItem(item.id)}
+                          onClick={() => removeFromCart(item)}
                           className="text-red-500 hover:text-red-700"
                         >
                           Remove
@@ -130,7 +109,7 @@ const CartPage = () => {
 
             {cartItems.length > 0 ? (
               <div className="flex justify-between mt-4">
-                <Button onClick={() => setCartItems([])} variant="destructive">
+                <Button onClick={clearCart} variant="destructive">
                   Clear Shopping Cart
                 </Button>
                 <Button>
@@ -144,11 +123,8 @@ const CartPage = () => {
             )}
           </div>
         </div>
-        {/* End Left Section */}
-
-        {/* Start Right Section */}
-        <MySummary cartItems={cartItems} total={total} subtotal={subtotal} shipping={shipping} />
-        {/* End Right Section */}
+        <MySummary 
+        />
       </main>
     </div>
   );

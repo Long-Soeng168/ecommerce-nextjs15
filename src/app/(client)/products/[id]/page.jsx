@@ -6,8 +6,10 @@ import { Minus, Plus, ShoppingCart } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
-import { Label } from "@/components/ui/label";
 import RelatedProducts from "@/app/(client)/products/[id]/components/related-products";
+import { Suspense } from "react";
+import MyLoadingAnimation from "@/components/ui/my-loading-animation";
+import MyAddToCart from "@/components/my-add-to-cart";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -21,6 +23,7 @@ const ProductPage = async ({ params }) => {
   if (product?.images?.length > 0) {
     images = product?.images.map((item) => item.image);
   }
+
 
   return (
     <div className="lg:flex">
@@ -41,6 +44,8 @@ const ProductPage = async ({ params }) => {
             <h1 className="block mt-1 mb-2 text-2xl leading-tight font-lg">
               {product?.title}
             </h1>
+            <MyShowMoreText maxLine={2} text={product?.short_description} />
+            <hr className="w-full my-6" />
             <div className="flex flex-col gap-6 my-6">
               <div className="flex flex-col gap-2">
                 {product?.author && (
@@ -153,7 +158,7 @@ const ProductPage = async ({ params }) => {
             <div>
               <div className="flex items-center gap-4">
                 {/* Quantity Control */}
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <Button
                     variant="outline"
                     className="rounded-tr-none rounded-br-none"
@@ -172,19 +177,17 @@ const ProductPage = async ({ params }) => {
                   >
                     <Plus className="text-primary" />
                   </Button>
-                </div>
+                </div> */}
                 {/* Add to Cart Button */}
-                <Button>
-                  <ShoppingCart /> ADD TO CART
-                </Button>
+                <MyAddToCart product={product} />
               </div>
-              <hr className="w-full mt-8 mb-4" />
-              <MyShowMoreText text={product?.short_description} />
             </div>
           </div>
         </div>
 
-        <RelatedProducts categoryId={product?.category_id} />
+        <Suspense key={product?.category_id} fallback={<MyLoadingAnimation />}>
+          <RelatedProducts categoryId={product?.category_id} />
+        </Suspense>
       </main>
     </div>
   );

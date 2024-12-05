@@ -32,8 +32,8 @@ const Page = async (props) => {
 
   const searchParams = await props.searchParams;
   const search = searchParams?.search || "";
-  const currentPage = searchParams?.page || '1';
-  const perPage = searchParams?.perPage || '20';
+  const currentPage = searchParams?.page || "1";
+  const perPage = searchParams?.perPage || "20";
   const categoryId = searchParams?.categoryId || "";
   const subCategoryId = searchParams?.subCategoryId || "";
   const orderBy = searchParams?.orderBy || "";
@@ -70,6 +70,9 @@ const Page = async (props) => {
         {/* End Bread */}
 
         {/* Start books Header */}
+        <div className="sticky top-0 z-50 w-full">
+          <MySearch placeholder="Search blogs..." />
+        </div>
         <div className="flex flex-wrap justify-end gap-2">
           {/* Start Search */}
           {/* <div className="flex flex-1 border rounded-lg shadow-sm">
@@ -83,9 +86,6 @@ const Page = async (props) => {
               <span className="sr-only">Search</span>
             </Button>
           </div> */}
-          <div className="w-full h-full">
-            <MySearch placeholder="Search blogs..." />
-          </div>
 
           {/* End Search */}
           <div className="flex flex-wrap items-center justify-end gap-2">
@@ -123,7 +123,7 @@ const Page = async (props) => {
         {/* Start books List */}
         <Suspense
           key={
-            ' ' +
+            " " +
             search +
             currentPage +
             perPage +
@@ -163,12 +163,10 @@ const Page = async (props) => {
   function leftSide() {
     return (
       <div className="flex flex-col w-64 pt-2 mb-10">
-        <ScrollArea className="max-h-[800px] pr-2">
-          <MyHomeSidebar
-            key={categoryId + subCategoryId}
-            categories={categories}
-          />
-        </ScrollArea>
+        <MyHomeSidebar
+          key={"categories-components" + categoryId + subCategoryId}
+          categories={categories}
+        />
         <Suspense
           key={authorId + publisherId}
           fallback={<MyLoadingAnimation />}
@@ -176,7 +174,7 @@ const Page = async (props) => {
           <MySelectFilter />
         </Suspense>
         {/* Price */}
-        <div key={' ' + priceFrom + priceTo + yearFrom + yearTo}>
+        <div key={" " + priceFrom + priceTo + yearFrom + yearTo}>
           <MyFilter />
         </div>
       </div>

@@ -30,7 +30,7 @@ const MySetPerPage = () => {
     <div>
       <Select
         onValueChange={(value) => handleSelect(value)}
-        defaultValue={searchParams.get("perPage")?.toString() || '10'}
+        defaultValue={searchParams.get("perPage")?.toString() || '20'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder={`Show : per page`} />
