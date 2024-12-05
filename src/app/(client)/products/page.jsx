@@ -99,7 +99,6 @@ const Page = async (props) => {
                 <LayoutListIcon />
               </Button>
             </span> */}
-
             {/* Filter */}
             <span className="lg:hidden">
               <Sheet>
