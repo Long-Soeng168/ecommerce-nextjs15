@@ -70,7 +70,7 @@ const Page = async (props) => {
         {/* End Bread */}
 
         {/* Start books Header */}
-        <div className="sticky top-0 z-50 w-full">
+        <div className="w-full">
           <MySearch placeholder="Search blogs..." />
         </div>
         <div className="flex flex-wrap justify-end gap-2">

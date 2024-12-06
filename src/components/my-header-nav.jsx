@@ -14,19 +14,37 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import ProductCard from "./ui/my-product-card";
 import { AlignLeft, ChevronRight } from "lucide-react";
+import MyCategoryPanel from "./my-categories-panel";
+import { IMAGE_BOOK_URL } from "@/config/env";
+import { useSearchParams } from "next/navigation";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
-  const IMAGE_CATE_URL =
-    "https://scholar.brolong.pro/assets/images/categories/";
-  const IMAGE_BOOK_URL = "https://scholar.brolong.pro/assets/images/isbn/";
+  const searchParams = useSearchParams();
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem
+          aria-hidden={true}
+          key={
+            "catePanelKey" +
+            searchParams.get("productTitle") +
+            searchParams.get("categoryId") +
+            searchParams.get("subCategoryId")
+          }
+        >
           <NavigationMenuTrigger>
-            <AlignLeft size={18} className="mr-1"/> Categories
+            <AlignLeft size={18} className="mr-1" /> Categories
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <MyCategoryPanel categoriesData={categories} />
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        {/* <NavigationMenuItem key={params}>
+          <NavigationMenuTrigger>
+            <AlignLeft size={18} className="mr-1" /> Categories
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             {categories?.length > 0 && (
@@ -59,7 +77,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
               </ul>
             )}
           </NavigationMenuContent>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
 
         {categoryMostBook?.books?.length > 0 && (
           <NavigationMenuItem>

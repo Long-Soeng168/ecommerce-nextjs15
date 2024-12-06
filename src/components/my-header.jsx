@@ -17,6 +17,7 @@ const MyHeader = async () => {
   const resultCateogries = await getCategories({
     orderBy: "books_count",
     orderDir: "desc",
+    withSub: 1
   });
 
   const categoryMostBooks = await getCategoryHasMostBooks();
