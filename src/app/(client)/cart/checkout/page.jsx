@@ -64,7 +64,9 @@ export default function Component() {
       items: cartItems.map((item) => ({
         id: item.id,
         title: item.title,
+        image: item.image,
         price: item.price,
+        discount: item.discount,
         quantity: item.quantity,
       })),
     };

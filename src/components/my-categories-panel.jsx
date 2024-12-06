@@ -119,7 +119,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
                   >
                     <div>
                       <div className="relative overflow-hidden ">
-                        <Link href={`/products/${book.id}`}>
+                        <Link href={`/products/${book.id}?productTitle=${book.title}`}>
                           <Image
                             width={100}
                             height={100}
@@ -134,7 +134,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
                           </span>
                         )}
                       </div>
-                      <Link href={`/products/${book.id}`}>
+                      <Link href={`/products/${book.id}?productTitle=${book.title}`}>
                         <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
                           {book.discount != 0 ? (
                             <p className="space-x-2 overflow-hidden text-xs text-gray-400 text-ellipsis">
