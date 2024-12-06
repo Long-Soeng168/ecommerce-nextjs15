@@ -5,7 +5,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { LucideChevronDown, Underline } from "lucide-react";
+import { AlignLeft, LucideChevronDown, Underline } from "lucide-react";
 import Image from "next/image";
 import { Label } from "./ui/label";
 import { IMAGE_CATE_URL } from "@/config/env";
@@ -45,7 +45,19 @@ export function MyHomeSidebar({ categories }) {
 
   return (
     <div className="space-y-1.5">
-      <Label className="text-primary">Categories</Label>
+      {/* <Label className="text-primary">Categories</Label> */}
+      <div className="flex items-stretch justify-between transition-all duration-500 cursor-pointer">
+        <button
+          onClick={() => handleSetCategory()}
+          className={`${
+            currentCategoryId == null &&
+            "underline font-bold bg-primary group text-white hover:text-primary"
+          } hover:bg-primary/10 p-2 rounded items-center flex gap-1 w-full text-[16px] hover:underline`}
+        >
+          <AlignLeft size={26} />
+          All Categories
+        </button>
+      </div>
       {categories?.length > 0 &&
         categories?.map((category) => (
           <Collapsible
@@ -98,7 +110,8 @@ export function MyHomeSidebar({ categories }) {
                     <li key={subCategory.id}>
                       <button
                         className={`${
-                          currentSubCategoryId == subCategory.id && "underline font-bold"
+                          currentSubCategoryId == subCategory.id &&
+                          "underline font-bold"
                         } relative pl-2 max-w-[85%] w-full text-left underline-offset-4 cursor-pointer hover:underline`}
                         onClick={() => {
                           handleSetSubCategory(subCategory.id, category.id);

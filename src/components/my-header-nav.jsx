@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import ProductCard from "./ui/my-product-card";
-import { ChevronRight } from "lucide-react";
+import { AlignLeft, ChevronRight } from "lucide-react";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const IMAGE_CATE_URL =
@@ -25,7 +25,9 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            <AlignLeft size={18} className="mr-1"/> Categories
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             {categories?.length > 0 && (
               <ul className="grid w-[400px] gap-2 p-1 md:w-[400px] md:grid-cols-3 lg:w-[600px] ">

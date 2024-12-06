@@ -100,7 +100,20 @@ const Page = async (props) => {
               </Button>
             </span> */}
             {/* Filter */}
-            <span className="lg:hidden">
+            <span
+              className="lg:hidden"
+              key={
+                " " +
+                categoryId +
+                subCategoryId +
+                priceFrom +
+                priceTo +
+                yearFrom +
+                yearTo +
+                authorId +
+                publisherId
+              }
+            >
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="outline">
@@ -108,7 +121,7 @@ const Page = async (props) => {
                     <Filter />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="overflow-y-scroll">
+                <SheetContent side="left" className="w-auto overflow-y-scroll">
                   <SheetHeader>
                     <SheetTitle>Filter</SheetTitle>
                   </SheetHeader>

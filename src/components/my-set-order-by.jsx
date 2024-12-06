@@ -47,7 +47,7 @@ const MySetOrderBy = () => {
         onValueChange={(value) => handleSelect(value)}
         defaultValue={searchParams.get("orderBy")?.toString()}
       >
-        <SelectTrigger className="w-[150px]">
+        <SelectTrigger className="w-[140px]">
           <SelectValue placeholder="Select Order" />
         </SelectTrigger>
         <SelectContent>
@@ -63,8 +63,8 @@ const MySetOrderBy = () => {
         onValueChange={(value) => handleSelectDir(value)}
         defaultValue={searchParams.get("orderDir")?.toString()}
       >
-        <SelectTrigger className="w-[150px]">
-          <SelectValue placeholder="Select Direction " />
+        <SelectTrigger className="w-[130px]">
+          <SelectValue placeholder="Set Direction" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="asc">From A to Z</SelectItem>
