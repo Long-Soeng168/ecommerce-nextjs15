@@ -10,6 +10,7 @@ import RelatedProducts from "@/app/(client)/products/[id]/components/related-pro
 import { Suspense } from "react";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import MyAddToCart from "@/components/my-add-to-cart";
+import MyBuyNowButton from "@/components/my-buy-now-button";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -23,7 +24,6 @@ const ProductPage = async ({ params }) => {
   if (product?.images?.length > 0) {
     images = product?.images.map((item) => item.image);
   }
-
 
   return (
     <div className="lg:flex">
@@ -179,6 +179,7 @@ const ProductPage = async ({ params }) => {
                   </Button>
                 </div> */}
                 {/* Add to Cart Button */}
+                <MyBuyNowButton product={product} />
                 <MyAddToCart product={product} />
               </div>
             </div>

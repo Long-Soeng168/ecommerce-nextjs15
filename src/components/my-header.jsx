@@ -4,18 +4,23 @@ import { MyHeaderNav } from "./my-header-nav";
 import { ModeToggle } from "./mode-toggle";
 import { LanguageToggle } from "./language-toggle";
 import { Button } from "./ui/button";
-import { Menu, Search, ShoppingCart } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { Input } from "./ui/input";
 import Link from "next/link";
 import {
   getCategories,
   getCategoryHasMostBooks,
 } from "@/services/categories-services";
+import MyCartButtonHeader from "./ui/my-cart-button-header";
 
 const MyHeader = async () => {
-  const resultCateogries = await getCategories({ orderBy: 'books_count', orderDir: 'desc' });
+  const resultCateogries = await getCategories({
+    orderBy: "books_count",
+    orderDir: "desc",
+  });
 
   const categoryMostBooks = await getCategoryHasMostBooks();
+
   return (
     <div>
       <div className="flex flex-wrap py-4 lg:gap-10 lg:items-center">
@@ -56,15 +61,7 @@ const MyHeader = async () => {
               <span className="sr-only">Search</span>
             </Button>
           </div>
-          <Button variant="outline" size="icon" className="relative">
-            <Link href="/cart">
-              <ShoppingCart className="h-[1.2rem] w-[1.2rem] " />
-              <span className="sr-only">Cart</span>
-            </Link>
-            <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-3">
-              2
-            </span>
-          </Button>
+          <MyCartButtonHeader />
         </div>
       </div>
 

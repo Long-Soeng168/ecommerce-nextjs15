@@ -8,9 +8,12 @@ import { IMAGE_BOOK_URL } from "@/config/env";
 import { useCart } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { ListX, Trash2Icon, X } from "lucide-react";
 
 const CartPage = () => {
-  const { cartItems, removeFromCart, clearCart, handleQuantityChange } = useCart();
+  const { cartItems, removeFromCart, clearCart, handleQuantityChange } =
+    useCart();
   const [isClient, setIsClient] = useState(false); // Track if it's client-side
 
   useEffect(() => {
@@ -23,16 +26,14 @@ const CartPage = () => {
 
   const getTotalPrice = () => {
     return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .reduce(
+        (total, item) =>
+          total +
+          (item.price - (item.discount / 100) * item.price) * item.quantity,
+        0
+      )
       .toFixed(2);
   };
-
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-  const shipping = 5.0;
-  const total = subtotal + shipping;
 
   return (
     <div className="flex flex-col min-h-screen mb-8 lg:px-4">
@@ -41,76 +42,114 @@ const CartPage = () => {
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
           <div>
             <h1 className="mb-4 text-2xl font-bold">Shopping Cart</h1>
-            <div className="overflow-x-auto">
-              <table className="min-w-full border border-border bg-background">
-                <thead>
-                  <tr className="bg-primary/10 dark:bg-border">
-                    <th className="p-4 font-semibold text-left ">Image</th>
-                    <th className="p-4 font-semibold text-left ">Item</th>
-                    <th className="p-4 font-semibold text-left ">Price</th>
-                    <th className="p-4 font-semibold text-left ">Quantity</th>
-                    <th className="p-4 font-semibold text-left ">Subtotal</th>
-                    <th className="p-4 font-semibold text-left ">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <tr key={item.id} className="border-b border-border">
-                      <td className="p-4">
-                        <Image
-                          src={IMAGE_BOOK_URL + item.image}
-                          alt={item.title}
-                          width={80}
-                          height={80}
-                          className="rounded"
-                        />
-                      </td>
-                      <td className="p-4 min-w-40">
-                        <h2 className="line-clamp-3">{item.title}</h2>
-                      </td>
-                      <td className="p-4">${item.price.toFixed(2)}</td>
-                      <td className="p-4">
-                        <div className="flex items-center space-x-2">
-                          <button
-                            onClick={() => handleQuantityChange(item.id, -1)}
-                            className="px-2 py-1 text-sm font-semibold rounded-lg bg-border"
-                            disabled={item.quantity <= 1}
-                          >
-                            -
-                          </button>
-                          <span>{item.quantity}</span>
-                          <button
-                            onClick={() => handleQuantityChange(item.id, 1)}
-                            className="px-2 py-1 text-sm font-semibold rounded-lg bg-border"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="p-4 font-bold ">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </td>
-                      <td className="p-4">
-                        <button
-                          onClick={() => removeFromCart(item)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          Remove
-                        </button>
-                      </td>
+            <div className="overflow-x-auto border border-border">
+              <ScrollArea className="max-h-[100vh]">
+                <table className="min-w-full bg-background">
+                  <thead>
+                    <tr className="bg-primary/10 dark:bg-border">
+                      <th className="p-4 font-semibold text-left ">No</th>
+                      <th className="p-4 font-semibold text-center ">Image</th>
+                      <th className="p-4 font-semibold text-left ">Items</th>
+                      <th className="p-4 font-semibold text-left ">Price</th>
+                      <th className="p-4 font-semibold text-left ">Quantity</th>
+                      <th className="p-4 font-semibold text-left ">Subtotal</th>
+                      <th className="p-4 font-semibold text-left ">Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              <h2 className="p-4 text-2xl font-bold border-b border-l border-r text-end">
-                Total: ${getTotalPrice()}
-              </h2>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((item, index) => (
+                      <tr key={item.id} className="border-b border-border">
+                        <td className="p-4">{index + 1}</td>
+                        <td className="flex justify-center w-auto">
+                          <Image
+                            src={IMAGE_BOOK_URL + item.image}
+                            alt={item.title}
+                            width={50}
+                            height={50}
+                            className="py-1.5"
+                          />
+                        </td>
+                        <td className="p-4 pl-0 min-w-40">
+                          <h2 className="line-clamp-3">{item.title}</h2>
+                        </td>
+                        <td className="p-4">
+                          {item.discount != 0 ? (
+                            <p className="flex space-x-2 overflow-hidden text-lg text-gray-400 whitespace-nowrap text-ellipsis">
+                              <span className="line-through whitespace-nowrap">
+                                {item.price} $
+                              </span>
+                              <span className="text-primary">
+                                {(
+                                  item.price -
+                                  (item.discount / 100) * item.price
+                                ).toFixed(2)}
+                                $
+                              </span>
+                            </p>
+                          ) : (
+                            <p className="max-w-full overflow-hidden text-lg text-primary text-ellipsis">
+                              {item.price} $
+                            </p>
+                          )}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => handleQuantityChange(item.id, -1)}
+                              className="px-2 py-1 text-sm font-semibold rounded-lg bg-border"
+                              disabled={item.quantity <= 1}
+                            >
+                              -
+                            </button>
+                            <span>{item.quantity}</span>
+                            <button
+                              onClick={() => handleQuantityChange(item.id, 1)}
+                              className="px-2 py-1 text-sm font-semibold rounded-lg bg-border"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          {item.discount != 0 ? (
+                            <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
+                              <span className="text-primary">
+                                {(
+                                  (item.price -
+                                    (item.discount / 100) * item.price) *
+                                  item.quantity
+                                ).toFixed(2)}
+                                $
+                              </span>
+                            </p>
+                          ) : (
+                            <p className="max-w-full overflow-hidden text-lg text-primary text-ellipsis">
+                              {item.price * item.quantity} $
+                            </p>
+                          )}
+                        </td>
+                        <td className="p-4">
+                          <button
+                            onClick={() => removeFromCart(item)}
+                            className="text-red-400 hover:text-red-700"
+                          >
+                            <Trash2Icon />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </ScrollArea>
             </div>
+            <h2 className="p-4 text-2xl font-bold border-b border-l border-r text-end">
+              Total: ${getTotalPrice()}
+            </h2>
 
             {cartItems.length > 0 ? (
               <div className="flex justify-between mt-4">
                 <Button onClick={clearCart} variant="destructive">
-                  Clear Shopping Cart
+                  <X /> Clear Shopping Cart
                 </Button>
                 <Button>
                   <Link href="/cart/checkout">Proceed to Checkout</Link>
@@ -123,8 +162,7 @@ const CartPage = () => {
             )}
           </div>
         </div>
-        <MySummary 
-        />
+        <MySummary />
       </main>
     </div>
   );

@@ -93,9 +93,9 @@ export function CartProvider({ children }) {
     setIsDialogOpen(false);
   };
 
-  const addToCart = (product) => {
+  const addToCart = (product, isShowDialog = true) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
-    showDialog(`${product.title} has been added to the cart.`);
+    isShowDialog && showDialog(`${product.title} has been added to the cart.`);
   };
 
   const removeFromCart = (product) => {
@@ -110,9 +110,13 @@ export function CartProvider({ children }) {
     });
   };
 
-  const clearCart = () => {
+  const clearCart = ({isShowDialog = true}) => {
     dispatch({ type: "CLEAR_CART" });
-    showDialog("Your cart has been cleared.");
+    isShowDialog && showDialog("Your cart has been cleared.");
+  };
+
+  const getTotalItemCount = () => {
+    return state.cartItems.length; // Access length directly, not as a method
   };
 
   return (
@@ -123,6 +127,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         clearCart,
         handleQuantityChange,
+        getTotalItemCount,
       }}
     >
       {children}

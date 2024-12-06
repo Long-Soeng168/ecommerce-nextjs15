@@ -1,5 +1,4 @@
 "use client";
-
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,10 +7,14 @@ import MySummary from "@/components/my-summary";
 import MyStepper from "@/components/my-stepper";
 import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { RotateCwIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Component() {
-  const { cartItems } = useCart();
+  const router = useRouter(); // Get the router object from Next.js
+
+  const { cartItems, clearCart } = useCart();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -19,6 +22,13 @@ export default function Component() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
+  const [isClient, setIsClient] = useState(false);
+
+  // Use effect to track when the component is mounted on the client-side
+  useEffect(() => {
+    setIsClient(true); // Only update this after the component mounts
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -31,6 +41,24 @@ export default function Component() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError(null);
+    setValidationErrors({});
+    const errors = {};
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required.";
+    }
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required.";
+    } else if (!/^\d{7,15}$/.test(formData.phone)) {
+      errors.phone = "Phone number must be between 7 to 15 digits.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+
     const orderData = {
       ...formData,
       items: cartItems.map((item) => ({
@@ -41,9 +69,7 @@ export default function Component() {
       })),
     };
     // console.log(orderData);
-
     setLoading(true);
-    setError(null);
 
     try {
       const response = await fetch("https://scholar.brolong.pro/api/orders", {
@@ -59,7 +85,8 @@ export default function Component() {
       }
 
       // Handle success (e.g., navigate to the success page)
-      window.location.href = "/cart/success";
+      clearCart({ isShowDialog: false });
+      router.push("/cart/success");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -67,9 +94,13 @@ export default function Component() {
     }
   };
 
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col min-h-screen mb-8 lg:px-4">
-      <MyStepper currentStep={2} />
+      <MyStepper key={cartItems} currentStep={2} allowCheckout={true} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8">
         {/* Start Left Section */}
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
@@ -83,16 +114,26 @@ export default function Component() {
                 value={formData.name}
                 onChange={handleInputChange}
               />
+              {validationErrors.name && (
+                <p className="mt-1 text-sm text-red-500">
+                  {validationErrors.name}
+                </p>
+              )}
             </div>
             <div className="col-span-2">
               <Label htmlFor="phone">Phone Number</Label>
               <Input
                 id="phone"
-                type="phone"
+                type="number"
                 placeholder="ex: 06156154"
                 value={formData.phone}
                 onChange={handleInputChange}
               />
+              {validationErrors.phone && (
+                <p className="mt-1 text-sm text-red-500">
+                  {validationErrors.phone}
+                </p>
+              )}
             </div>
             <div className="col-span-2">
               <Label htmlFor="note">Note</Label>
@@ -105,9 +146,18 @@ export default function Component() {
             </div>
 
             <div className="flex justify-end col-span-2">
-              <Button type="submit" size="lg" disabled={loading}>
-                {loading ? "Placing Order..." : "Place Order"}
-              </Button>
+              {cartItems.length > 0 && (
+                <Button type="submit" size="lg" disabled={loading}>
+                  {loading ? (
+                    <p className="flex gap-2">
+                      <RotateCwIcon className="text-white animate-spin" />
+                      Placing Order...
+                    </p>
+                  ) : (
+                    "Place Order"
+                  )}
+                </Button>
+              )}
             </div>
           </form>
           {error && <p className="mt-4 text-center text-red-500">{error}</p>}

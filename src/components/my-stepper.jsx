@@ -15,10 +15,10 @@ const MyStepper = ({ currentStep }) => {
       <div className={currentStep === 2 ? "flex-1 border-t border-primary border-2" : "flex-1 border-t border-2 border-gray-400"}></div>
 
       {/* Checkout Step */}
-      <Link href='/cart/checkout' className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2">
         <PackageCheck className={currentStep === 2 ? "text-primary" : "text-gray-400"} />
         <span className={currentStep === 2 ? "text-primary" : "text-gray-400"}>Checkout</span>
-      </Link>
+      </div>
 
       <div className="flex-1 border-2 border-t border-gray-400"></div>
 
