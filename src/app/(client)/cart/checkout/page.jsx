@@ -109,6 +109,7 @@ export default function Component() {
             <div className="col-span-2">
               <Label htmlFor="name">Name</Label>
               <Input
+                autoFocus
                 id="name"
                 placeholder="Enter your name"
                 value={formData.name}
