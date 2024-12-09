@@ -35,8 +35,8 @@ export const metadata = {
     title: "Scholar | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Scholar, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    site: "@scholar_com", // replace with actual Twitter handle
-    creator: "@scholar_com", // replace with actual Twitter handle
+    site: "@scholar_com", 
+    creator: "@scholar_com", 
   },
 };
 
