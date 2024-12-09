@@ -5,6 +5,13 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
+import { Siemreap } from "next/font/google";
+
+const siemreap = Siemreap({
+  weight: "400",
+  subsets: ["khmer"],
+});
+
 export const metadata = {
   icons: {
     icon: "/images/favicon.ico",
@@ -45,7 +52,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  const {locale} = await params;
+  const { locale } = await params;
   if (!routing.locales.includes(locale)) {
     console.log("Available locales:", routing.locales);
     notFound();
@@ -57,7 +64,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <>
       <html lang={locale} suppressHydrationWarning>
-        <body className={`font-default`}>
+        <body className={`${siemreap.className}`}>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"
