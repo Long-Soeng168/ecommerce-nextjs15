@@ -5,14 +5,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import MySummary from "@/components/my-summary";
 import MyStepper from "@/components/my-stepper";
-import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
 import { useEffect, useState } from "react";
 import { RotateCwIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Component() {
   const router = useRouter(); // Get the router object from Next.js
+  const t = useTranslations('Index');
 
   const { cartItems, clearCart } = useCart();
   const [formData, setFormData] = useState({
@@ -106,14 +107,14 @@ export default function Component() {
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8">
         {/* Start Left Section */}
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
-          <h1 className="mb-4 text-2xl font-bold">Checkout</h1>
+          <h1 className="mb-4 text-2xl font-bold">{t('checkout')}</h1>
           <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
             <div className="col-span-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t('name')}</Label>
               <Input
                 autoFocus
                 id="name"
-                placeholder="Enter your name"
+                placeholder={t('name')}
                 value={formData.name}
                 onChange={handleInputChange}
               />
@@ -124,11 +125,11 @@ export default function Component() {
               )}
             </div>
             <div className="col-span-2">
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="phone">{t('phone')}</Label>
               <Input
                 id="phone"
                 type="number"
-                placeholder="ex: 06156154"
+                placeholder="ex: 061561155"
                 value={formData.phone}
                 onChange={handleInputChange}
               />
@@ -139,10 +140,10 @@ export default function Component() {
               )}
             </div>
             <div className="col-span-2">
-              <Label htmlFor="note">Note</Label>
+              <Label htmlFor="note">{t('note')}</Label>
               <Textarea
                 id="note"
-                placeholder="Enter your note"
+                placeholder={t('note')}
                 value={formData.note}
                 onChange={handleInputChange}
               />
@@ -154,10 +155,10 @@ export default function Component() {
                   {loading ? (
                     <p className="flex gap-2">
                       <RotateCwIcon className="text-white animate-spin" />
-                      Placing Order...
+                      {t('placingOrder')}...
                     </p>
                   ) : (
-                    "Place Order"
+                    t('placeOrder')
                   )}
                 </Button>
               )}

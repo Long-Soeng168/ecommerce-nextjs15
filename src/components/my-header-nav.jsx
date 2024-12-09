@@ -36,7 +36,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           }
         >
           <NavigationMenuTrigger>
-            <AlignLeft size={18} className="mr-1" /> Categories
+            <AlignLeft size={18} className="mr-1" /> {t('categories')}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <MyCategoryPanel categoriesData={categories} />
@@ -217,7 +217,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t('blogs')}
+              {t('news')}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

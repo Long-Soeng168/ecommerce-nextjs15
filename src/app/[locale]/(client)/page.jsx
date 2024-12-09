@@ -11,7 +11,7 @@ import BestSellings from "@/components/homepage/best-sellings";
 import Promotion from "@/components/homepage/promotion";
 import Blogs from "@/components/homepage/blogs";
 
-export default async function Home() {
+export default function Home() {
   return (
     <div>
       <Suspense fallback={<MyLoadingAnimation />}>

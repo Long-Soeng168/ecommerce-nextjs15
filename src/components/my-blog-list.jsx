@@ -3,8 +3,10 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
-const MyBlogList = ({ blogs }) => {
+const MyBlogList = async ({ blogs }) => {
+  const t = await getTranslations('Index');
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {blogs?.map((blog) => (
@@ -32,7 +34,7 @@ const MyBlogList = ({ blogs }) => {
           </div>
           <div className="flex justify-end">
             <Button variant="link" className="mt-2 text-lg text-primary">
-              Read More
+              {t('readMore')}
             </Button>
           </div>
         </Link>

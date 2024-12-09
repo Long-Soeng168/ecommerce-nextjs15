@@ -5,12 +5,13 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
-import { Siemreap } from "next/font/google";
+import { Kantumruy_Pro } from 'next/font/google'
+ 
+const kantumruyPro = Kantumruy_Pro({
+  weight: ["100", "200", "300", '400', "500", "600", "700"],
+  subsets: ['khmer'],
+})
 
-const siemreap = Siemreap({
-  weight: "400",
-  subsets: ["khmer"],
-});
 
 export const metadata = {
   icons: {
@@ -64,7 +65,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <>
       <html lang={locale} suppressHydrationWarning>
-        <body className={`${siemreap.className}`}>
+        <body className={`${kantumruyPro.className}`}>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"

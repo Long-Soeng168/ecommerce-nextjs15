@@ -50,7 +50,7 @@ const MySetOrderBy = () => {
           <SelectValue placeholder="Sort By : " />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="title">Sort By : Title</SelectItem>
+          <SelectItem value="title">Sort By : <span className="font-semibold">Title</span></SelectItem>
           <SelectItem value="price">Sort By : Price</SelectItem>
           <SelectItem value="discount">Sort By : Discount</SelectItem>
           <SelectItem value="created_at">Sort By : Post Date</SelectItem>

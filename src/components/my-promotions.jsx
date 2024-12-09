@@ -2,8 +2,10 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-const MyPromotions = ({ promotions }) => {
+const MyPromotions = async ({ promotions }) => {
+  const t = await getTranslations('Index');
   return (
     <div className="grid gap-4 overflow-hidden lg:grid-cols-3">
       {/* Left Column (Book Promotion) */}
@@ -13,7 +15,7 @@ const MyPromotions = ({ promotions }) => {
         </h2>
         <p className="text-xs sm:text-sm line-clamp-6">{promotions[0].short_description}</p>
         <p className="mt-1 text-xl text-indigo-500 uppercase hover:underline">
-          READ MORE
+          {t('readMore')}
         </p>
         <div className="flex items-center justify-center">
           <Image
@@ -52,7 +54,7 @@ const MyPromotions = ({ promotions }) => {
                 </p>
 
                 <p className="text-lg text-indigo-500 uppercase hover:underline">
-                  Read More
+                  {t('readMore')}
                 </p>
               </div>
               <div className="flex items-center justify-center flex-1">

@@ -2,8 +2,10 @@ import { getBlogs } from "@/services/blogs-services";
 import React from "react";
 import MyHeading from "../ui/my-heading";
 import MyBlogList from "../my-blog-list";
+import { getTranslations } from "next-intl/server";
 
 const Blogs = async () => {
+  const t = await getTranslations('Index');
   const resultsBlogs = await getBlogs({ perPage: 3 });
   const blogs = resultsBlogs?.data;
   return (
@@ -11,8 +13,8 @@ const Blogs = async () => {
       {blogs?.length > 0 && (
         <div className="flex flex-col gap-4 mb-20">
           <MyHeading
-            title="From the community"
-            description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
+            title={t('news')}
+            // description={t('newsDescription')}
           />
           <MyBlogList blogs={blogs} />
         </div>

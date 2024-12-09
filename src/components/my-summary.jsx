@@ -3,8 +3,10 @@ import { Separator } from "./ui/separator";
 import Image from "next/image";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import { useCart } from "@/contexts/CartContext";
+import { useTranslations } from "next-intl";
 
 const MySummary = () => {
+  const t = useTranslations('Index');
   const { cartItems } = useCart();
   const [isClient, setIsClient] = useState(false); // Track if it's client-side
 
@@ -26,18 +28,18 @@ const MySummary = () => {
 
   return (
     <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
-      <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
+      <h2 className="mb-4 text-xl font-bold">{t('orderSummary')}</h2>
       <div className="space-y-4">
         <div className="flex justify-between">
-          <span>Subtotal</span>
+          <span>{t('subTotal')}</span>
           <span>${subtotal.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
-          <span>Shipping</span>
+          <span>{t('shipping')}</span>
           <span>${shipping.toFixed(2)}</span>
         </div>
         <div className="flex justify-between font-bold">
-          <span>Total</span>
+          <span>{t('total')}</span>
           <span>${total.toFixed(2)}</span>
         </div>
       </div>
@@ -57,7 +59,7 @@ const MySummary = () => {
             </div>
             <div>
               <p className="font-medium line-clamp-2">{item.title}</p>
-              <p className="text-gray-500">Quantity: {item.quantity}</p>
+              <p className="text-gray-500">{t('quantity')}: {item.quantity}</p>
             </div>
             <p className="ml-auto font-medium">
               $

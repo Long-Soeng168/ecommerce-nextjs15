@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button"; // Adjust import path based on your project
+import { getTranslations } from "next-intl/server";
 
-const MyBlogCard = ({ blog }) => {
+const MyBlogCard = async ({ blog }) => {
+  const t = await getTranslations('Index');
   return (
     <Link
       href={`blogs/${blog.id}`}
@@ -30,7 +32,7 @@ const MyBlogCard = ({ blog }) => {
       </div>
       <div className="flex justify-end">
         <Button variant="link" className="mt-2 text-lg text-primary">
-          Read More
+          {t('seeMore')}
         </Button>
       </div>
     </Link>

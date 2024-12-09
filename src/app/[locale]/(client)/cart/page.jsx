@@ -10,8 +10,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ListX, Trash2Icon, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const CartPage = () => {
+  const t = useTranslations('Index');
   const { cartItems, removeFromCart, clearCart, handleQuantityChange } =
     useCart();
   const [isClient, setIsClient] = useState(false); // Track if it's client-side
@@ -41,19 +43,21 @@ const CartPage = () => {
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8 ">
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">
           <div>
-            <h1 className="mb-4 text-2xl font-bold">Shopping Cart</h1>
+            <h1 className="mb-4 text-2xl font-bold">
+              {t('shoppingCart')}
+            </h1>
             <div className="overflow-x-auto border border-border">
               <ScrollArea className="max-h-[100vh]">
                 <table className="min-w-full bg-background">
                   <thead>
                     <tr className="bg-primary/10 dark:bg-border">
-                      <th className="p-4 font-semibold text-left ">No</th>
-                      <th className="p-4 font-semibold text-center ">Image</th>
-                      <th className="p-4 font-semibold text-left ">Items</th>
-                      <th className="p-4 font-semibold text-left ">Price</th>
-                      <th className="p-4 font-semibold text-left ">Quantity</th>
-                      <th className="p-4 font-semibold text-left ">Subtotal</th>
-                      <th className="p-4 font-semibold text-left ">Action</th>
+                      <th className="p-4 font-normal text-left ">No</th>
+                      <th className="p-4 font-normal text-center ">{t('image')}</th>
+                      <th className="p-4 font-normal text-left ">{t('title')}</th>
+                      <th className="p-4 font-normal text-left ">{t('price')}</th>
+                      <th className="p-4 font-normal text-left ">{t('quantity')}</th>
+                      <th className="p-4 font-normal text-left ">{t('subTotal')}</th>
+                      <th className="p-4 font-normal text-center ">{t('action')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -128,7 +132,7 @@ const CartPage = () => {
                             </p>
                           )}
                         </td>
-                        <td className="p-4">
+                        <td className="p-4 text-center">
                           <button
                             onClick={() => removeFromCart(item)}
                             className="text-red-400 hover:text-red-700"
@@ -143,21 +147,21 @@ const CartPage = () => {
               </ScrollArea>
             </div>
             <h2 className="p-4 text-2xl font-bold border-b border-l border-r text-end">
-              Total: ${getTotalPrice()}
+              {t('total')}: ${getTotalPrice()}
             </h2>
 
             {cartItems.length > 0 ? (
               <div className="flex justify-between mt-4">
                 <Button onClick={clearCart} variant="destructive">
-                  <X /> Clear Shopping Cart
+                  <X /> {t('clearCart')}
                 </Button>
                 <Button>
-                  <Link href="/cart/checkout">Proceed to Checkout</Link>
+                  <Link href="/cart/checkout">{t('checkout')}</Link>
                 </Button>
               </div>
             ) : (
               <p className="mt-8 text-center text-gray-500">
-                Your cart is empty.
+                {t('noData')}...
               </p>
             )}
           </div>

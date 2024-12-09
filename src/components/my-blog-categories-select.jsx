@@ -19,11 +19,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useTranslations } from "next-intl";
 
 export function MyBlogCategoriesSelect({ categories }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
+  const t = useTranslations('Index');
 
   // Retrieve the current categoryId from the searchParams
   const currentCategoryId = searchParams.get("categoryId");
@@ -50,24 +52,24 @@ export function MyBlogCategoriesSelect({ categories }) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild className="h-full">
+      <PopoverTrigger asChild className="h-auto">
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between h-full"
+          className="w-[200px] justify-between h-auto"
         >
           {value
             ? categories?.find((category) => category.id == value)?.name
-            : "Select category..."}
+            : t('selectCategory')}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search category..." className="h-9" />
+          <CommandInput placeholder={t('searchCategory')} className="h-9" />
           <CommandList>
-            <CommandEmpty>No category found.</CommandEmpty>
+            <CommandEmpty>{t('noData')}</CommandEmpty>
             <CommandGroup>
               <CommandItem
                 key="all"
@@ -78,7 +80,7 @@ export function MyBlogCategoriesSelect({ categories }) {
                   handleCategoryChange(value === "" ? "" : "");
                 }}
               >
-                All
+                {t('all')}
                 <Check
                   className={cn(
                     "ml-auto",

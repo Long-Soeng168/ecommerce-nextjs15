@@ -1,8 +1,10 @@
 import { getFooter } from "@/services/footer-services";
 import MySocialLinkCard from "./ui/my-social-link-card";
 import { getLinks } from "@/services/links-services";
+import { getTranslations } from "next-intl/server";
 
 const MyFooter = async () => {
+  const t = await getTranslations('Index');
   const footer = await getFooter();
   const links = await getLinks();
   return (
@@ -17,7 +19,7 @@ const MyFooter = async () => {
         {links?.length > 0 && (
           <div className="flex flex-col flex-1 sm:pl-10 sm:items-end">
             <div className="flex flex-col sm:items-center">
-              <h4 className="mb-2 text-lg font-semibold">Social Media</h4>
+              <h4 className="mb-2 text-lg ">{t('socialMedia')}</h4>
               <ul className="space-x-4">
                 {links?.map((item) => (
                   <MySocialLinkCard

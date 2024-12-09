@@ -11,11 +11,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useTranslations } from "next-intl";
 
 const MyPagination = ({ links, from, to, total }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
+  const t = useTranslations("Index");
 
   // Retrieve the current page from the searchParams or default to 1
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -39,14 +41,15 @@ const MyPagination = ({ links, from, to, total }) => {
 
   return (
     <div className="flex items-center justify-center w-full md:justify-between ">
-        <p className="hidden whitespace-nowrap md:block">
-          Showing {from} to {to} of {total} results
-        </p>
+      <p className="hidden whitespace-nowrap md:block">
+        {t("showing")} {from} {t("to")} {to} {t("of")} {total} {t("results")}
+      </p>
       <Pagination className="w-auto mx-0">
         <PaginationContent>
           {/* Previous Button */}
           <PaginationItem>
             <PaginationPrevious
+              title={t("previous")}
               className={hasPreviousPage ? "text-primary font-bold" : ""}
               onClick={() =>
                 hasPreviousPage && handlePaginationChange(currentPage - 1)
@@ -87,6 +90,7 @@ const MyPagination = ({ links, from, to, total }) => {
           {/* Next Button */}
           <PaginationItem>
             <PaginationNext
+              title={t("next")}
               className={hasNextPage ? "text-primary font-bold" : ""}
               onClick={() =>
                 hasNextPage && handlePaginationChange(currentPage + 1)

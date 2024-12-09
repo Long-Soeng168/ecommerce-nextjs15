@@ -2,15 +2,17 @@
 import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { getContact } from "@/services/page-services";
+import { getTranslations } from "next-intl/server";
 
 const ContactPage = async () => {
   let contact = await getContact();
+  const t = await getTranslations('Index');
   return (
     <div className="grid gap-12 m-8 lg:grid-cols-2">
       {/* Company Contact Information */}
       <div className="p-8 bg-white border rounded-lg shadow-md">
         <h2 className="mb-4 text-3xl font-semibold text-gray-800">
-          Contact Information
+          {t('contactInformation')}
         </h2>
         <div className="mb-4">
           {contact?.description ? (
@@ -19,7 +21,7 @@ const ContactPage = async () => {
               dangerouslySetInnerHTML={{ __html: contact?.description }}
             />
           ) : (
-            <p>No description available.</p>
+            <p>{t('noData')}</p>
           )}
         </div>
 
@@ -41,7 +43,7 @@ const ContactPage = async () => {
         {/* Google Maps Iframe */}
         <div className="mt-6">
           <h3 className="mb-2 text-lg font-semibold text-gray-800">
-            Our Location
+            {t('ourLocation')}
           </h3>
           <div className="h-64 overflow-hidden rounded-lg ">
             <iframe
@@ -59,7 +61,7 @@ const ContactPage = async () => {
       {/* Contact Form */}
       <div className="p-8 bg-white border rounded-lg shadow-md">
         <h2 className="mb-4 text-3xl font-semibold text-center text-gray-800">
-          Send Us a Message
+          {t('sendUsAMessage')}
         </h2>
         <form className="space-y-6">
           <div>
@@ -67,13 +69,13 @@ const ContactPage = async () => {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Name
+              {t('name')}
             </label>
             <input
               type="text"
               id="name"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder="Your Name"
+              placeholder={t('name')}
               required
             />
           </div>
@@ -83,13 +85,13 @@ const ContactPage = async () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              {t('email')}
             </label>
             <input
               type="email"
               id="email"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder="Your Email"
+              placeholder={t('email')}
               required
             />
           </div>
@@ -99,13 +101,13 @@ const ContactPage = async () => {
               htmlFor="phone"
               className="block text-sm font-medium text-gray-700"
             >
-              Phone
+              {t('phone')}
             </label>
             <input
               type="text"
               id="phone"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder="Phone Number"
+              placeholder={t('phone')}
               required
             />
           </div>
@@ -115,12 +117,12 @@ const ContactPage = async () => {
               htmlFor="message"
               className="block text-sm font-medium text-gray-700"
             >
-              Message
+              {t('message')}
             </label>
             <textarea
               id="message"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder="Your Message"
+              placeholder={t('message')}
               rows="4"
               required
             ></textarea>
@@ -130,7 +132,7 @@ const ContactPage = async () => {
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none"
           >
-            Send Message
+            {t('sendMessage')}
           </button>
         </form>
       </div>
