@@ -6,11 +6,11 @@ import { Minus, Plus, ShoppingCart } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
-import RelatedProducts from "@/app/(client)/products/[id]/components/related-products";
 import { Suspense } from "react";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import MyAddToCart from "@/components/my-add-to-cart";
 import MyBuyNowButton from "@/components/my-buy-now-button";
+import RelatedProducts from "./components/related-products";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 

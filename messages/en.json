@@ -1,0 +1,10 @@
+{
+    "Index": {
+        "home": "Home",
+        "categories": "Categories",
+        "books": "Books",
+        "blogs": "News",
+        "contact": "Contact",
+        "about": "About"
+    }
+}

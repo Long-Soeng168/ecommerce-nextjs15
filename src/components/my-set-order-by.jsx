@@ -42,20 +42,19 @@ const MySetOrderBy = () => {
   };
   return (
     <div className="flex items-center gap-2">
-      <span>Order by</span>
       <Select
         onValueChange={(value) => handleSelect(value)}
         defaultValue={searchParams.get("orderBy")?.toString()}
       >
-        <SelectTrigger className="w-[140px]">
-          <SelectValue placeholder="Select Order" />
+        <SelectTrigger className="w-auto pr-1">
+          <SelectValue placeholder="Sort By : " />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="title">Title</SelectItem>
-          <SelectItem value="price">Price</SelectItem>
-          <SelectItem value="discount">Discount</SelectItem>
-          <SelectItem value="created_at">Post Date</SelectItem>
-          <SelectItem value="year">Published Year</SelectItem>
+          <SelectItem value="title">Sort By : Title</SelectItem>
+          <SelectItem value="price">Sort By : Price</SelectItem>
+          <SelectItem value="discount">Sort By : Discount</SelectItem>
+          <SelectItem value="created_at">Sort By : Post Date</SelectItem>
+          <SelectItem value="year">Sort By : Published Year</SelectItem>
         </SelectContent>
       </Select>
       <Select

@@ -10,11 +10,11 @@ import Image from "next/image";
 import { getSlides } from "@/services/slides-services";
 import Link from "next/link";
 
-const MySlideShow = async () => {
+const MySlideShow = async ({className}) => {
   const topSlides = await getSlides({ position: "top" }) || [];
   const bottomSlides = await getSlides({ position: "bottom" }) || [];
   return (
-    <>
+    <div className={className}>
       {topSlides.length > 0 && (
         <Carousel>
           <CarouselContent>
@@ -62,7 +62,7 @@ const MySlideShow = async () => {
           <CarouselNext />
         </Carousel>
       )}
-    </>
+    </div>
   );
 };
 

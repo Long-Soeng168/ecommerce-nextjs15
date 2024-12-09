@@ -3,7 +3,7 @@ import { Brush, User, Briefcase, BookOpen } from "lucide-react";
 import MyCategoryCard from "./ui/my-category-card";
 import { getCategories } from "@/services/categories-services";
 
-const MyCategoryList = async () => {
+const MyCategoryList = async ({className}) => {
   const categories = await getCategories({
     limit: 6,
     orderBy: "books_count",
@@ -19,7 +19,7 @@ const MyCategoryList = async () => {
     "#8b5cf6",
   ];
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+    <div className={`grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6 ${className}`}>
       {categories?.map((category, index) => (
         <MyCategoryCard
           category={category}

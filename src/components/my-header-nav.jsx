@@ -18,10 +18,11 @@ import { AlignLeft, ChevronRight } from "lucide-react";
 import MyCategoryPanel from "./my-categories-panel";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const searchParams = useSearchParams();
-
+  const t = useTranslations('Index');
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -209,14 +210,14 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/products" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Books
+              {t('books')}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Blogs
+              {t('blogs')}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -224,7 +225,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Contact
+              {t('contact')}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -232,7 +233,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/about" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              About
+              {t('about')}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
