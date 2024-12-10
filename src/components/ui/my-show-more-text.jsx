@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "./button";
+import { useTranslations } from "next-intl";
 
 const MyShowMoreText = ({ text, maxLine = 4 }) => {
   const [showMore, setShowMore] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
   const textRef = useRef(null);
+  const t = useTranslations('Index');
 
   const toggleText = () => {
     setShowMore(!showMore);
@@ -51,11 +53,11 @@ const MyShowMoreText = ({ text, maxLine = 4 }) => {
         >
           {showMore ? (
             <>
-              Show Less <ChevronUp />
+              {t('showLess')} <ChevronUp />
             </>
           ) : (
             <>
-              Show More <ChevronDown />
+              {t('showMore')} <ChevronDown />
             </>
           )}
         </Button>
