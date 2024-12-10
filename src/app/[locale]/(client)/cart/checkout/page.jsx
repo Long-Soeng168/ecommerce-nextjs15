@@ -84,7 +84,7 @@ export default function Component() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to place the order. Please try again.");
+        throw new Error("Failed to place the order. Please contact admin.");
       }
 
       // Handle success (e.g., navigate to the success page)

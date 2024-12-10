@@ -19,8 +19,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useTranslations } from "next-intl";
 
 export function SelectPublisher({ publishers }) {
+  const t = useTranslations('Index');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -58,15 +60,15 @@ export function SelectPublisher({ publishers }) {
         >
           {value
             ? publishers?.find((publisher) => publisher.id == value)?.name
-            : "Select publisher..."}
+            : t('selectPublisher')}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search publisher..." className="h-9" />
+          <CommandInput placeholder={t('searchPublisher')} className="h-9" />
           <CommandList>
-            <CommandEmpty>No publisher found.</CommandEmpty>
+            <CommandEmpty>{t('noData')}</CommandEmpty>
             <CommandGroup>
               <CommandItem
                 key="all"
@@ -77,7 +79,7 @@ export function SelectPublisher({ publishers }) {
                   handlepublisherChange(value == "" ? "" : "");
                 }}
               >
-                All
+                {t('all')}
                 <Check
                   className={cn(
                     "ml-auto",

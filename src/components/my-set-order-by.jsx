@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 const MySetOrderBy = () => {
+  const t = useTranslations("Index");
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -47,14 +50,27 @@ const MySetOrderBy = () => {
         defaultValue={searchParams.get("orderBy")?.toString()}
       >
         <SelectTrigger className="w-auto pr-1">
-          <SelectValue placeholder="Sort By : " />
+          <SelectValue placeholder={`${t('sortBy')} : `} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="title">Sort By : <span className="font-semibold">Title</span></SelectItem>
-          <SelectItem value="price">Sort By : Price</SelectItem>
-          <SelectItem value="discount">Sort By : Discount</SelectItem>
-          <SelectItem value="created_at">Sort By : Post Date</SelectItem>
-          <SelectItem value="year">Sort By : Published Year</SelectItem>
+          <SelectItem value="title">
+            {t("sortBy")} : <span className="font-semibold">{t("title")}</span>
+          </SelectItem>
+          <SelectItem value="price">
+            {t("sortBy")} : <span className="font-semibold">{t("price")}</span>
+          </SelectItem>
+          <SelectItem value="discount">
+            {t("sortBy")} :{" "}
+            <span className="font-semibold">{t("discount")}</span>
+          </SelectItem>
+          <SelectItem value="created_at">
+            {t("sortBy")} :{" "}
+            <span className="font-semibold">{t("postDate")}</span>
+          </SelectItem>
+          <SelectItem value="year">
+            {t("sortBy")} :{" "}
+            <span className="font-semibold">{t("publishedYear")}</span>
+          </SelectItem>
         </SelectContent>
       </Select>
       <Select
@@ -63,11 +79,11 @@ const MySetOrderBy = () => {
         defaultValue={searchParams.get("orderDir")?.toString()}
       >
         <SelectTrigger className="w-[130px]">
-          <SelectValue placeholder="Set Direction" />
+          <SelectValue placeholder={t('sortDirection')} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="asc">From A to Z</SelectItem>
-          <SelectItem value="desc">From Z to A</SelectItem>
+          <SelectItem value="asc">{t('from')} A {t('to')} Z</SelectItem>
+          <SelectItem value="desc">{t('from')} Z {t('to')} A</SelectItem>
         </SelectContent>
       </Select>
     </div>

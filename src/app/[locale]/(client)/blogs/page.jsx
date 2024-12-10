@@ -5,10 +5,11 @@ import { getBlogCategories } from "@/services/blogs-services";
 import { Suspense } from "react";
 import DataList from "./data-list";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const Page = async (props) => {
   const t = await getTranslations('Index');
+  const locale = await getLocale();
   const categories = await getBlogCategories();
 
   const searchParams = await props.searchParams;
@@ -24,7 +25,7 @@ const Page = async (props) => {
           description="We are a rapidly growing community of members from various libraries in Cambodia, united as one digital library community."
         /> */}
         <div className="flex flex-wrap h-full gap-3">
-          <MyBlogCategoriesSelect categories={categories} />
+          <MyBlogCategoriesSelect categories={categories} locale={locale} />
           <MySearch placeholder={t('searchNews')} />
         </div>
         <Suspense key={categoryId + search + currentPage} fallback={<MyLoadingAnimation />}>

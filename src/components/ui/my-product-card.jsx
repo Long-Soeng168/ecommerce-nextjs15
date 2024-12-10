@@ -11,13 +11,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { IMAGE_BOOK_URL } from "@/config/env";
+import MyAddToCartMini from "../my-add-to-cart-mini";
 
 const ProductCard = ({ product }) => {
   return (
     <div className="flex flex-col items-stretch justify-between w-full h-full transition-all duration-500 rounded-lg group hover:scale-95">
       <div>
         <div className="relative overflow-hidden ">
-          <Link href={`/products/${product.id}`}>
+          <Link href={`/products/${product.id}&productTitle=${product.title}`}>
             <Image
               width={600}
               height={600}
@@ -31,9 +32,7 @@ const ProductCard = ({ product }) => {
               - {product.discount}%
             </span>
           )}
-          <Button className="absolute z-50 opacity-0 translate-y-10 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 px-1.5 font-bold text-lg rounded-sm bottom-1.5 right-1.5">
-            <ShoppingCart />
-          </Button>
+          <MyAddToCartMini product={product} />
         </div>
         <Link href={`/products/${product.id}`}>
           <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">

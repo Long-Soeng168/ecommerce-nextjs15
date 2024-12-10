@@ -18,11 +18,12 @@ import { AlignLeft, ChevronRight } from "lucide-react";
 import MyCategoryPanel from "./my-categories-panel";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const searchParams = useSearchParams();
-  const t = useTranslations('Index');
+  const t = useTranslations("Index");
+  const locale = useLocale();
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -36,7 +37,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           }
         >
           <NavigationMenuTrigger>
-            <AlignLeft size={18} className="mr-1" /> {t('categories')}
+            <AlignLeft size={18} className="mr-1" /> {t("categories")}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <MyCategoryPanel categoriesData={categories} />
@@ -83,13 +84,15 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         {categoryMostBook?.books?.length > 0 && (
           <NavigationMenuItem>
             <NavigationMenuTrigger>
-              {categoryMostBook?.name}
+              {locale == "kh"
+                ? categoryMostBook?.name_kh
+                : categoryMostBook?.name}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
                 <li className="row-span-2">
                   <Link
-                    href={`/products/${categoryMostBook?.books[0].id}`}
+                    href={`/products/${categoryMostBook?.books[0].id}&productTitle=${categoryMostBook?.books[0].title}`}
                     className="flex flex-col items-stretch justify-between w-full transition-all duration-500 rounded-lg group"
                   >
                     <div>
@@ -128,7 +131,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                           </p>
                         )}
                       </div>
-                      <h3 className="text-md group-hover:underline text-start text-foreground line-clamp-2">
+                      <h3 className="font-semibold text-md group-hover:underline text-start text-foreground line-clamp-2">
                         {categoryMostBook?.books[0].title}
                       </h3>
                       <p className="text-sm text-gray-400 line-clamp-3">
@@ -141,7 +144,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                   {categoryMostBook?.books?.slice(1).map((book) => (
                     <Link
                       key={book.id}
-                      href={`/products/${book.id}`}
+                      href={`/products/${book.id}&productTitle=${book.title}`}
                       className="group items-start grid grid-cols-[62px,1fr] gap-2"
                       prefetch={false}
                     >
@@ -182,7 +185,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                     href="/products"
                     className="flex justify-end text-primary hover:underline"
                   >
-                    See More <ChevronRight />
+                    {t("seeMore")} <ChevronRight />
                   </Link>
                 </li>
               </ul>
@@ -206,18 +209,18 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem> */}
-
+        <div className="w-[1px] h-6 bg-white/80"></div>
         <NavigationMenuItem>
           <Link href="/products" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t('books')}
+              {t("books")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t('news')}
+              {t("news")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -225,7 +228,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t('contact')}
+              {t("contact")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
@@ -233,7 +236,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
         <NavigationMenuItem>
           <Link href="/about" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t('about')}
+              {t("about")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

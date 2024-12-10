@@ -12,16 +12,19 @@ import {
   getCategoryHasMostBooks,
 } from "@/services/categories-services";
 import MyCartButtonHeader from "./ui/my-cart-button-header";
+import { getTranslations } from "next-intl/server";
+import MyHeaderSearchInput from "./ui/my-header-search-input";
+import MySearch from "./ui/my-search";
 
 const MyHeader = async () => {
   const resultCateogries = await getCategories({
     orderBy: "books_count",
     orderDir: "desc",
-    withSub: 1
+    withSub: 1,
   });
 
   const categoryMostBooks = await getCategoryHasMostBooks();
-
+  const t = await getTranslations("Index");
   return (
     <div>
       <div className="flex flex-wrap py-4 lg:gap-10 lg:items-center">
@@ -51,17 +54,8 @@ const MyHeader = async () => {
 
         {/* Start Action  */}
         <div className="flex items-center justify-end flex-1 w-full gap-2">
-          <div className="flex flex-1 bg-white border rounded-lg shadow-sm dark:text-primary border-primary">
-            <Input
-              autoFocus
-              className="border-none shadow-none dark:text-black dark:placeholder-black min-w-40 focus-visible:ring-0"
-              placeholder="Search Books..."
-            />
-            <Button variant="gosh" size="icon">
-              <Search className="h-[1.2rem] w-[1.2rem] dark:text-black" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </div>
+          {/* <MyHeaderSearchInput /> */}
+          <MySearch placeholder={t('searchBooks')} />
           <MyCartButtonHeader />
         </div>
       </div>

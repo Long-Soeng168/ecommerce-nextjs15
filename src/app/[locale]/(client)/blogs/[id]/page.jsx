@@ -4,10 +4,13 @@ import {
   getBlogCategories,
   getBlogs,
 } from "@/services/blogs-services";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Page({ params }) {
+  const t = await getTranslations("Index");
+  const locale = await getLocale();
   const { id } = await params;
   const blog = await getBlog(id);
 
@@ -19,9 +22,7 @@ export default async function Page({ params }) {
     <div className="bg-background text-foreground">
       <section className="w-full grid grid-cols-1 gap-8 px-4 mt-8 md:grid-cols-[3fr,1fr] md:gap-12 ">
         <div>
-          <h1 className="mb-4 text-2xl font-bold tracking-tighter">
-            {blog.name}
-          </h1>
+          <h1 className="text-2xl font-semibold">{blog.name}</h1>
           <div className="flex items-center space-x-4 text-muted-foreground">
             <div>
               {blog?.created_at &&
@@ -51,22 +52,24 @@ export default async function Page({ params }) {
               dangerouslySetInnerHTML={{ __html: blog?.description }}
             />
           ) : (
-            <p>No description available.</p>
+            <p>{t("noData")}</p>
           )}
         </article>
         <aside className="space-y-8">
           <div className="p-6 border rounded-lg bg-background">
-            <h3 className="text-lg font-semibold">Categories</h3>
+            <h3 className="text-lg font-semibold">{t("categories")}</h3>
             {categories && (
               <div className="mt-4 space-y-2">
                 {categories.map((category) => (
                   <Link
                     key={category.id}
-                    href="#"
+                    href={`/blogs?categoryId=${category.id}`}
                     className="flex items-center justify-between text-sm font-medium hover:underline"
                     prefetch={false}
                   >
-                    <span>{category.name}</span>
+                    <span>
+                      {locale == "kh" ? category.name_kh : category.name}
+                    </span>
                     <span className="text-sm text-muted-foreground">
                       {category.pages_count != 0 && category.pages_count}
                     </span>
@@ -76,7 +79,7 @@ export default async function Page({ params }) {
             )}
           </div>
           <div className="p-6 border rounded-lg bg-background">
-            <h3 className="text-lg font-semibold">Related Posts</h3>
+            <h3 className="text-lg font-semibold">{t("related")}</h3>
             <div className="mt-4 space-y-4">
               {relatedBlogs.map((blog) => (
                 <Link

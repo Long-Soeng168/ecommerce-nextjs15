@@ -6,44 +6,44 @@ import { getTranslations } from "next-intl/server";
 
 const ContactPage = async () => {
   let contact = await getContact();
-  const t = await getTranslations('Index');
+  const t = await getTranslations("Index");
   return (
-    <div className="grid gap-12 m-8 lg:grid-cols-2">
+    <div className="grid gap-12 my-8 lg:grid-cols-2">
       {/* Company Contact Information */}
-      <div className="p-8 bg-white border rounded-lg shadow-md">
-        <h2 className="mb-4 text-3xl font-semibold text-gray-800">
-          {t('contactInformation')}
+      <div className="rounded-lg">
+        <h2 className="mb-4 text-3xl font-semibold text-pri">
+          {t("contactInformation")}
         </h2>
         <div className="mb-4">
-          {contact?.description ? (
+          {contact?.description && (
             <div
               className="w-full prose max-w-none lg:prose-xl"
               dangerouslySetInnerHTML={{ __html: contact?.description }}
             />
-          ) : (
-            <p>{t('noData')}</p>
           )}
         </div>
 
         <div className="space-y-4 ">
           <div className="flex items-center space-x-4">
-            <Mail className="w-6 h-6 text-gray-600" />
-            <p className="text-gray-600">{contact?.email}</p>
+            <Mail className="w-6 h-6 text-gray-500 dark:text-gray-200" />
+            <p className="text-gray-500 dark:text-gray-200">{contact?.email}</p>
           </div>
           <div className="flex items-center space-x-4">
-            <Phone className="w-6 h-6 text-gray-600" />
-            <p className="text-gray-600">{contact?.phone}</p>
+            <Phone className="w-6 h-6 text-gray-500 dark:text-gray-200" />
+            <p className="text-gray-500 dark:text-gray-200">{contact?.phone}</p>
           </div>
           <div className="flex items-center space-x-4">
-            <MapPin className="w-6 h-6 text-gray-600" />
-            <p className="text-gray-600">{contact?.address}</p>
+            <MapPin className="w-6 h-6 text-gray-500 dark:text-gray-200" />
+            <p className="text-gray-500 dark:text-gray-200">
+              {contact?.address}
+            </p>
           </div>
         </div>
 
         {/* Google Maps Iframe */}
         <div className="mt-6">
-          <h3 className="mb-2 text-lg font-semibold text-gray-800">
-            {t('ourLocation')}
+          <h3 className="mb-2 text-lg font-semibold text-gray-800 dark:text-gray-200">
+            {t("ourLocation")}
           </h3>
           <div className="h-64 overflow-hidden rounded-lg ">
             <iframe
@@ -54,60 +54,59 @@ const ContactPage = async () => {
               title="Google Maps Location"
             ></iframe>
           </div>
-
         </div>
       </div>
 
       {/* Contact Form */}
-      <div className="p-8 bg-white border rounded-lg shadow-md">
-        <h2 className="mb-4 text-3xl font-semibold text-center text-gray-800">
-          {t('sendUsAMessage')}
+      <div className="p-8 border rounded-lg shadow-md bg-background">
+        <h2 className="mb-4 text-3xl font-semibold text-center text-gray-800 dark:text-white">
+          {t("sendUsAMessage")}
         </h2>
         <form className="space-y-6">
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              {t('name')}
+              {t("name")}
             </label>
             <input
               type="text"
               id="name"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t('name')}
+              placeholder={t("name")}
               required
             />
           </div>
 
-          <div>
+          {/* <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              {t('email')}
+              {t("email")}
             </label>
             <input
               type="email"
               id="email"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t('email')}
+              placeholder={t("email")}
               required
             />
-          </div>
+          </div> */}
 
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              {t('phone')}
+              {t("phone")}
             </label>
             <input
               type="text"
               id="phone"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t('phone')}
+              placeholder={t("phone")}
               required
             />
           </div>
@@ -115,14 +114,14 @@ const ContactPage = async () => {
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
             >
-              {t('message')}
+              {t("message")}
             </label>
             <textarea
               id="message"
               className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t('message')}
+              placeholder={t("message")}
               rows="4"
               required
             ></textarea>
@@ -130,9 +129,9 @@ const ContactPage = async () => {
 
           <button
             type="submit"
-            className="w-full px-4 py-2 text-white bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none"
+            className="w-full px-4 py-2 transition-all duration-500 rounded-md shadow text-primary-foreground bg-primary hover:scale-105 focus:outline-none"
           >
-            {t('sendMessage')}
+            {t("sendMessage")}
           </button>
         </form>
       </div>

@@ -10,8 +10,12 @@ import Image from "next/image";
 import { Label } from "./ui/label";
 import { IMAGE_CATE_URL } from "@/config/env";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 export function MyHomeSidebar({ categories }) {
+  const t = useTranslations('Index')
+  const locale = useLocale();
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -51,11 +55,11 @@ export function MyHomeSidebar({ categories }) {
           onClick={() => handleSetCategory()}
           className={`${
             currentCategoryId == null &&
-            "underline font-bold bg-primary group text-white hover:text-primary"
-          } hover:bg-primary/10 p-2 rounded items-center flex gap-1 w-full text-[16px] hover:underline`}
+            "underline font-bold bg-primary group text-primary-foreground hover:text-primary"
+          } hover:bg-primary/10 p-2 py-2 rounded items-center flex gap-1 w-full text-[16px] hover:underline`}
         >
           <AlignLeft size={26} />
-          All Categories
+          {t('allCategories')}
         </button>
       </div>
       {categories?.length > 0 &&
@@ -69,7 +73,7 @@ export function MyHomeSidebar({ categories }) {
                 onClick={() => handleSetCategory(category.id)}
                 className={`${
                   currentCategoryId == category.id &&
-                  "underline font-bold bg-primary group text-white hover:text-primary"
+                  "underline font-semibold bg-primary group text-primary-foreground hover:text-primary"
                 } hover:bg-primary/10 rounded-tl rounded-bl items-center flex gap-1 p-0.5 w-full text-[16px] hover:underline`}
               >
                 <Image
@@ -80,12 +84,12 @@ export function MyHomeSidebar({ categories }) {
                   alt=""
                 />
                 <span>
-                  {category.name}{" "}
+                  {locale == 'kh' ? category.name_kh : category.name}{" "}
                   {category.books_count > 0 && (
                     <span
                       className={`text-[12px]  ${
                         currentCategoryId == category.id
-                          ? "text-white group-hover:text-primary"
+                          ? "text-primary-foreground group-hover:text-primary"
                           : "text-primary/80"
                       }  `}
                     >{` (${category.books_count})`}</span>
@@ -111,13 +115,13 @@ export function MyHomeSidebar({ categories }) {
                       <button
                         className={`${
                           currentSubCategoryId == subCategory.id &&
-                          "underline font-bold"
+                          "underline font-semibold"
                         } relative pl-2 max-w-[85%] w-full text-left underline-offset-4 cursor-pointer hover:underline`}
                         onClick={() => {
                           handleSetSubCategory(subCategory.id, category.id);
                         }}
                       >
-                        {subCategory.name}
+                        {locale == 'kh' ? subCategory.name_kh : subCategory.name}
                         {subCategory.books_count > 0 && (
                           <span className="text-[12px] text-primary/80">{` (${subCategory.books_count})`}</span>
                         )}

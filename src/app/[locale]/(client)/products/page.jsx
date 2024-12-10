@@ -22,8 +22,10 @@ import LoadingDataList from "./components/loading-data-list";
 import MyFilter from "./components/my-filter";
 import MySelectFilter from "./components/my-select-filter";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
+import { getTranslations } from "next-intl/server";
 
 const Page = async (props) => {
+  const t = await getTranslations('Index');
   const categories = await getCategories({
     withSub: 1,
     orderBy: "name",
@@ -50,7 +52,7 @@ const Page = async (props) => {
       {/* Left Side */}
       <div className="hidden lg:flex">{leftSide()}</div>
       {/* Right Side */}
-      <div className="flex-1 p-4 space-y-2">
+      <div className="flex-1 p-4 pt-4 space-y-2">
         {/* Start Bread */}
         {/* <Breadcrumb>
           <BreadcrumbList>
@@ -70,9 +72,9 @@ const Page = async (props) => {
         {/* End Bread */}
 
         {/* Start books Header */}
-        <div className="w-full">
-          <MySearch placeholder="Search Books..." />
-        </div>
+        {/* <div className="w-full">
+          <MySearch placeholder={t('searchBooks')} />
+        </div> */}
         <div className="flex flex-wrap justify-end gap-2">
           {/* Start Search */}
           {/* <div className="flex flex-1 border rounded-lg shadow-sm">
@@ -117,13 +119,13 @@ const Page = async (props) => {
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="outline">
-                    Filter
+                    {t('filter')}
                     <Filter />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-auto overflow-y-scroll">
                   <SheetHeader>
-                    <SheetTitle>Filter</SheetTitle>
+                    <SheetTitle>{t('filter')}</SheetTitle>
                   </SheetHeader>
                   {leftSide()}
                 </SheetContent>

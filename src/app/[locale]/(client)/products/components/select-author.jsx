@@ -19,8 +19,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useTranslations } from "next-intl";
 
 export function SelectAuthor({ authors }) {
+  const t = useTranslations('Index');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -59,15 +61,15 @@ export function SelectAuthor({ authors }) {
         >
           {value
             ? authors?.find((author) => author.id == value)?.name
-            : "Select author..."}
+            : t('selectAuthor')}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search author..." className="h-9" />
+          <CommandInput placeholder={t('searchAuthor')} className="h-9" />
           <CommandList>
-            <CommandEmpty>No author found.</CommandEmpty>
+            <CommandEmpty>{t('noData')}</CommandEmpty>
             <CommandGroup>
               <CommandItem
                 key="all"
@@ -78,7 +80,7 @@ export function SelectAuthor({ authors }) {
                   handleauthorChange(value == "" ? "" : "");
                 }}
               >
-                All
+                {t('all')}
                 <Check
                   className={cn(
                     "ml-auto",

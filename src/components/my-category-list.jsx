@@ -2,8 +2,10 @@ import React from "react";
 import { Brush, User, Briefcase, BookOpen } from "lucide-react";
 import MyCategoryCard from "./ui/my-category-card";
 import { getCategories } from "@/services/categories-services";
+import { getLocale } from "next-intl/server";
 
 const MyCategoryList = async ({className}) => {
+  const locale = await getLocale();
   const categories = await getCategories({
     limit: 6,
     orderBy: "books_count",
@@ -23,6 +25,7 @@ const MyCategoryList = async ({className}) => {
       {categories?.map((category, index) => (
         <MyCategoryCard
           category={category}
+          locale={locale}
           key={category.id}
           bgHoverColor={colors[index % colors.length]}
         />

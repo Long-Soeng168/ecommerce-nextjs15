@@ -21,11 +21,11 @@ import {
 } from "@/components/ui/popover";
 import { useTranslations } from "next-intl";
 
-export function MyBlogCategoriesSelect({ categories }) {
+export function MyBlogCategoriesSelect({ categories, locale }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
-  const t = useTranslations('Index');
+  const t = useTranslations("Index");
 
   // Retrieve the current categoryId from the searchParams
   const currentCategoryId = searchParams.get("categoryId");
@@ -60,16 +60,18 @@ export function MyBlogCategoriesSelect({ categories }) {
           className="w-[200px] justify-between h-auto"
         >
           {value
-            ? categories?.find((category) => category.id == value)?.name
-            : t('selectCategory')}
+            ? locale == "kh"
+              ? categories?.find((category) => category.id == value)?.name_kh
+              : categories?.find((category) => category.id == value)?.name
+            : t("selectCategory")}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder={t('searchCategory')} className="h-9" />
+          <CommandInput placeholder={t("searchCategory")} className="h-9" />
           <CommandList>
-            <CommandEmpty>{t('noData')}</CommandEmpty>
+            <CommandEmpty>{t("noData")}</CommandEmpty>
             <CommandGroup>
               <CommandItem
                 key="all"
@@ -80,7 +82,7 @@ export function MyBlogCategoriesSelect({ categories }) {
                   handleCategoryChange(value === "" ? "" : "");
                 }}
               >
-                {t('all')}
+                {t("all")}
                 <Check
                   className={cn(
                     "ml-auto",
@@ -100,7 +102,7 @@ export function MyBlogCategoriesSelect({ categories }) {
                     );
                   }}
                 >
-                  {category.name}{" "}
+                  {locale == "kh" ? category.name_kh : category.name}{" "}
                   {category.pages_count ? `(${category.pages_count})` : ""}
                   <Check
                     className={cn(

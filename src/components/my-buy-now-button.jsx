@@ -4,8 +4,10 @@ import { CircleCheckBig } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const MyBuyNowButton = ({ product }) => {
+  const t = useTranslations('Index');
   const { addToCart } = useCart();
   const router = useRouter(); // Get the router object from Next.js
 
@@ -17,7 +19,7 @@ const MyBuyNowButton = ({ product }) => {
   return (
     <div>
       <Button variant="outline" onClick={handleClick} aria-label="Add to cart">
-        <CircleCheckBig /> Buy Now
+        <CircleCheckBig /> {t('buyNow')}
       </Button>
     </div>
   );

@@ -3,17 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import ProductCard from "./ui/my-product-card";
-import { Button } from "./ui/button";
-import { ChevronRight, ShoppingCart } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
+import { useLocale, useTranslations } from "next-intl";
 
 const MyCategoryPanel = ({ categoriesData }) => {
+  const t = useTranslations("Index");
+  const locale = useLocale();
   const router = useRouter();
   if (!categoriesData || categoriesData.length === 0) {
     return (
       <div className="text-center text-gray-500 dark:text-gray-300">
-        No categories available.
+        {t("noData")}
       </div>
     );
   }
@@ -26,6 +27,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
   );
 
   const [hoveredCateId, sethoveredCateId] = useState(null);
+
 
   return (
     <div className="flex w-[1265px] max-w-[99vw]">
@@ -59,7 +61,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
               alt=""
             />
             <span className="text-gray-900 dark:text-gray-200">
-              {category.name}
+              {locale == 'kh' ? category.name_kh : category.name}
               {category.books_count > 0 && (
                 <span className="text-[12px] text-primary/80">{` (${category.books_count})`}</span>
               )}
@@ -91,7 +93,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
                   }`}
                 >
                   <span className="text-gray-900 dark:text-gray-200">
-                    {subCategory.name}
+                    {locale == 'kh' ? subCategory.name_kh : subCategory.name}
                     {subCategory.books_count > 0 && (
                       <span className="text-[12px] text-primary/80">{` (${subCategory.books_count})`}</span>
                     )}
@@ -119,7 +121,9 @@ const MyCategoryPanel = ({ categoriesData }) => {
                   >
                     <div>
                       <div className="relative overflow-hidden ">
-                        <Link href={`/products/${book.id}?productTitle=${book.title}`}>
+                        <Link
+                          href={`/products/${book.id}?productTitle=${book.title}`}
+                        >
                           <Image
                             width={100}
                             height={100}
@@ -134,7 +138,9 @@ const MyCategoryPanel = ({ categoriesData }) => {
                           </span>
                         )}
                       </div>
-                      <Link href={`/products/${book.id}?productTitle=${book.title}`}>
+                      <Link
+                        href={`/products/${book.id}?productTitle=${book.title}`}
+                      >
                         <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
                           {book.discount != 0 ? (
                             <p className="space-x-2 overflow-hidden text-xs text-gray-400 text-ellipsis">
@@ -168,9 +174,9 @@ const MyCategoryPanel = ({ categoriesData }) => {
               )?.books?.length > 0 && (
               <Link
                 href={`/products?categoryId=${hoveredCateId}`}
-                className="flex justify-end w-full text-primary hover:underline"
+                className="absolute flex justify-end w-full bottom-2 right-2 text-primary hover:underline"
               >
-                See More <ChevronRight />
+               {t('seeMore')} <ChevronRight />
               </Link>
             )}
           </>
@@ -181,7 +187,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
             (subCategory) => subCategory.name === activeSubCategory
           )?.books?.length < 1 && (
           <div className="text-sm text-center text-gray-500 dark:text-gray-400">
-            No Data...
+            {t('noData')}
           </div>
         )}
       </ScrollArea>

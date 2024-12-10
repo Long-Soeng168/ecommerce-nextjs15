@@ -11,11 +11,13 @@ import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import MyAddToCart from "@/components/my-add-to-cart";
 import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
+import { getTranslations } from "next-intl/server";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
 // pages/product?.js
 const ProductPage = async ({ params }) => {
+  const t = await getTranslations("Index");
   const { id } = await params;
   const product = await getBook({ id: id });
   const image = product?.image;
@@ -49,7 +51,7 @@ const ProductPage = async ({ params }) => {
             <div className="flex flex-col gap-6 my-6">
               <div className="flex flex-col gap-2">
                 {product?.author && (
-                  <MyKeyValueCard title="Author">
+                  <MyKeyValueCard title={t("author")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
                       href="/products"
@@ -59,7 +61,7 @@ const ProductPage = async ({ params }) => {
                   </MyKeyValueCard>
                 )}
                 {product?.publisher && (
-                  <MyKeyValueCard title="Publisher">
+                  <MyKeyValueCard title={t("publisher")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
                       href="/products"
@@ -70,7 +72,7 @@ const ProductPage = async ({ params }) => {
                 )}
 
                 {product?.category && (
-                  <MyKeyValueCard title="Category">
+                  <MyKeyValueCard title={t("category")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
                       href="/products"
@@ -102,28 +104,34 @@ const ProductPage = async ({ params }) => {
                 )} */}
                 {product?.year && (
                   <MyKeyValueCard
-                    title="Publication Date"
+                    title={t("publishedYear")}
                     value={product?.year}
                   />
                 )}
                 {product?.number_of_pages && (
                   <MyKeyValueCard
-                    title="Pages"
+                    title={t("pages")}
                     value={product?.number_of_pages}
                   />
                 )}
                 {product?.isbn && (
-                  <MyKeyValueCard title="ISBN" value={product?.isbn} />
+                  <MyKeyValueCard title={t("isbn")} value={product?.isbn} />
                 )}
                 {product?.edition && (
-                  <MyKeyValueCard title="Edition" value={product?.edition} />
+                  <MyKeyValueCard
+                    title={t("edition")}
+                    value={product?.edition}
+                  />
                 )}
                 {product?.language && (
-                  <MyKeyValueCard title="Language" value={product?.language} />
+                  <MyKeyValueCard
+                    title={t("language")}
+                    value={product?.language == 'khmer' ? t('khmer') : t('english')}
+                  />
                 )}
                 {product?.created_at && (
                   <MyKeyValueCard
-                    title="Post Date"
+                    title={t("postDate")}
                     value={moment(product?.created_at).format(
                       "D - MMMM - YYYY"
                     )}
@@ -131,7 +139,7 @@ const ProductPage = async ({ params }) => {
                 )}
                 {product?.updated_at && (
                   <MyKeyValueCard
-                    title="Last Update"
+                    title={t("lastUpdate")}
                     value={moment(product?.updated_at).format(
                       "D - MMMM - YYYY"
                     )}
