@@ -14,6 +14,9 @@ const nextConfig = {
       {
         hostname: "scholar.brolong.pro",
       },
+      {
+        hostname: "admin.thnal.org",
+      },
     ],
   },
 };
