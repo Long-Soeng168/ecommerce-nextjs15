@@ -4,8 +4,7 @@ import { MyHeaderNav } from "./my-header-nav";
 import { ModeToggle } from "./mode-toggle";
 import { LanguageToggle } from "./language-toggle";
 import { Button } from "./ui/button";
-import { Menu, Search } from "lucide-react";
-import { Input } from "./ui/input";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import {
   getCategories,
@@ -13,7 +12,6 @@ import {
 } from "@/services/categories-services";
 import MyCartButtonHeader from "./ui/my-cart-button-header";
 import { getTranslations } from "next-intl/server";
-import MyHeaderSearchInput from "./ui/my-header-search-input";
 import MySearch from "./ui/my-search";
 
 const MyHeader = async () => {
@@ -33,7 +31,7 @@ const MyHeader = async () => {
           <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
               className="object-contain rounded-md"
-              src="/images/logo.png"
+              src="/images/thnal_logo.png"
               width={60}
               height={60}
               alt="Logo Image"
