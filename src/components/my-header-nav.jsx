@@ -223,15 +223,20 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem
-          className={`${pathName == "/kids" && "underline underline-offset-4"}`}
-        >
-          <Link href="/kids" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              {t("kidBooks")}
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {IS_SHOW_KID_BOOKS && (
+          <NavigationMenuItem
+            className={`${
+              pathName == "/kids" && "underline underline-offset-4"
+            }`}
+          >
+            <Link href="/kids" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                {t("kidBooks")}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        )}
+
         <NavigationMenuItem
           className={`${
             pathName == "/blogs" && "underline underline-offset-4"
