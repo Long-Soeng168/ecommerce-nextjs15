@@ -94,7 +94,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
               <ul className="grid p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
                 <li className="row-span-2">
                   <Link
-                    href={`/products/${categoryMostBook?.books[0].id}&productTitle=${categoryMostBook?.books[0].title}`}
+                    href={`/products/${categoryMostBook?.books[0].id}?productTitle=${categoryMostBook?.books[0].title}`}
                     className="flex flex-col items-stretch justify-between w-full transition-all duration-500 rounded-lg group"
                   >
                     <div>

@@ -134,6 +134,9 @@ export async function getBook({ id }) {
   const url = process.env.BASE_API_URL + `/books/${id}`;
   try {
     const response = await fetch(url);
+    if(response.status == 404){
+      return null;
+    }
     if (!response.ok) {
       throw new Error(`Failed to fetch Book : ${response.statusText}`);
     }

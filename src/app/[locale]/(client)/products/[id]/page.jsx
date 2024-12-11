@@ -12,10 +12,26 @@ import MyAddToCart from "@/components/my-add-to-cart";
 import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { APP_URL, IMAGE_BOOK_URL } from "@/config/env";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
-// pages/product?.js
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const product = await getBook({ id: id });
+  return {
+    title: product.title,
+    description: product.short_description,
+    openGraph: {
+      title: product.title,
+      description: product.short_description,
+      url: `${APP_URL}products/${product.id}`,
+      images: [`${IMAGE_BOOK_URL + 'thumb/' + product.image}`],
+    },
+  };
+}
+
 const ProductPage = async ({ params }) => {
   const t = await getTranslations("Index");
   const { id } = await params;
@@ -27,12 +43,8 @@ const ProductPage = async ({ params }) => {
     images = product?.images.map((item) => item.image);
   }
 
-  if (!product.title) {
-    return (
-      <div>
-        <MyLoadingAnimation />
-      </div>
-    );
+  if (product == null) {
+    notFound();
   }
 
   return (

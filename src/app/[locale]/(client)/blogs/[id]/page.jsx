@@ -1,4 +1,3 @@
-import { Separator } from "@/components/ui/separator";
 import {
   getBlog,
   getBlogCategories,
@@ -7,6 +6,7 @@ import {
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }) {
   const t = await getTranslations("Index");
@@ -18,6 +18,10 @@ export default async function Page({ params }) {
 
   let results = await getBlogs({ categoryId: blog?.news_category_id });
   let relatedBlogs = results?.data || [];
+  if (blog == null) {
+    notFound();
+  }
+  
   return (
     <div className="bg-background text-foreground">
       <section className="w-full grid grid-cols-1 gap-8 px-4 mt-8 md:grid-cols-[3fr,1fr] md:gap-12 ">
