@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import { Kantumruy_Pro } from 'next/font/google'
-import { APP_URL } from "@/config/env";
  
 const kantumruyPro = Kantumruy_Pro({
   weight: ["100", "200", "300", '400', "500", "600", "700"],
@@ -16,7 +15,7 @@ const kantumruyPro = Kantumruy_Pro({
 
 export const metadata = {
   icons: {
-    icon: `${APP_URL}images/logo_thnal.png`,
+    icon: "https://thnal.org/images/logo_thnal.png",
   },
   title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
   description:
@@ -32,11 +31,11 @@ export const metadata = {
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    url: `${APP_URL}`, // replace with the actual Thnal URL
+    url: "https://thnal.org", // replace with the actual Thnal URL
     type: "website",
     images: [
       {
-        url: `${APP_URL}images/logo_thnal.png`, // replace with the actual image URL
+        url: "https://thnal.org/images/logo_thnal.png", // replace with the actual image URL
         width: 500,
         height: 500,
         alt: "Thnal Cambodia's Leading Bookshop",
@@ -44,7 +43,7 @@ export const metadata = {
     ],
   },
   twitter: {
-    card: `${APP_URL}images/logo_thnal.png`,
+    card: "https://thnal.org/images/logo_thnal.png",
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
