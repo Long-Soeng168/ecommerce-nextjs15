@@ -2,7 +2,7 @@ import MyGallery from "@/components/my-gallery";
 import { Button } from "@/components/ui/button";
 import MyKeyValueCard from "@/components/ui/my-key-value-card";
 import { getBook } from "@/services/books-services";
-import { Minus, Plus, ShoppingCart } from "lucide-react";
+import { BookOpenTextIcon, Minus, Plus, ShoppingCart } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
@@ -27,12 +27,12 @@ const ProductPage = async ({ params }) => {
     images = product?.images.map((item) => item.image);
   }
 
-  if(!product.title){
+  if (!product.title) {
     return (
       <div>
         <MyLoadingAnimation />
       </div>
-    )
+    );
   }
 
   return (
@@ -46,7 +46,19 @@ const ProductPage = async ({ params }) => {
       <main className="lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
-            <MyGallery image={image} images={images} />
+            <div className="pb-4 ">
+              <MyGallery image={image} images={images} />
+            </div>
+            {product?.file && (
+              <a
+                href={`https://admin.thnal.org/assets/pdf/books/${product?.file}`}
+                className="mt-8"
+              >
+                <Button className="w-full" variant="destructive">
+                  <BookOpenTextIcon /> Read
+                </Button>
+              </a>
+            )}
           </div>
 
           {/* Right Item */}
@@ -137,7 +149,9 @@ const ProductPage = async ({ params }) => {
                 {product?.language && (
                   <MyKeyValueCard
                     title={t("language")}
-                    value={product?.language == 'khmer' ? t('khmer') : t('english')}
+                    value={
+                      product?.language == "khmer" ? t("khmer") : t("english")
+                    }
                   />
                 )}
                 {product?.created_at && (

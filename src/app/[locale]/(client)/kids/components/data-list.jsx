@@ -38,7 +38,7 @@ const DataList = async ({
     <div>
       <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {books?.map((product) => (
-          <ProductCard product={product} endpoint="/kids" key={product.id} />
+          <ProductCard product={product} key={product.id} />
         ))}
       </div>
       {/* End books List */}

@@ -19,9 +19,11 @@ import MyCategoryPanel from "./my-categories-panel";
 import { IMAGE_BOOK_URL, IS_SHOW_KID_BOOKS } from "@/config/env";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/routing";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const searchParams = useSearchParams();
+  const pathName = usePathname();
   const t = useTranslations("Index");
   const locale = useLocale();
   return (
@@ -210,7 +212,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem> */}
         <div className="w-[1px] h-6 bg-white/80"></div>
-        <NavigationMenuItem>
+        <NavigationMenuItem className={`${pathName == '/products' && 'underline underline-offset-4'}`}>
           <Link href="/products" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("books")}
@@ -218,7 +220,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem>
         {IS_SHOW_KID_BOOKS && (
-          <NavigationMenuItem>
+          <NavigationMenuItem className={`${pathName == '/kids' && 'underline underline-offset-4'}`}>
             <Link href="/kids" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 {t("kidBooks")}
@@ -226,7 +228,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
             </Link>
           </NavigationMenuItem>
         )}
-        <NavigationMenuItem>
+        <NavigationMenuItem className={`${pathName == '/blogs' && 'underline underline-offset-4'}`}>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("news")}
@@ -234,7 +236,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        <NavigationMenuItem className={`${pathName == '/contact' && 'underline underline-offset-4'}`}>
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("contact")}
@@ -242,7 +244,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        <NavigationMenuItem className={`${pathName == '/about' && 'underline underline-offset-4'}`}>
           <Link href="/about" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("about")}
