@@ -135,6 +135,9 @@ const ProductPage = async ({ params }) => {
                 {product?.isbn && (
                   <MyKeyValueCard title={t("isbn")} value={product?.isbn} />
                 )}
+                {product?.tsin && (
+                  <MyKeyValueCard title={t("tsin")} value={product?.tsin} />
+                )}
                 {product?.edition && (
                   <MyKeyValueCard
                     title={t("edition")}

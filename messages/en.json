@@ -46,6 +46,7 @@
         "title": "Title",
         "pages": "Pages",
         "isbn": "ISBN",
+        "tsin": "TSIN",
         "edition": "Edition",
         "language": "Language",
         "lastUpdate": "Last Update",
