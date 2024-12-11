@@ -80,6 +80,55 @@ export async function getBooks({
     return null;
   }
 }
+export async function getKidBooks({
+  categoryId = "",
+  subCategoryId = "",
+  randomOrder = "",
+  orderBy = "",
+  orderDir = "",
+  page = "",
+  perPage = "",
+  search = "",
+  priceFrom = "",
+  priceTo = "",
+  yearFrom = "",
+  yearTo = "",
+  authorId = "",
+  publisherId = "",
+} = {}) {
+  const queryParams = new URLSearchParams({
+    categoryId,
+    subCategoryId,
+    randomOrder,
+    page,
+    search,
+    perPage,
+    orderBy,
+    orderDir,
+    priceFrom,
+    priceTo,
+    yearFrom,
+    yearTo,
+    authorId,
+    publisherId,
+  });
+
+  const url = `${process.env.BASE_API_URL}/kid_books?${queryParams}`;
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Kids Books : ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+}
 
 export async function getBook({ id }) {
   const url = process.env.BASE_API_URL + `/books/${id}`;

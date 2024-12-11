@@ -16,7 +16,7 @@ import {
 import Image from "next/image";
 import { AlignLeft, ChevronRight } from "lucide-react";
 import MyCategoryPanel from "./my-categories-panel";
-import { IMAGE_BOOK_URL } from "@/config/env";
+import { IMAGE_BOOK_URL, IS_SHOW_KID_BOOKS } from "@/config/env";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -217,6 +217,15 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        {IS_SHOW_KID_BOOKS && (
+          <NavigationMenuItem>
+            <Link href="/kids" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                {t("kidBooks")}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        )}
         <NavigationMenuItem>
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>

@@ -1,8 +1,6 @@
 import MyGallery from "@/components/my-gallery";
-import { Button } from "@/components/ui/button";
 import MyKeyValueCard from "@/components/ui/my-key-value-card";
 import { getBook } from "@/services/books-services";
-import { Minus, Plus, ShoppingCart } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
@@ -12,6 +10,8 @@ import MyAddToCart from "@/components/my-add-to-cart";
 import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
 import { getTranslations } from "next-intl/server";
+import { Button } from "@/components/ui/button";
+import { BookOpenTextIcon } from "lucide-react";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -27,12 +27,12 @@ const ProductPage = async ({ params }) => {
     images = product?.images.map((item) => item.image);
   }
 
-  if(!product.title){
+  if (!product.title) {
     return (
       <div>
         <MyLoadingAnimation />
       </div>
-    )
+    );
   }
 
   return (
@@ -46,7 +46,17 @@ const ProductPage = async ({ params }) => {
       <main className="lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
-            <MyGallery image={image} images={images} />
+            <div className="pb-4 ">
+              <MyGallery image={image} images={images} />
+            </div>
+            <a
+              href={`https://admin.thnal.org/assets/pdf/books/${product?.file}`}
+              className="mt-8"
+            >
+              <Button className="w-full" variant="destructive">
+                <BookOpenTextIcon /> Read
+              </Button>
+            </a>
           </div>
 
           {/* Right Item */}
@@ -134,7 +144,9 @@ const ProductPage = async ({ params }) => {
                 {product?.language && (
                   <MyKeyValueCard
                     title={t("language")}
-                    value={product?.language == 'khmer' ? t('khmer') : t('english')}
+                    value={
+                      product?.language == "khmer" ? t("khmer") : t("english")
+                    }
                   />
                 )}
                 {product?.created_at && (

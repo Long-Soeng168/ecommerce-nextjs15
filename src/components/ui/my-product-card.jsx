@@ -13,12 +13,12 @@ import {
 import { IMAGE_BOOK_URL } from "@/config/env";
 import MyAddToCartMini from "../my-add-to-cart-mini";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, endpoint = '/products' }) => {
   return (
     <div className="flex flex-col items-stretch justify-between w-full h-full transition-all duration-500 rounded-lg group hover:scale-95">
       <div>
         <div className="relative overflow-hidden ">
-          <Link href={`/products/${product.id}&productTitle=${product.title}`}>
+          <Link href={`${endpoint}/${product.id}&productTitle=${product.title}`}>
             <Image
               width={600}
               height={600}
