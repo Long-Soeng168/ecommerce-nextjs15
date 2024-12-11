@@ -34,8 +34,8 @@ const MyHeader = async () => {
             <Image
               className="object-contain rounded-md"
               src="/images/logo.png"
-              width={100}
-              height={100}
+              width={60}
+              height={60}
               alt="Logo Image"
             />
             {/* <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
