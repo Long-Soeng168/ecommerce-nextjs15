@@ -212,23 +212,31 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem> */}
         <div className="w-[1px] h-6 bg-white/80"></div>
-        <NavigationMenuItem className={`${pathName == '/products' && 'underline underline-offset-4'}`}>
+        <NavigationMenuItem
+          className={`${
+            pathName == "/products" && "underline underline-offset-4"
+          }`}
+        >
           <Link href="/products" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("books")}
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        {IS_SHOW_KID_BOOKS && (
-          <NavigationMenuItem className={`${pathName == '/kids' && 'underline underline-offset-4'}`}>
-            <Link href="/kids" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {t("kidBooks")}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        )}
-        <NavigationMenuItem className={`${pathName == '/blogs' && 'underline underline-offset-4'}`}>
+        <NavigationMenuItem
+          className={`${pathName == "/kids" && "underline underline-offset-4"}`}
+        >
+          <Link href="/kids" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              {t("kidBooks")}
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem
+          className={`${
+            pathName == "/blogs" && "underline underline-offset-4"
+          }`}
+        >
           <Link href="/blogs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("news")}
@@ -236,7 +244,11 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className={`${pathName == '/contact' && 'underline underline-offset-4'}`}>
+        <NavigationMenuItem
+          className={`${
+            pathName == "/contact" && "underline underline-offset-4"
+          }`}
+        >
           <Link href="/contact" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("contact")}
@@ -244,7 +256,11 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           </Link>
         </NavigationMenuItem>
 
-        <NavigationMenuItem className={`${pathName == '/about' && 'underline underline-offset-4'}`}>
+        <NavigationMenuItem
+          className={`${
+            pathName == "/about" && "underline underline-offset-4"
+          }`}
+        >
           <Link href="/about" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               {t("about")}
