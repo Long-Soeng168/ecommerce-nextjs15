@@ -1,9 +1,6 @@
 import MySlideShow from "@/components/my-slide-show";
 import MyCategoryList from "@/components/my-category-list";
 import MyFeatureList from "@/components/my-feature-list";
-import MyBlogList from "@/components/my-blog-list";
-import MyHeading from "@/components/ui/my-heading";
-import { getBlogs } from "@/services/blogs-services";
 import NewArrivals from "@/components/homepage/new-arrivals";
 import { Suspense } from "react";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
