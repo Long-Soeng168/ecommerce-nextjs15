@@ -1,5 +1,4 @@
 import React from "react";
-import { Brush, User, Briefcase, BookOpen } from "lucide-react";
 import MyCategoryCard from "./ui/my-category-card";
 import { getCategories } from "@/services/categories-services";
 import { getLocale } from "next-intl/server";

@@ -1,5 +1,4 @@
 import React from "react";
-import { Truck, ShieldCheck, HelpCircle, Smartphone } from "lucide-react";
 import MyFeatureCard from "./ui/my-feature-card";
 import { getFeatures } from "@/services/features-services";
 
