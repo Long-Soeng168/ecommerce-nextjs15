@@ -15,7 +15,7 @@ const kantumruyPro = Kantumruy_Pro({
 
 export const metadata = {
   icons: {
-    icon: "/images/thnal_logo.png",
+    icon: "/images/logo_thnal.png",
   },
   title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
   description:
@@ -35,7 +35,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/images/thnal_logo.png", // replace with the actual image URL
+        url: "/images/logo_thnal.png", // replace with the actual image URL
         width: 500,
         height: 500,
         alt: "Thnal Cambodia's Leading Bookshop",
@@ -43,7 +43,7 @@ export const metadata = {
     ],
   },
   twitter: {
-    card: "/images/thnal_logo.png",
+    card: "/images/logo_thnal.png",
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
