@@ -14,7 +14,6 @@ import Blogs from "@/components/homepage/blogs";
 export default function Home() {
   return (
     <div>
-      <h1>TEst Update</h1>
       <Suspense fallback={<MyLoadingAnimation />}>
         <MySlideShow className="mt-2 mb-8" />
       </Suspense>
