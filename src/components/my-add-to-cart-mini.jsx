@@ -32,7 +32,7 @@ const MyAddToCartMini = ({ product }) => {
             </div>
           </TooltipTrigger>
           <TooltipContent side="bottom" className="mt-2">
-            <p>Add To Cart</p>
+            <p>{t('addToCart')}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

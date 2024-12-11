@@ -1,11 +1,10 @@
 import { MyBlogCategoriesSelect } from "@/components/my-blog-categories-select";
-import MyHeading from "@/components/ui/my-heading";
-import MySearch from "@/components/ui/my-search";
 import { getBlogCategories } from "@/services/blogs-services";
 import { Suspense } from "react";
 import DataList from "./data-list";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import { getLocale, getTranslations } from "next-intl/server";
+import MyBlogSearch from "@/components/ui/my-blogs-search";
 
 const Page = async (props) => {
   const t = await getTranslations('Index');
@@ -26,7 +25,7 @@ const Page = async (props) => {
         /> */}
         <div className="flex flex-wrap h-full gap-3">
           <MyBlogCategoriesSelect categories={categories} locale={locale} />
-          <MySearch placeholder={t('searchNews')} />
+          <MyBlogSearch placeholder={t('searchNews')} />
         </div>
         <Suspense key={categoryId + search + currentPage} fallback={<MyLoadingAnimation />}>
           <DataList
