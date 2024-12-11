@@ -10,12 +10,9 @@ import {
 
 import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { MyHomeSidebar } from "@/components/my-home-sidebar";
 import { getCategories } from "@/services/categories-services";
-import MySearch from "@/components/ui/my-search";
 import DataList from "./components/data-list";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import MySetPerPage from "@/components/my-set-per-page";
 import MySetOrderBy from "@/components/my-set-order-by";
 import LoadingDataList from "./components/loading-data-list";
