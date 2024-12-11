@@ -68,7 +68,7 @@ export async function getBooks({
   try {
     const response = await fetch(url, {
       next: {
-        revalidate: 86400
+        revalidate: 3600
       }
     });
     if (!response.ok) {
