@@ -1,11 +1,7 @@
 export async function getPublishers() {
     const url = process.env.BASE_API_URL + `/publishers`;
     try {
-      const response = await fetch(url, {
-        next: {
-            revalidate: 80000
-        }
-      });
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(
           `Failed to fetch Publishers : ${response.statusText}`
