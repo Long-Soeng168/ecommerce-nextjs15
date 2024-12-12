@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { Kantumruy_Pro } from "next/font/google";
 import { APP_URL } from "@/config/env";
 import ToTopButton from "@/components/ui/to-top-button";
+import Script from "next/script";
 
 const kantumruyPro = Kantumruy_Pro({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -33,6 +34,16 @@ export default async function RootLayout({ children, params }) {
   return (
     <>
       <html lang={locale} suppressHydrationWarning>
+        {/* google Ads */}
+        <head>
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1281147781310004"
+            crossorigin="anonymous"
+          ></Script>
+        </head>
+        {/* google Ads */}
+
         <body className={`${kantumruyPro.className}`}>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
