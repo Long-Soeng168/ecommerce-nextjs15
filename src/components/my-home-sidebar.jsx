@@ -12,8 +12,8 @@ import { IMAGE_CATE_URL } from "@/config/env";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
-export function MyHomeSidebar({ categories }) {
-  const t = useTranslations('Index')
+export function MyHomeSidebar({ categories, isModal = false }) {
+  const t = useTranslations("Index");
   const locale = useLocale();
 
   const searchParams = useSearchParams();
@@ -32,7 +32,11 @@ export function MyHomeSidebar({ categories }) {
     } else {
       params.delete("categoryId");
     }
-    replace(`${pathname}?${params.toString()}`);
+    if (isModal) {
+      replace(`/products?${params.toString()}`);
+    } else {
+      replace(`${pathname}?${params.toString()}`);
+    }
   };
 
   const handleSetSubCategory = (subCategoryId, categoryId) => {
@@ -59,7 +63,7 @@ export function MyHomeSidebar({ categories }) {
           } hover:bg-primary/10 p-2 py-2 rounded items-center flex gap-1 w-full text-[16px] hover:underline`}
         >
           <AlignLeft size={26} />
-          {t('allCategories')}
+          {t("allCategories")}
         </button>
       </div>
       {categories?.length > 0 &&
@@ -84,7 +88,7 @@ export function MyHomeSidebar({ categories }) {
                   alt=""
                 />
                 <span>
-                  {locale == 'kh' ? category.name_kh : category.name}{" "}
+                  {locale == "kh" ? category.name_kh : category.name}{" "}
                   {category.books_count > 0 && (
                     <span
                       className={`text-[12px]  ${
@@ -121,7 +125,9 @@ export function MyHomeSidebar({ categories }) {
                           handleSetSubCategory(subCategory.id, category.id);
                         }}
                       >
-                        {locale == 'kh' ? subCategory.name_kh : subCategory.name}
+                        {locale == "kh"
+                          ? subCategory.name_kh
+                          : subCategory.name}
                         {subCategory.books_count > 0 && (
                           <span className="text-[12px] text-primary/80">{` (${subCategory.books_count})`}</span>
                         )}

@@ -3,8 +3,6 @@ import React from "react";
 import { MyHeaderNav } from "./my-header-nav";
 import { ModeToggle } from "./mode-toggle";
 import { LanguageToggle } from "./language-toggle";
-import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
 import Link from "next/link";
 import {
   getCategories,
@@ -13,6 +11,7 @@ import {
 import MyCartButtonHeader from "./ui/my-cart-button-header";
 import { getTranslations } from "next-intl/server";
 import MySearch from "./ui/my-search";
+import MyHomeModal from "./my-home-modal";
 
 const MyHeader = async () => {
   const resultCateogries = await getCategories({
@@ -43,17 +42,14 @@ const MyHeader = async () => {
           <div className="flex items-center gap-2 lg:hidden">
             <ModeToggle />
             <LanguageToggle />
-            <Button variant="outline" size="icon" className="lg:hidden">
-              <Menu className="h-[1.2rem] w-[1.2rem] " />
-              <span className="sr-only">Menu</span>
-            </Button>
+            <MyHomeModal categories={resultCateogries} />
           </div>
         </div>
 
         {/* Start Action  */}
         <div className="flex items-center justify-end flex-1 w-full gap-2">
           {/* <MyHeaderSearchInput /> */}
-          <MySearch placeholder={t('searchBooks')} />
+          <MySearch placeholder={t("searchBooks")} />
           <MyCartButtonHeader />
         </div>
       </div>
@@ -73,10 +69,10 @@ const MyHeader = async () => {
         <div className="flex items-center justify-end flex-1 w-full gap-2">
           <ModeToggle />
           <LanguageToggle />
-          <Button variant="outline" size="icon" className="lg:hidden">
+          {/* <Button variant="outline" size="icon" className="lg:hidden">
             <Menu className="h-[1.2rem] w-[1.2rem] " />
             <span className="sr-only">Menu</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
