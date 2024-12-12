@@ -1,7 +1,11 @@
 export async function fetchAPI(endpoint) {
   const url = process.env.BASE_API_URL + endpoint;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch ${endpoint}: ${response.statusText}`);
     }

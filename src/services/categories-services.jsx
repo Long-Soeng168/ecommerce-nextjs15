@@ -10,7 +10,11 @@ export async function getCategories({
       orderBy || ""
     }&orderDir=${orderDir || ""}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch Categories : ${response.statusText}`);
     }
@@ -24,7 +28,11 @@ export async function getCategories({
 export async function getCategoryHasMostBooks() {
   const url = process.env.BASE_API_URL + `/categories_most_books`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(
         `Failed to fetch Category most Book : ${response.statusText}`

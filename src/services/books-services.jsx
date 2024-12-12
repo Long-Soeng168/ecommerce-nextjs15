@@ -1,7 +1,11 @@
 export async function getNewArrivalBooks() {
   const url = process.env.BASE_API_URL + `/books_new_arrival`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(
         `Failed to fetch New Arrival Books : ${response.statusText}`
@@ -18,7 +22,11 @@ export async function getBestSellingBooks({ limit } = {}) {
   const url =
     process.env.BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(
         `Failed to fetch Best Selling Books : ${response.statusText}`
@@ -133,7 +141,11 @@ export async function getKidBooks({
 export async function getBook({ id }) {
   const url = process.env.BASE_API_URL + `/books/${id}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if(response.status == 404){
       return 404;
     }

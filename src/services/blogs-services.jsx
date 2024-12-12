@@ -27,7 +27,11 @@ export async function getBlogs({categoryId, perPage, currentPage, search} = {}) 
 export async function getBlog(id) {
   const url = process.env.BASE_API_URL + "/news/" + id;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if(response.status == 404){
       return 404;
     }
@@ -44,7 +48,11 @@ export async function getBlog(id) {
 export async function getBlogCategories() {
   const url = process.env.BASE_API_URL + `/news_categories`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: {
+        revalidate: 3600
+      }
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch Blogs: ${response.statusText}`);
     }
