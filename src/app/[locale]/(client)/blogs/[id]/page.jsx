@@ -18,7 +18,7 @@ export default async function Page({ params }) {
 
   let results = await getBlogs({ categoryId: blog?.news_category_id });
   let relatedBlogs = results?.data || [];
-  if (blog == null) {
+  if (blog == 404) {
     notFound();
   }
   

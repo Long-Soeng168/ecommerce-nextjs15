@@ -135,7 +135,7 @@ export async function getBook({ id }) {
   try {
     const response = await fetch(url);
     if(response.status == 404){
-      return null;
+      return 404;
     }
     if (!response.ok) {
       throw new Error(`Failed to fetch Book : ${response.statusText}`);

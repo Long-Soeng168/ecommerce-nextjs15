@@ -42,7 +42,7 @@ const ProductPage = async ({ params }) => {
     images = product?.images.map((item) => item.image);
   }
 
-  if (product == null) {
+  if (product == 404) {
     notFound();
   }
 

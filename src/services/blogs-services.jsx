@@ -28,6 +28,9 @@ export async function getBlog(id) {
   const url = process.env.BASE_API_URL + "/news/" + id;
   try {
     const response = await fetch(url);
+    if(response.status == 404){
+      return 404;
+    }
     if (!response.ok) {
       throw new Error(`Failed to fetch Blogs: ${response.statusText}`);
     }
