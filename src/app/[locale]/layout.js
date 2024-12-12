@@ -38,10 +38,13 @@ export default async function RootLayout({ children, params }) {
         <head>
           <Script
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1281147781310004"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2937517680506251"
             crossorigin="anonymous"
           ></Script>
-          <meta name="google-adsense-account" content="ca-pub-2937517680506251" />
+          <meta
+            name="google-adsense-account"
+            content="ca-pub-2937517680506251"
+          />
         </head>
         {/* google Ads */}
 
