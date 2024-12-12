@@ -2,10 +2,7 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetPortal,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MyHomeSidebar } from "./my-home-sidebar";
