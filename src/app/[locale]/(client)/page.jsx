@@ -7,42 +7,65 @@ import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import BestSellings from "@/components/homepage/best-sellings";
 import Promotion from "@/components/homepage/promotion";
 import Blogs from "@/components/homepage/blogs";
+import { APP_URL } from "@/config/env";
+
+export const metadata = {
+  title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+  description:
+    "Discover Thnal, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks.",
+  keywords: [
+    "Online book shop Cambodia",
+    "Cambodian bookshop platform",
+    "Authors and publishers selling books",
+    "eBooks and audiobooks Cambodia",
+    "Sell books online Cambodia",
+  ],
+  openGraph: {
+    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+    description:
+      "Discover Thnal, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    url: `${APP_URL}`, // replace with the actual Thnal URL
+    type: "website",
+    images: [
+      {
+        url: `${APP_URL}images/logo_thnal.png`, // replace with the actual image URL
+        width: 500,
+        height: 500,
+        alt: "Thnal Cambodia's Leading Bookshop",
+      },
+    ],
+  },
+  twitter: {
+    card: `${APP_URL}images/logo_thnal.png`,
+    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
+    description:
+      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
+    site: "@Thnal_com",
+    creator: "@Thnal_com",
+  },
+};
 
 export default function Home() {
   return (
     <div>
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <MySlideShow className="mt-2 mb-8" />
-      </Suspense>
+      <MySlideShow className="mt-2 mb-8" />
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <MyCategoryList key="category-list-key" className="mb-8" />
-      </Suspense>
+      <MyCategoryList key="category-list-key" className="mb-8" />
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <NewArrivals />
-      </Suspense>
+      <NewArrivals />
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <BestSellings />
-      </Suspense>
+      <BestSellings />
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <Promotion />
-      </Suspense>
+      <Promotion />
 
       {/* <div className="max-w-screen-xl mx-auto mb-20 space-y-4">
         <MyHeading title="Partners" />
         <MyPartnerList />
       </div> */}
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <Blogs />
-      </Suspense>
+      <Blogs />
 
-      <Suspense fallback={<MyLoadingAnimation />}>
-        <MyFeatureList className="my-16" />
-      </Suspense>
+      <MyFeatureList className="my-16" />
     </div>
   );
 }

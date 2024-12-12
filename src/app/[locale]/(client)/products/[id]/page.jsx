@@ -2,7 +2,7 @@ import MyGallery from "@/components/my-gallery";
 import { Button } from "@/components/ui/button";
 import MyKeyValueCard from "@/components/ui/my-key-value-card";
 import { getBook } from "@/services/books-services";
-import { BookOpenTextIcon, Minus, Plus, ShoppingCart } from "lucide-react";
+import { BookOpenTextIcon } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { APP_URL, IMAGE_BOOK_URL } from "@/config/env";
+import { IMAGE_BOOK_URL } from "@/config/env";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -26,8 +26,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product.title,
       description: product.short_description,
-      url: `${APP_URL}products/${product.id}`,
-      images: [`${IMAGE_BOOK_URL + 'thumb/' + product.image}`],
+      images: [`${IMAGE_BOOK_URL + "thumb/" + product.image}`],
     },
   };
 }

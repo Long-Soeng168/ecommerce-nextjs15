@@ -4,6 +4,18 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { getContact } from "@/services/page-services";
 import { getTranslations } from "next-intl/server";
 
+export async function generateMetadata() {
+  let contact = await getContact();
+  return {
+    title: 'Contact Us',
+    description: contact.description,
+    openGraph: {
+      title: 'Contact Us',
+      description: contact.description,
+    },
+  };
+}
+
 const ContactPage = async () => {
   let contact = await getContact();
   const t = await getTranslations("Index");

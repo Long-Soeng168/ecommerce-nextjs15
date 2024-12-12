@@ -2,6 +2,19 @@ import { getAbout } from "@/services/page-services";
 import { getLocale, getTranslations } from "next-intl/server";
 import React from "react";
 
+
+export async function generateMetadata() {
+  let about = await getAbout();
+  return {
+    title: 'About Us',
+    description: about.description,
+    openGraph: {
+      title: 'About Us',
+      description: about.description,
+    },
+  };
+}
+
 const AboutPage = async () => {
   let about = await getAbout();
   const t = getTranslations("Index");
