@@ -3,6 +3,7 @@ import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { getContact } from "@/services/page-services";
 import { getTranslations } from "next-intl/server";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export async function generateMetadata() {
   let contact = await getContact();
@@ -21,6 +22,8 @@ const ContactPage = async () => {
   const t = await getTranslations("Index");
   return (
     <div className="grid gap-12 my-8 lg:grid-cols-2">
+      <ScrollToTop />
+
       {/* Company Contact Information */}
       <div className="rounded-lg">
         <h2 className="mb-4 text-3xl font-semibold text-pri">

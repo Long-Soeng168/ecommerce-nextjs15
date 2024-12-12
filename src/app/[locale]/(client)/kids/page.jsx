@@ -4,6 +4,7 @@ import DataList from "./components/data-list";
 import LoadingDataList from "./components/loading-data-list";
 import { getTranslations } from "next-intl/server";
 import MyKidsSearch from "@/components/ui/my-kids-search";
+import ScrollToTop from "@/components/scroll-to-top";
 
 const Page = async (props) => {
   const t = await getTranslations('Index');
@@ -24,6 +25,8 @@ const Page = async (props) => {
 
   return (
     <div className="flex">
+      <ScrollToTop />
+
       <div className="flex-1 p-4 pt-4 space-y-2">
         {/* Start books Header */}
         <div className="w-full">

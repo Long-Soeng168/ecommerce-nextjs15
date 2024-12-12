@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 
 import { Kantumruy_Pro } from "next/font/google";
 import { APP_URL } from "@/config/env";
+import ToTopButton from "@/components/ui/to-top-button";
 
 const kantumruyPro = Kantumruy_Pro({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -43,6 +44,7 @@ export default async function RootLayout({ children, params }) {
               {children}
             </ThemeProvider>
           </NextIntlClientProvider>
+          <ToTopButton />
         </body>
       </html>
     </>

@@ -1,3 +1,5 @@
+import ScrollToTop from "@/components/scroll-to-top";
+import { IMAGE_BLOG_URL } from "@/config/env";
 import {
   getBlog,
   getBlogCategories,
@@ -7,6 +9,22 @@ import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+
+export async function generateMetadata({params}) {
+  const { id } = await params;
+  const blog = await getBlog(id);
+  return {
+    title: blog.name,
+    description: blog.short_description,
+    openGraph: {
+      title: blog.name,
+      description: blog.short_description,
+      images: [`${IMAGE_BLOG_URL + "thumb/" + blog.image}`],
+    },
+  };
+}
+
 
 export default async function Page({ params }) {
   const t = await getTranslations("Index");
@@ -24,6 +42,8 @@ export default async function Page({ params }) {
   
   return (
     <div className="bg-background text-foreground">
+      <ScrollToTop />
+
       <section className="w-full grid grid-cols-1 gap-8 px-4 mt-8 md:grid-cols-[3fr,1fr] md:gap-12 ">
         <div>
           <h1 className="text-2xl font-semibold">{blog.name}</h1>

@@ -68,7 +68,6 @@ export default function MySearch({ placeholder }) {
           } flex flex-1 bg-white border rounded-lg shadow-sm dark:text-primary border-primary`}
         >
           <Input
-            autoFocus
             // value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="border-none shadow-none dark:text-black dark:placeholder-black min-w-40 focus-visible:ring-0"

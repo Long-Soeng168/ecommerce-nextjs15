@@ -90,8 +90,8 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                 ? categoryMostBook?.name_kh
                 : categoryMostBook?.name}
             </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
+            <NavigationMenuContent className="border rounded-lg shadow bg-background">
+              <ul className="grid  p-4 space-x-4 items-start w-[500px] grid-cols-[.65fr_1fr]">
                 <li className="row-span-2">
                   <Link
                     href={`/products/${categoryMostBook?.books[0].id}?productTitle=${categoryMostBook?.books[0].title}`}
@@ -102,20 +102,22 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                         <Image
                           width={100}
                           height={100}
-                          className="object-cover w-full rounded-md aspect-[6/9]"
+                          className="object-cover border-[0.5px] border-primary w-full rounded-md aspect-[6/9]"
                           src={
                             IMAGE_BOOK_URL + categoryMostBook?.books[0].image
                           }
                           alt={categoryMostBook?.books[0].title}
                         />
-                        {categoryMostBook?.books[0]?.discount != 0 && (
-                          <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-primary/80">
-                            - {categoryMostBook?.books[0]?.discount}%
-                          </span>
-                        )}
+                        {categoryMostBook?.books[0]?.discount != 0 &&
+                          categoryMostBook?.books[0]?.discount != null && (
+                            <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-primary/80">
+                              - {categoryMostBook?.books[0]?.discount}%
+                            </span>
+                          )}
                       </div>
                       <div className="flex flex-col justify-between p-1 lg:items-center lg:flex-row">
-                        {categoryMostBook?.books[0]?.discount != 0 ? (
+                        {categoryMostBook?.books[0]?.discount != 0 &&
+                        categoryMostBook?.books[0]?.discount != null ? (
                           <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
                             <span className="line-through">
                               {categoryMostBook?.books[0]?.price} $
@@ -153,7 +155,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                       <Image
                         width={50}
                         height={50}
-                        className="object-cover w-full aspect-book"
+                        className="object-cover border-[0.5px] border-primary aspect-book w-full aspect-book"
                         src={IMAGE_BOOK_URL + book.image}
                         alt={"Image's book"}
                       />
@@ -165,7 +167,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                         <p className="text-sm text-gray-400 line-clamp-2">
                           {book.short_description} $
                         </p>
-                        {book.discount != 0 ? (
+                        {book.discount != 0 && book.discount != null ? (
                           <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
                             <span className="line-through">{book.price} $</span>
                             <span className="text-red-500">

@@ -60,6 +60,7 @@
         "discount": "Discount",
         "postDate": "Post Date",
         "publishedYear": "Published Year",
+        "year": "Year",
 
         "applyFilter": "Apply Filter",
         "filter": "Filter",

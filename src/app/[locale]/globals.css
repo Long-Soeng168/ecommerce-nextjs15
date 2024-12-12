@@ -89,7 +89,7 @@
 .no-tailwind {
   @apply prose prose-gray dark:prose-invert max-w-none lg:prose-xl;
 }
-.no-book {
+.aspect-book {
   @apply aspect-[6/9];
 }
 

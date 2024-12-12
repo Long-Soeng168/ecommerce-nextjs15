@@ -11,9 +11,10 @@ import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import MyAddToCart from "@/components/my-add-to-cart";
 import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { IMAGE_BOOK_URL } from "@/config/env";
+import ScrollToTop from "@/components/scroll-to-top";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -32,6 +33,7 @@ export async function generateMetadata({ params }) {
 }
 
 const ProductPage = async ({ params }) => {
+  const locale = await getLocale();
   const t = await getTranslations("Index");
   const { id } = await params;
   const product = await getBook({ id: id });
@@ -48,13 +50,15 @@ const ProductPage = async ({ params }) => {
 
   return (
     <div className="lg:flex">
+      <ScrollToTop />
+
       {/* <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
         <Categories />
         <hr className="my-6" />
         <Label className="text-primary">Best Selling</Label>
         <BestSelling />
       </aside> */}
-      <main className="lg:flex-1">
+      <main className="w-full lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
             <div className="pb-4 ">
@@ -85,7 +89,7 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("author")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href="/products"
+                      href={`/products?authorId=${product?.author.id}`}
                     >
                       {product?.author.name}
                     </Link>
@@ -95,7 +99,7 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("publisher")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href="/products"
+                      href={`/products?publisherId=${product?.publisher.id}`}
                     >
                       {product?.publisher.name}
                     </Link>
@@ -106,9 +110,9 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("category")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href="/products"
+                      href={`/products?categoryId=${product?.category.id}`}
                     >
-                      {product?.category?.name}
+                      {locale == 'kh' ? product?.category?.name_kh : product?.category?.name}
                     </Link>
                     <p className="text-sm capitalize"></p>
                     {product?.sub_category && (
@@ -116,9 +120,9 @@ const ProductPage = async ({ params }) => {
                         <p className="mx-2"> / </p>
                         <Link
                           className="hover:underline underline-offset-4 text-primary"
-                          href="/products"
+                          href={`/products?categoryId=${product?.category.id}&subCategoryId=${product?.sub_category.id}`}
                         >
-                          {product?.sub_category?.name}
+                          {locale == 'kh' ? product?.sub_category?.name_kh : product?.sub_category?.name}
                         </Link>
                       </>
                     )}

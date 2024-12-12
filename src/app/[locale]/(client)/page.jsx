@@ -8,6 +8,7 @@ import BestSellings from "@/components/homepage/best-sellings";
 import Promotion from "@/components/homepage/promotion";
 import Blogs from "@/components/homepage/blogs";
 import { APP_URL } from "@/config/env";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata = {
   title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
@@ -48,6 +49,8 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
+      <ScrollToTop />
+
       <MySlideShow className="mt-2 mb-8" />
 
       <MyCategoryList key="category-list-key" className="mb-8" />

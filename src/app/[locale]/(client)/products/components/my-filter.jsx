@@ -49,6 +49,7 @@ const MyFilter = () => {
               onChange={(e) => {
                 setYearFrom(e.target.value);
               }}
+              placeholder={t('year')}
             />
           </div>
           <div>
@@ -60,6 +61,7 @@ const MyFilter = () => {
               onChange={(e) => {
                 setYearTo(e.target.value);
               }}
+              placeholder={t('year')}
             />
           </div>
         </div>

@@ -22,12 +22,12 @@ const ProductCard = ({ product, endpoint = '/products' }) => {
             <Image
               width={600}
               height={600}
-              className="object-cover w-full rounded-md aspect-[6/9] font-moul"
+              className="object-cover w-full border-[0.5px] border-primary rounded-md aspect-[6/9] font-moul"
               src={IMAGE_BOOK_URL + product.image}
               alt={product.title}
             />
           </Link>
-          {product.discount != 0 && (
+          {product.discount != 0 && product.discount != null && (
             <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
               - {product.discount}%
             </span>
@@ -36,7 +36,7 @@ const ProductCard = ({ product, endpoint = '/products' }) => {
         </div>
         <Link href={`/products/${product.id}?productTitle=${product.title}`}>
           <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
-            {product.discount != 0 ? (
+            {product.discount != 0 && product.discount != null ? (
               <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
                 <span className="line-through">{product.price} $</span>
                 <span className="text-red-500">
@@ -58,7 +58,7 @@ const ProductCard = ({ product, endpoint = '/products' }) => {
           </div>
           <TooltipProvider delayDuration={0}>
             <Tooltip className="bg-blue-200">
-              <TooltipTrigger>
+              <TooltipTrigger className="w-full">
                 <h3 className="text-md text-start text-foreground line-clamp-1">
                   {product.title}
                 </h3>

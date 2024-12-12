@@ -11,6 +11,7 @@ import Link from "next/link";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ListX, Trash2Icon, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import ScrollToTop from "@/components/scroll-to-top";
 
 const CartPage = () => {
   const t = useTranslations('Index');
@@ -39,6 +40,8 @@ const CartPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen mb-8 lg:px-4">
+      <ScrollToTop />
+
       <MyStepper currentStep={1} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8 ">
         <div className="p-2 py-4 border rounded-lg shadow-lg lg:p-8 bg-background">

@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/scroll-to-top";
 import { getAbout } from "@/services/page-services";
 import { getLocale, getTranslations } from "next-intl/server";
 import React from "react";
@@ -22,6 +23,8 @@ const AboutPage = async () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen mt-8">
+      <ScrollToTop />
+
       {about?.description ? (
         <div
           className="no-tailwind"

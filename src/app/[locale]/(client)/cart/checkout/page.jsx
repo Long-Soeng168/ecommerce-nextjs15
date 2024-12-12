@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { RotateCwIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export default function Component() {
   const router = useRouter(); // Get the router object from Next.js
@@ -103,6 +104,8 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-screen mb-8 lg:px-4">
+      <ScrollToTop />
+
       <MyStepper key={cartItems} currentStep={2} allowCheckout={true} />
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-8">
         {/* Start Left Section */}

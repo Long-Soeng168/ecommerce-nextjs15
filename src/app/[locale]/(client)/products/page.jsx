@@ -20,6 +20,7 @@ import MyFilter from "./components/my-filter";
 import MySelectFilter from "./components/my-select-filter";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import { getTranslations } from "next-intl/server";
+import ScrollToTop from "@/components/scroll-to-top";
 
 const Page = async (props) => {
   const t = await getTranslations('Index');
@@ -46,6 +47,8 @@ const Page = async (props) => {
 
   return (
     <div className="flex">
+      <ScrollToTop />
+
       {/* Left Side */}
       <div className="hidden lg:flex">{leftSide()}</div>
       {/* Right Side */}
