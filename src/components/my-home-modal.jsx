@@ -3,6 +3,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MyHomeSidebar } from "./my-home-sidebar";
@@ -45,7 +46,9 @@ const MyHomeModal = ({ categories }) => {
           side="left"
           className="w-[300px] sm:w-[540px] overscroll-y-auto"
         >
-          <SheetHeader>{t("menu")}</SheetHeader>
+          <SheetHeader>
+            <SheetTitle>{t("menu")}</SheetTitle>
+          </SheetHeader>
           <ScrollArea className="h-full pr-3">
             <div className="pt-2">
               <Accordion type="single" collapsible>
