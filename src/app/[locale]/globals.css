@@ -98,3 +98,7 @@
 .rpv-toolbar__item button[aria-label="Download"] {
   display: none;
 }
+
+.rpv-core__display--block.rpv-core__display--hidden-medium button[data-testid="get-file__download-menu"] {
+  display: none;
+}

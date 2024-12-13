@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { getTranslations } from "next-intl/server";
 
-const MyProductHeader = async ({ title }) => {
+const MyProductHeader = async ({ title, categoryId = '' }) => {
   const t = await getTranslations('Index');
   return (
     <div className="flex justify-between mb-4 border-b-4 border-primary">
@@ -12,7 +12,7 @@ const MyProductHeader = async ({ title }) => {
         {title}
       </h2>
       <Link
-        href="/products"
+        href={`/products?categoryId=${categoryId}`}
         className="flex items-center gap-1 text-xl transition-all duration-500 hover:underline text-primary hover:translate-x-4"
       >
         {t('seeMore')}
