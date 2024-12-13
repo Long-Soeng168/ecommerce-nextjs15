@@ -31,7 +31,7 @@ const Page = () => {
   return (
     <div>
       {/* Start Logo */}
-      <div className="flex px-1 items-center gap-10 justify-between w-full h-[50px] bg-primary">
+      <div className="flex px-1 items-center gap-10 justify-between w-full h-[50px] bg-primary-true-color">
         <Link href="/" className="flex items-center gap-2 overflow-hidden">
           <Image
             className="object-contain rounded-md"
