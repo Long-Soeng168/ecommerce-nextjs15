@@ -12,7 +12,7 @@ const PDFViewer = ({pdfUrl = '/sample.pdf'}) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   return (
     <div className="max-w-full mx-auto h-[100vh]">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+      <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
         <Viewer
           defaultScale={1}
           fileUrl={pdfUrl}
