@@ -15,6 +15,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
+import MyReadPdfButton from "@/components/my-read-pdf-button";
 // import BestSelling from "./components/best-selling";
 // import Categories from "./components/categories";
 
@@ -48,10 +49,10 @@ const ProductPage = async ({ params }) => {
     notFound();
   }
 
+
   return (
     <div className="lg:flex">
       <ScrollToTop />
-
       {/* <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
         <Categories />
         <hr className="my-6" />
@@ -65,14 +66,15 @@ const ProductPage = async ({ params }) => {
               <MyGallery image={image} images={images} />
             </div>
             {product?.file && (
-              <a
-                href={`https://admin.thnal.org/assets/pdf/books/${product?.file}`}
-                className="mt-8"
-              >
-                <Button className="w-full" variant="destructive">
-                  <BookOpenTextIcon /> Read
-                </Button>
-              </a>
+              // <a
+              //   href={`https://admin.thnal.org/assets/pdf/books/${product?.file}`}
+              //   className="mt-8"
+              // >
+              //   <Button className="w-full" variant="destructive">
+              //     <BookOpenTextIcon /> Read
+              //   </Button>
+              // </a>
+              <MyReadPdfButton product={product} />
             )}
           </div>
 
@@ -112,7 +114,9 @@ const ProductPage = async ({ params }) => {
                       className="hover:underline underline-offset-4 text-primary"
                       href={`/products?categoryId=${product?.category.id}`}
                     >
-                      {locale == 'kh' ? product?.category?.name_kh : product?.category?.name}
+                      {locale == "kh"
+                        ? product?.category?.name_kh
+                        : product?.category?.name}
                     </Link>
                     <p className="text-sm capitalize"></p>
                     {product?.sub_category && (
@@ -122,7 +126,9 @@ const ProductPage = async ({ params }) => {
                           className="hover:underline underline-offset-4 text-primary"
                           href={`/products?categoryId=${product?.category.id}&subCategoryId=${product?.sub_category.id}`}
                         >
-                          {locale == 'kh' ? product?.sub_category?.name_kh : product?.sub_category?.name}
+                          {locale == "kh"
+                            ? product?.sub_category?.name_kh
+                            : product?.sub_category?.name}
                         </Link>
                       </>
                     )}

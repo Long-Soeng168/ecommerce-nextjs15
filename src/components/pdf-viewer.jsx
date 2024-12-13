@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Worker } from "@react-pdf-viewer/core";
-// Import the main component
 import { Viewer, ProgressBar } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
@@ -11,10 +10,11 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 const PDFViewer = ({pdfUrl = '/sample.pdf'}) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   return (
-    <div className="max-w-full mx-auto h-[100vh]">
-      <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+    <div className="h-[calc(100vh-50px)] max-w-full">
+      {/* <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}> */}
+      <Worker workerUrl={`/js/pdf-worker-3-11-174.min.js`}>
         <Viewer
-          defaultScale={1}
+          defaultScale='PageFit'
           fileUrl={pdfUrl}
           renderLoader={(percentages) => (
             <div style={{ width: "240px" }}>
