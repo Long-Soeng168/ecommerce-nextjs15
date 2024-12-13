@@ -11,8 +11,8 @@ const PDFViewer = ({pdfUrl = '/sample.pdf'}) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   return (
     <div className="h-[calc(100vh-50px)] max-w-full">
-      {/* <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}> */}
-      <Worker workerUrl={`/js/pdf-worker-3-11-174.min.js`}>
+      <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+      {/* <Worker workerUrl={`/js/pdf-worker-3-11-174.min.js`}> */}
         <Viewer
           defaultScale='PageFit'
           fileUrl={pdfUrl}
