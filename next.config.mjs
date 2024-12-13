@@ -3,6 +3,16 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        canvas: false,
+        fs: false, // prevent using Node.js file system module in the browser
+      };
+    }
+    return config;
+  },
   images: {
     remotePatterns: [
       {
