@@ -46,7 +46,9 @@ const Page = () => {
         <MySearch />
       </div>
       {/* Render the PDFViewer only on the client */}
-      <PDFViewer pdfUrl={pdfUrl} />
+      <div className="no-tailwind">
+        <PDFViewer pdfUrl={pdfUrl} />
+      </div>
     </div>
   );
 };

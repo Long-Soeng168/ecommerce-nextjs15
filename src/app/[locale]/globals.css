@@ -102,3 +102,9 @@
 .rpv-core__display--block.rpv-core__display--hidden-medium button[data-testid="get-file__download-menu"] {
   display: none;
 }
+
+.rpv-core__minimal-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
