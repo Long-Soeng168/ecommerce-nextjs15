@@ -14,7 +14,7 @@ const Page = () => {
     // If it's not the client side, return null (or a loading indicator)
     return null;
   }
-  console.log("running");
+  console.log("running on client");
 
   return (
     <div>
