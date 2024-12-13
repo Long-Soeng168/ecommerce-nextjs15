@@ -17,6 +17,9 @@ const nextConfig = {
       {
         hostname: "admin.thnal.org",
       },
+      {
+        hostname: "cdnjs.cloudflare.com",
+      },
     ],
   },
 };

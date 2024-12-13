@@ -95,3 +95,6 @@
 
 
 /* Normal CSS */
+.rpv-toolbar__item button[aria-label="Download"] {
+  display: none;
+}
