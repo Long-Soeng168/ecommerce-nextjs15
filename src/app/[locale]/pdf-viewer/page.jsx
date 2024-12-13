@@ -6,6 +6,7 @@ const Page = () => {
   return (
     <div>
     <PDFViewer/>
+    <PDFViewer pdfUrl='https://admin.thnal.org/sample.pdf'/>
     </div>
   )
 }

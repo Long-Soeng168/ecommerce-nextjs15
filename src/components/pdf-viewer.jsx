@@ -8,14 +8,14 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 
-const PDFViewer = () => {
+const PDFViewer = ({pdfUrl = '/sample.pdf'}) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   return (
     <div className="max-w-full mx-auto h-[100vh]">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
         <Viewer
           defaultScale={1}
-          fileUrl="/sample.pdf"
+          fileUrl={pdfUrl}
           renderLoader={(percentages) => (
             <div style={{ width: "240px" }}>
               <ProgressBar progress={Math.round(percentages)} />
