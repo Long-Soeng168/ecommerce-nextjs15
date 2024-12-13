@@ -12,12 +12,11 @@ const Page = () => {
   const [pdfUrl, setPdfUrl] = useState(null);
   useEffect(() => {
     setIsClient(true);
-    
-    const url = localStorage.getItem("pdfUrl"); 
+
+    const url = localStorage.getItem("pdfUrl");
     setPdfUrl(url);
     console.log(url);
   }, []);
-
 
   if (!isClient) {
     // If it's not the client side, return null (or a loading indicator)
@@ -31,7 +30,7 @@ const Page = () => {
   return (
     <div>
       {/* Start Logo */}
-      <div className="flex px-1 items-center gap-10 justify-between w-full h-[50px] bg-primary-true-color">
+      <div className="flex px-1 items-center gap-10 justify-between w-full h-[50px] bg-background">
         <Link href="/" className="flex items-center gap-2 overflow-hidden">
           <Image
             className="object-contain rounded-md"
@@ -40,7 +39,7 @@ const Page = () => {
             height={35}
             alt="Logo Image"
           />
-          <p className="text-2xl font-bold max-w-26 text-primary-foreground dark:text-white">
+          <p className="text-2xl font-bold max-w-26 text-foreground/80">
             Thnal
           </p>
         </Link>
