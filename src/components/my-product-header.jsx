@@ -12,7 +12,7 @@ const MyProductHeader = async ({ title, categoryId = '' }) => {
         {title}
       </h2>
       <Link
-        href={`/products?categoryId=${categoryId}`}
+        href={`/products${categoryId ? '?categoryId='+categoryId : ''}`}
         className="flex items-center gap-1 text-xl transition-all duration-500 hover:underline text-primary hover:translate-x-4"
       >
         {t('seeMore')}
