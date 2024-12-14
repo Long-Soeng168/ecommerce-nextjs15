@@ -15,7 +15,7 @@ const MyReadPdfButton = ({ product }) => {
     <>
       <Button
         onClick={handleReadClick}
-        className="w-full mt-8"
+        className="w-full"
         variant="destructive"
       >
         <BookOpenTextIcon /> Read
