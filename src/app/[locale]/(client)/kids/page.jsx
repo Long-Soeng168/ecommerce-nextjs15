@@ -25,7 +25,7 @@ const Page = async (props) => {
 
   return (
     <div className="flex">
-      <ScrollToTop />
+      <ScrollToTop key={' ' + currentPage} />
 
       <div className="flex-1 p-4 pt-4 space-y-2">
         {/* Start books Header */}

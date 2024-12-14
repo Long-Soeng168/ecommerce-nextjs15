@@ -23,7 +23,7 @@ import { getTranslations } from "next-intl/server";
 import ScrollToTop from "@/components/scroll-to-top";
 
 const Page = async (props) => {
-  const t = await getTranslations('Index');
+  const t = await getTranslations("Index");
   const categories = await getCategories({
     withSub: 1,
     orderBy: "name",
@@ -47,7 +47,24 @@ const Page = async (props) => {
 
   return (
     <div className="flex">
-      <ScrollToTop />
+      <ScrollToTop
+        key={
+          " " +
+          search +
+          currentPage +
+          perPage +
+          categoryId +
+          subCategoryId +
+          orderBy +
+          orderDir +
+          priceFrom +
+          priceTo +
+          yearFrom +
+          yearTo +
+          authorId +
+          publisherId
+        }
+      />
 
       {/* Left Side */}
       <div className="hidden lg:flex">{leftSide()}</div>
@@ -119,13 +136,13 @@ const Page = async (props) => {
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="outline">
-                    {t('filter')}
+                    {t("filter")}
                     <Filter />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-auto overflow-y-scroll">
                   <SheetHeader>
-                    <SheetTitle>{t('filter')}</SheetTitle>
+                    <SheetTitle>{t("filter")}</SheetTitle>
                   </SheetHeader>
                   {leftSide()}
                 </SheetContent>
