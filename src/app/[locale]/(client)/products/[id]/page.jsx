@@ -1,8 +1,6 @@
 import MyGallery from "@/components/my-gallery";
-import { Button } from "@/components/ui/button";
 import MyKeyValueCard from "@/components/ui/my-key-value-card";
 import { getBook } from "@/services/books-services";
-import { BookOpenTextIcon } from "lucide-react";
 import MyShowMoreText from "@/components/ui/my-show-more-text";
 import moment from "moment";
 import Link from "next/link";
