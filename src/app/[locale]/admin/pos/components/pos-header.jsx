@@ -40,7 +40,7 @@ const POSHeader = () => {
         {/* Logo */}
         <div className="flex flex-wrap items-center justify-between gap-2 p-2">
           <div className="flex items-center justify-center flex-1 order-2 gap-4 ">
-            <POSHeaderMenu className="hidden lg:block" />
+            <POSHeaderMenu className="hidden md:block" />
 
             {/* Search Bar */}
             <div className="flex-1">
@@ -75,7 +75,7 @@ const POSHeader = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between w-full gap-2 lg:w-auto lg:order-3">
+          <div className="flex items-center justify-between w-full gap-2 md:w-auto md:order-3">
             <POSHeaderMenu className="lg:hidden" />
             <div className="flex items-center gap-2">
               <Button variant="outline" className="relative">

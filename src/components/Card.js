@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Card({ image, title, price, discount, id }) {
   return (
-    <button className="p-1 mt-5 bg-white border-2 border-white rounded-lg shadow hover:border-primary dark:bg-gray-800 dark:border-gray-700">
+    <button className="flex flex-col justify-start h-full p-1 bg-white border-2 border-white rounded-lg shadow hover:border-primary dark:bg-gray-800 dark:border-gray-700">
       <div className="relative">
         <Image
           className="rounded-md border-[0.5px] aspect-[1/1] object-cover"
