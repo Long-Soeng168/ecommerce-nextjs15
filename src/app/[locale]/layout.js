@@ -7,7 +7,6 @@ import { routing } from "@/i18n/routing";
 
 import { Kantumruy_Pro } from "next/font/google";
 import { APP_URL } from "@/config/env";
-import ToTopButton from "@/components/ui/to-top-button";
 import Script from "next/script";
 
 const kantumruyPro = Kantumruy_Pro({
@@ -59,7 +58,6 @@ export default async function RootLayout({ children, params }) {
               {children}
             </ThemeProvider>
           </NextIntlClientProvider>
-          <ToTopButton />
         </body>
       </html>
     </>
