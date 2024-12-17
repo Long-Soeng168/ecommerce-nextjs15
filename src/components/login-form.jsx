@@ -23,7 +23,7 @@ export function LoginForm({ className, ...props }) {
   const router = useRouter();
 
   useEffect(() => {
-    setBaseUrl(BASE_API_URL || "http://127.0.0.1:8000/api");
+    setBaseUrl(BASE_API_URL || "https://admin.thnal.org/api");
     const token = localStorage.getItem("token");
     if (token) {
       router.push("/admin/pos");
