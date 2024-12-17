@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { BASE_API_URL } from "@/config/env";
 
 const validateForm = (email, password) => {
   const errors = {};
@@ -22,7 +23,7 @@ export function LoginForm({ className, ...props }) {
   const router = useRouter();
 
   useEffect(() => {
-    setBaseUrl(process.env.BASE_API_URL || "http://127.0.0.1:8000/api");
+    setBaseUrl(BASE_API_URL || "http://127.0.0.1:8000/api");
     const token = localStorage.getItem("token");
     if (token) {
       router.push("/admin/pos");
