@@ -97,7 +97,7 @@ const DataList = () => {
       
 
   return (
-    <div className="grid items-start justify-start w-full grid-cols-2 gap-3 px-2 pr-4 my-4 mb-10 sm:grid-cols-3 xl:grid-cols-6 lg:grid-cols-4">
+    <div className="grid items-start justify-start w-full grid-cols-2 gap-3 px-2 pr-4 my-2 mb-10 sm:grid-cols-3 xl:grid-cols-6 lg:grid-cols-4">
       {details.map((item, index) => (
         <Card
           key={index} // Use a unique key, such as `index` or a unique property from the `item` object

@@ -130,7 +130,7 @@
 
 .custom-scrollbar {
   scrollbar-width: thin; /* Firefox: Make scrollbar thin */
-  scrollbar-color: #4e489d8a #4e489d8a; /* Firefox: Thumb and track colors */
+  scrollbar-color: #4e489d8a #fff; /* Firefox: Thumb and track colors */
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Hides scrollbar for Chrome, Safari, and Edge */

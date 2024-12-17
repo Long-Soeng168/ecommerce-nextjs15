@@ -9,9 +9,9 @@ import DataList from "./components/data-list";
 export default function Home() {
   return (
     <>
-      <div className="flex mx-auto max-w-screen-2xl ">
+      <div className="flex mx-auto max-w-[1920px] ">
         <div className="flex-1 h-screen overflow-x-auto overflow-y-auto custom-scrollbar">
-          <div className="sticky top-0 z-50 bg-primary/80">
+          <div className="sticky top-0 z-50 bg-white/50 backdrop-blur-md">
             <POSHeader />
           </div>
           <POSFilter />

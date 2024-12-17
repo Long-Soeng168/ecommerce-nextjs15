@@ -45,9 +45,9 @@ const POSHeader = () => {
             {/* Search Bar */}
             <div className="flex-1">
               <form className="relative w-full ">
-                <div className="flex items-stretch bg-white rounded-lg">
+                <div className="flex items-stretch bg-white border-[0.5px] border-primary rounded-lg">
                   <Select defaultValue="products">
-                    <SelectTrigger className="w-auto h-full py-4 font-semibold border-none rounded-lg outline-none focus:ring-0">
+                    <SelectTrigger className="w-auto h-full py-3 font-semibold border-none rounded-lg outline-none focus:ring-0">
                       <SelectValue placeholder="Item Type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -60,13 +60,13 @@ const POSHeader = () => {
                       <Search />
                     </div>
                     <Input
-                      className="w-full h-full pl-12 pr-20 border-0 border-l rounded-none rounded-tr-lg rounded-br-lg border-primary"
+                      className="w-full h-full pl-12 pr-20 border-0 border-l rounded-none rounded-tr-lg rounded-br-lg border-primary focus-visible:ring-primary focus-visible:ring-2"
                       type="search"
                       id="default-search"
                       placeholder="Search Items..."
                     />
                     {/* Error here <button> tag */}
-                    <Button className="absolute right-1.5 top-1/2 -translate-y-[50%]">
+                    <Button className="absolute right-1 top-1/2 -translate-y-[50%]">
                       Search
                     </Button>
                   </div>
@@ -78,7 +78,7 @@ const POSHeader = () => {
           <div className="flex items-center justify-between w-full gap-2 md:w-auto md:order-3">
             <POSHeaderMenu className="lg:hidden" />
             <div className="flex items-center gap-2">
-              <Button variant="outline" className="relative">
+              <Button variant="outline" className="relative h-11 border-[0.5px]">
                 <Link href="#" className="flex items-center gap-1">
                   <ListEnd className="text-primary" />
                   <span>Holds</span>
@@ -91,12 +91,12 @@ const POSHeader = () => {
               <section className="lg:hidden">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button className="flex items-center border border-white">
+                    <Button className="flex items-center border-[0.5px] h-11">
                       <ListChecksIcon />
                       <span>Orders</span>
                     </Button>
                   </SheetTrigger>
-                  <SheetContent className="w-auto sm:max-w-auto">
+                  <SheetContent className="w-auto px-0 sm:max-w-auto">
                     <SheetTitle className="hidden" />
                     <SheetDescription className="hidden" />
                     <Detail />

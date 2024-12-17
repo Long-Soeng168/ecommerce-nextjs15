@@ -62,9 +62,9 @@ const categories = [
 
 const POSFilter = () => {
   return (
-    <div className="bg-primary/10">
-      <ScrollArea className="w-full px-2 pt-2 mt-4 ">
-        <div className="flex pb-2 space-x-2 w-max">
+    <div>
+      <ScrollArea className="w-full px-2 pt-2 mt-2">
+        <div className="flex pb-3 space-x-2 w-max">
           <Button>
             <p>All Categories</p>
           </Button>
@@ -77,10 +77,10 @@ const POSFilter = () => {
             </Button>
           ))}
         </div>
-        <ScrollBar orientation="horizontal" className='pt-1 text-primary' />
+        <ScrollBar orientation="horizontal" className='text-primary' />
       </ScrollArea>
-      <ScrollArea className="w-full px-2 mt-2 ">
-        <div className="flex pb-2 space-x-2 w-max">
+      <ScrollArea className="w-full px-2 mt-1">
+        <div className="flex pb-3 space-x-2 w-max">
           <Button>
             <p>All Brands</p>
           </Button>
@@ -93,7 +93,7 @@ const POSFilter = () => {
             </Button>
           ))}
         </div>
-        <ScrollBar orientation="horizontal" className='pt-1 text-primary' />
+        <ScrollBar orientation="horizontal" className='text-primary' />
       </ScrollArea>
     </div>
   );

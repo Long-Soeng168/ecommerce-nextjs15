@@ -14,14 +14,14 @@ export default function Card({ image, title, price, discount, id }) {
           objectFit="center" 
         />
         {discount != 0 && discount != null && (
-          <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
+          <span className="absolute px-1.5 font-bold text-sm rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
             - {discount}%
           </span>
         )}
       </div>
-      <div>
-        <h5 className="text-gray-900 text-start line-clamp-2 dark:text-white">{title}</h5>
-        <p className="text-start">Code: P-0123</p>
+      <div className="mt-1">
+        <h5 className="text-xs text-gray-900 text-start line-clamp-2 dark:text-white">{title}</h5>
+        <p className="text-xs text-start">Code: P-0123</p>
       </div>
       <div className="w-full text-right text-primary dark:text-gray-400">
         <div className="flex flex-col items-start">

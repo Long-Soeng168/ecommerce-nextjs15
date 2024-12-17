@@ -7,6 +7,7 @@ import {
   Hand,
   ListEnd,
   ListRestart,
+  LucideImageOff,
   Minus,
   Pencil,
   Plus,
@@ -14,24 +15,8 @@ import {
   Trash2Icon,
   X,
 } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { ScrollArea } from "./ui/scroll-area";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   Dialog,
@@ -167,38 +152,30 @@ export default function Detail() {
           <table>
             <tbody>
               <tr>
+                <th></th>
                 <th className="text-gray-500">Items</th>
                 <th className="text-gray-500">Qrt</th>
-                <th className="text-gray-500">SubTotal</th>
+                <th className="text-gray-500">Total</th>
                 <th className="text-gray-500"></th>
               </tr>
               {details.map((item, index) => (
-                <tr key={index} className="relative mb-3 group">
-                  <td className="p-2">
-                    <div className="flex w-full">
-                      <span className="relative">
-                        <Image
-                          src={item.image} // Replace with your actual image path
-                          alt={item.title || "Image"} // Provide meaningful alt text
-                          width={300}
-                          height={300}
-                          className="object-cover w-20 h-20 mr-1 border rounded aspect-square"
-                        />
-                        {item.discount != 0 && item.discount != null && (
-                          <span className="absolute px-0.5 font-bold text-xs rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
-                            - {item.discount}%
-                          </span>
-                        )}
-                      </span>
-                      <div className="flex-1">
-                        <p className="text-sm line-clamp-2">{item.title}</p>
-                        <p className="text-sm line-clamp-1">
-                          Code: <strong> P-0123</strong>
-                        </p>
-                        <p className="text-base text-gray-600 line-clamp-1 whitespace-nowrap ">
-                          $ {item.price}
-                        </p>
-                      </div>
+                <tr key={index} className="relative group">
+                  <td>
+                    <Avatar className="border-[0.5px] rounded-sm w-16 h-16 m-1">
+                      <AvatarImage src={item.image} />
+                      <AvatarFallback className="border-[0.5px] rounded-sm w-14 h-14 ">
+                        <LucideImageOff className="text-gray-400" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </td>
+                  <td>
+                    <div className="flex-1 shrink-0">
+                      <p className="text-sm line-clamp-2 shrink-0">
+                        {item.title}
+                      </p>
+                      <p className="text-sm text-gray-600 line-clamp-1 shrink-0 whitespace-nowrap ">
+                        $ <span className="line-through">{item.price}</span>  <span className="text-destructive">{item.price - (item.price * (item.discount / 100))}</span>
+                      </p>
                     </div>
                   </td>
                   <td className="p-2">
@@ -215,8 +192,8 @@ export default function Detail() {
                     </div>
                   </td>
                   <td className="p-2">
-                    <p className="ml-2 text-base text-primary ">
-                      $ {item.price * item.quantity}
+                    <p className="ml-2 text-base text-primary whitespace-nowrap">
+                      $ {(item.price - (item.price * (item.discount / 100))) * item.quantity}
                     </p>
                   </td>
                   <td className="p-2">
@@ -229,7 +206,7 @@ export default function Detail() {
             </tbody>
           </table>
         </ScrollArea>
-        <div>
+        <div className="px-2">
           {/* Subtotal */}
           <div className="pt-4 mt-4 space-y-3 border-t">
             <div className="flex justify-between text-lg">
@@ -265,7 +242,7 @@ export default function Detail() {
           </div>
 
           <Dialog>
-            <div className="flex gap-2">
+            <div className="flex gap-2 mb-2">
               <ShadCNButton
                 size="mySize"
                 variant="destructive"
