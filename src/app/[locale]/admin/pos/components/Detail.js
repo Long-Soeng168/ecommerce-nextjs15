@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Sheet } from "@/components/ui/sheet";
 import { Button as ShadCNButton } from "@/components/ui/button";
 import {
+  CheckCircle,
   CircleDollarSignIcon,
   DollarSign,
   ListEnd,
@@ -282,7 +283,7 @@ export default function Detail() {
             </div>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Payment</DialogTitle>
+                <DialogTitle>Payment <span className="font-normal text-destructive">($1 = ៛4100)</span></DialogTitle>
                 <DialogDescription />
               </DialogHeader>
               <>
@@ -408,7 +409,7 @@ export default function Detail() {
                   variant="myStyle"
                   className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
                 >
-                  <CircleDollarSignIcon /> Pay
+                  <CheckCircle /> Submit
                 </ShadCNButton>
               </div>
             </DialogContent>
