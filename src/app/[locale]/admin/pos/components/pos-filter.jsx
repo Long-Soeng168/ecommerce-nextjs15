@@ -79,22 +79,6 @@ const POSFilter = () => {
         </div>
         <ScrollBar orientation="horizontal" className='text-primary' />
       </ScrollArea>
-      <ScrollArea className="w-full px-2 mt-1">
-        <div className="flex pb-3 space-x-2 w-max">
-          <Button>
-            <p>All Brands</p>
-          </Button>
-          {categories.map((category) => (
-            <Button key={category.id} variant="outline">
-              {category.icon && (
-                <Image src={category.icon} width={20} height={20} alt="" />
-              )}
-              <p>{category.text}</p>
-            </Button>
-          ))}
-        </div>
-        <ScrollBar orientation="horizontal" className='text-primary' />
-      </ScrollArea>
     </div>
   );
 };

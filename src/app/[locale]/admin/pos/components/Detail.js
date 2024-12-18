@@ -1,28 +1,24 @@
 import Image from "next/image";
-import Button from "./Button";
 import { Sheet } from "@/components/ui/sheet";
 import { Button as ShadCNButton } from "@/components/ui/button";
 import {
   CircleDollarSignIcon,
-  Hand,
+  DollarSign,
   ListEnd,
   ListRestart,
-  LucideImageOff,
   Minus,
-  Pencil,
   Plus,
   Trash2,
-  Trash2Icon,
-  X,
 } from "lucide-react";
-import { ScrollArea } from "./ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  ScrollArea,
+  ScrollBar,
+} from "../../../../../components/ui/scroll-area";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -35,6 +31,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import SelectCustomer from "./select-customer";
+import { Input } from "@/components/ui/input";
 
 const details = [
   {
@@ -148,7 +146,7 @@ export default function Detail() {
         <h2 className="w-full p-2 text-lg font-bold text-center">
           Order Details
         </h2>
-        <ScrollArea className="flex-1 pr-2 space-y-2 border-t">
+        <ScrollArea className="flex-1 pt-1 border-t">
           <table>
             <tbody>
               <tr>
@@ -161,12 +159,15 @@ export default function Detail() {
               {details.map((item, index) => (
                 <tr key={index} className="relative group">
                   <td>
-                    <Avatar className="border-[0.5px] rounded-sm w-16 h-16 m-1">
-                      <AvatarImage src={item.image} />
-                      <AvatarFallback className="border-[0.5px] rounded-sm w-14 h-14 ">
-                        <LucideImageOff className="text-gray-400" />
-                      </AvatarFallback>
-                    </Avatar>
+                    <span className="relative flex shrink-0 overflow-hidden border-[0.5px] rounded-sm w-16 h-16 m-1">
+                      <Image
+                        className="w-full h-full aspect-square"
+                        height={300}
+                        width={300}
+                        alt=""
+                        src={item.image}
+                      />
+                    </span>
                   </td>
                   <td>
                     <div className="flex-1 shrink-0">
@@ -174,7 +175,10 @@ export default function Detail() {
                         {item.title}
                       </p>
                       <p className="text-sm text-gray-600 line-clamp-1 shrink-0 whitespace-nowrap ">
-                        $ <span className="line-through">{item.price}</span>  <span className="text-destructive">{item.price - (item.price * (item.discount / 100))}</span>
+                        $ <span className="line-through">{item.price}</span>{" "}
+                        <span className="text-destructive">
+                          {item.price - item.price * (item.discount / 100)}
+                        </span>
                       </p>
                     </div>
                   </td>
@@ -193,7 +197,9 @@ export default function Detail() {
                   </td>
                   <td className="p-2">
                     <p className="ml-2 text-base text-primary whitespace-nowrap">
-                      $ {(item.price - (item.price * (item.discount / 100))) * item.quantity}
+                      ${" "}
+                      {(item.price - item.price * (item.discount / 100)) *
+                        item.quantity}
                     </p>
                   </td>
                   <td className="p-2">
@@ -208,7 +214,13 @@ export default function Detail() {
         </ScrollArea>
         <div className="px-2">
           {/* Subtotal */}
-          <div className="pt-4 mt-4 space-y-3 border-t">
+          <div className="pt-4 space-y-3 border-t">
+            <div className="flex justify-between text-lg">
+              <p className="text-black">Customer</p>
+              <div>
+                <SelectCustomer />
+              </div>
+            </div>
             <div className="flex justify-between text-lg">
               <p className="text-black">Subtotal</p>
               <p className="text-red-600 ">$742.00</p>
@@ -270,150 +282,135 @@ export default function Detail() {
             </div>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle />
+                <DialogTitle>Payment</DialogTitle>
                 <DialogDescription />
-                <div>
-                  <p className="mb-4 text-2xl font-bold text-center text-black">
-                    Payment
-                  </p>
-                  <hr className="my-4 border-black" />
-                  <div>
-                    {/* Total Amount */}
-                    <div className="max-w-full p-4 text-center rounded-lg ">
-                      <div className="py-2 text-3xl text-white rounded-lg bg-primary">
-                        $50
-                      </div>
-                      <div className="mt-3 text-lg text-black">
-                        20000.00 <span>រៀល</span>
-                      </div>
-                    </div>
-
-                    {/* Customer */}
-                  </div>
-
-                  {/* Payment Method */}
-                  <div className="grid items-center justify-between grid-cols-7 gap-6 my-3 space-x-2">
-                    <div className="col-span-4 sm:col-span-4">
-                      <p className="text-gray-700 text-start">Payment Method</p>
-                      <div className="grid grid-cols-3 space-x-2 sm:flex">
-                        <ShadCNButton variant="base">
-                          <Image
-                            src="/images/pos/dollar.png"
-                            width={15}
-                            height={15}
-                            alt="image"
-                          ></Image>
-                          <p> Cash</p>
-                        </ShadCNButton>
-                        <ShadCNButton variant="base">
-                          <Image
-                            src="/images/pos/credit.png"
-                            width={15}
-                            height={15}
-                            alt="image"
-                          ></Image>
-                          <p> Card</p>
-                        </ShadCNButton>
-                        <ShadCNButton variant="base">
-                          <Image
-                            src="/images/pos/abaPay.png"
-                            width={15}
-                            height={15}
-                            alt="image"
-                          ></Image>
-                          <p> ABA</p>
-                        </ShadCNButton>
-                      </div>
-                    </div>
-
-                    <div className="col-span-3 sm:col-span-3">
-                      <label
-                        htmlFor="customer"
-                        className="block mb-1 font-medium text-gray-700 text-start"
-                      >
-                        Customer:
-                      </label>
-
-                      <select
-                        id="customer"
-                        className="w-full p-1 border border-gray-300 "
-                      >
-                        <option value="">N/A</option>
-                        <option value="customer1">Customer 1</option>
-                        <option value="customer2">Customer 2</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <hr className="my-4 border border-[#4d489d] max-w-72 mx-auto border-dashed " />
-                  <section className="grid grid-cols-7 gap-2 sm:gap-6">
-                    <div className="col-span-7 sm:col-span-4 ">
-                      {/* Received Amount */}
-                      <div className="mb-4">
-                        <label
-                          htmlFor="received-dollar"
-                          className="block text-black text-[16px] font-medium mb-1 text-start"
-                        >
-                          Received In Dollar
-                        </label>
-                        <input
-                          type="number"
-                          id="received-dollar"
-                          className="w-full text-[16px] border-2 text-red-600 border-black p-2 rounded-lg shadow-sm "
-                          placeholder=""
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="received-khmer"
-                          className="block text-black text-[16px] font-medium mb-1 text-start"
-                        >
-                          Received In Khmer
-                        </label>
-                        <input
-                          type="number"
-                          id="received-khmer"
-                          className="w-full text-[16px] border-2 text-red-600 border-black p-2 rounded-lg shadow-sm "
-                          placeholder="៛"
-                        />
-                      </div>
-                    </div>
-                    {/* Return Amount */}
-                    <div className="col-span-7 sm:col-span-3">
-                      <p className="text-black text-[16px] mb-1">Return:</p>
-                      <div className="p-4 text-black rounded-lg subBgpayMent ">
-                        <div className="flex justify-between text-[16px] items-center py-4">
-                          <p>Dollar: </p>
-                          <p> 2.00 </p>
-                          <p> Dollar </p>
-                        </div>
-                        <div className="flex justify-between text-[16px] items-center py-4">
-                          <p>រៀល: </p>
-                          <p> 8,000 </p>
-                          <p> រៀល </p>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </div>
-                <div className="flex gap-2">
-                  <ShadCNButton
-                    size="mySize"
-                    variant="outline"
-                    className="w-full p-2 mt-4 mb-2 rounded-lg"
-                  >
-                    <X /> Cancel
-                  </ShadCNButton>
-
-                  <ShadCNButton
-                    size="mySize"
-                    variant="myStyle"
-                    className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
-                  >
-                    <CircleDollarSignIcon /> Pay
-                  </ShadCNButton>
-                </div>
               </DialogHeader>
+              <>
+                <div className="max-w-full px-4 py-2 text-center bg-gray-200 rounded-lg">
+                  <div className="flex items-end gap-2 py-2 text-lg rounded-lg text-primary ">
+                    <p>Total ($) : </p>{" "}
+                    <p className="text-3xl font-semibold">$50</p>
+                  </div>
+                  <div className="flex items-end gap-2 py-2 text-lg rounded-lg text-primary ">
+                    <p>Total (៛) : </p> <p>200 000 រៀល</p>
+                  </div>
+                </div>
+                {/* Payment Method */}
+                <div className="flex items-center justify-between mt-4 mb-2 text-gray-700 text-start">
+                  <span> Payment Method</span>{" "}
+                  <div>
+                    (Customer Credit :{" "}
+                    <span className="text-destructive">$321</span>)
+                  </div>
+                </div>
+                <ScrollArea className="w-full pb-3 whitespace-nowrap">
+                  <div className="flex items-center gap-2">
+                    <ShadCNButton variant="outline">
+                      <Image
+                        src="/images/pos/dollar.png"
+                        width={24}
+                        height={24}
+                        alt="image"
+                      ></Image>
+                      <p> Cash</p>
+                    </ShadCNButton>
+                    <ShadCNButton variant="outline">
+                      <Image
+                        src="/images/pos/credit.png"
+                        width={24}
+                        height={24}
+                        alt="image"
+                      ></Image>
+                      <p> Card</p>
+                    </ShadCNButton>
+                    <ShadCNButton variant="outline">
+                      <Image
+                        src="/images/pos/abaPay.png"
+                        width={24}
+                        height={24}
+                        alt="image"
+                      ></Image>
+                      <p> ABA</p>
+                    </ShadCNButton>
+                    <ShadCNButton variant="outline">
+                      <Image
+                        src="/images/pos/dollar.png"
+                        width={24}
+                        height={24}
+                        alt="image"
+                      ></Image>
+                      <p>Credit</p>
+                    </ShadCNButton>
+                  </div>
+                  <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+
+                <section className="flex flex-wrap items-center">
+                  <div className="flex-1">
+                    {/* Received Amount */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="received-dollar"
+                        className="block text-black text-[16px] font-medium mb-1 text-start"
+                      >
+                        Received In Dollar
+                      </label>
+                      <div className="flex">
+                        <span className="flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border border-primary">
+                          $
+                        </span>
+                        <Input
+                          type="number"
+                          placeholder="0.00 $"
+                          className="z-10 border rounded-none border-primary"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="received-dollar"
+                        className="block text-black text-[16px] font-medium mb-1 text-start"
+                      >
+                        Received In Riel
+                      </label>
+                      <div className="flex">
+                        <span className="flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border border-primary">
+                          ៛
+                        </span>
+                        <Input
+                          type="number"
+                          placeholder="000 រៀល"
+                          className="z-10 border rounded-none border-primary"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Return Amount */}
+                  <div className="w-full h-auto p-2 mt-6 bg-gray-200 rounded-lg md:mt-0 md:ml-6 md:w-44">
+                    <label
+                      htmlFor="received-dollar"
+                      className="block text-black text-[16px] font-medium mb-1 text-start"
+                    >
+                      Return Change
+                    </label>
+                    <div className="flex gap-2 text-lg rounded-lg text-primary">
+                      <p>USD: </p> <p>4 $</p>
+                    </div>
+                    <div className="flex gap-2 text-lg rounded-lg text-primary">
+                      <p>KHR: </p> <p>20 000 ៛</p>
+                    </div>
+                  </div>
+                </section>
+              </>
+              <div className="flex gap-2 mt-2">
+                <ShadCNButton
+                  size="mySize"
+                  variant="myStyle"
+                  className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
+                >
+                  <CircleDollarSignIcon /> Pay
+                </ShadCNButton>
+              </div>
             </DialogContent>
           </Dialog>
         </div>

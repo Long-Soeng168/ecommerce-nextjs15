@@ -22,7 +22,7 @@ import {
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Detail from "@/components/Detail";
+import Detail from "@/app/[locale]/admin/pos/components/Detail";
 
 import {
   Select,

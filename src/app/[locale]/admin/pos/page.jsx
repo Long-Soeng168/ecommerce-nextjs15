@@ -1,4 +1,4 @@
-import Detail from "@/components/Detail";
+import Detail from "@/app/[locale]/admin/pos/components/Detail";
 
 // import { Sheet } from "@/components/ui/sheet";
 
