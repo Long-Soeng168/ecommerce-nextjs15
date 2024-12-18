@@ -7,7 +7,7 @@ export default function Card({ image, title, price, discount, id }) {
       <div className="relative">
         <Image
           className="rounded-md border-[0.5px] aspect-[1/1] object-cover"
-          src={image}
+          src={`https://admin.thnal.org/assets/images/isbn/thumb/${image}`}
           alt=""
           width={300}
           height={300}

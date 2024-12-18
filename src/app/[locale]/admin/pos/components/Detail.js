@@ -214,17 +214,17 @@ export default function Detail() {
         {/* Subtotal */}
         <div className="pt-4 space-y-3 border-t">
           <div className="flex justify-between text-lg">
-            <p className="text-black">Customer</p>
+            <p className="text-foreground">Customer</p>
             <div>
               <SelectCustomer />
             </div>
           </div>
           <div className="flex justify-between text-lg">
-            <p className="text-black">Subtotal</p>
+            <p className="text-foreground">Subtotal</p>
             <p className="text-red-600 ">$742.00</p>
           </div>
           <div className="flex justify-between text-lg">
-            <p className="flex items-center text-black">Discount</p>
+            <p className="flex items-center text-foreground">Discount</p>
             <div className="flex w-[200px] border-gray-300">
               <span className="z-50 text-destructive translate-x-[0.5px] border-[0.5px] border-primary">
                 <Select defaultValue="percentage">
@@ -272,7 +272,7 @@ export default function Detail() {
               <ShadCNButton
                 size="mySize"
                 variant="myStyle"
-                className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
+                className="w-full p-2 mt-4 mb-2 rounded-lg text-primary-foreground bg-primary hover:bg-primary/90"
               >
                 <CircleDollarSignIcon /> Pay Now
               </ShadCNButton>

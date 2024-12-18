@@ -1,10 +1,7 @@
-import Detail from "@/app/[locale]/admin/pos/components/Detail";
-
-// import { Sheet } from "@/components/ui/sheet";
-
 import POSHeader from "./components/pos-header";
 import POSFilter from "./components/pos-filter";
 import DataList from "./components/data-list";
+import Detail from "./components/Detail";
 
 export default function Home() {
   return (
