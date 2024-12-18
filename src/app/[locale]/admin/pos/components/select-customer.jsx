@@ -61,9 +61,9 @@ export default function SelectCustomer() {
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[200px] p-0 pointer-events-auto">
         <Command>
-          <CommandInput placeholder="Search customer..." className="h-9" />
+          <CommandInput placeholder="Search Customer..." className="h-9" />
           <CommandList>
             <CommandEmpty>No customer found.</CommandEmpty>
             <CommandGroup>

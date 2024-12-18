@@ -89,7 +89,7 @@ const POSHeader = () => {
               </Button>
 
               <section className="lg:hidden">
-                <Sheet>
+                <Sheet  modal={false}>
                   <SheetTrigger asChild>
                     <Button className="flex items-center border-[0.5px] h-11">
                       <ListChecksIcon />

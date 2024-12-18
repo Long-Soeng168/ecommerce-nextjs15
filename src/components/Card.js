@@ -21,11 +21,11 @@ export default function Card({ image, title, price, discount, id }) {
       </div>
       <div className="mt-1">
         <h5 className="text-xs text-gray-900 text-start line-clamp-2 dark:text-white">{title}</h5>
-        <p className="text-xs text-start">Code: P-0123</p>
+        {/* <p className="text-xs text-start">Code: P-0123</p> */}
       </div>
       <div className="w-full text-right text-primary dark:text-gray-400">
-        <div className="flex flex-col items-start">
-          <p className="text-gray-600 line-through ">$ {price}</p>
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <p className="text-xs text-gray-600 line-through">$ {price}</p>
           <p className="text-red-600">$ {price - price * (discount / 100)} $</p>
         </div>
       </div>
