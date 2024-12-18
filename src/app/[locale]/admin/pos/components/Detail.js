@@ -162,8 +162,8 @@ export default function Detail() {
                   <span className="relative flex shrink-0 overflow-hidden border-[0.5px] rounded-sm w-16 h-16 m-1">
                     <Image
                       className="w-full h-full aspect-square"
-                      height={300}
-                      width={300}
+                      height={100}
+                      width={100}
                       alt=""
                       src={item.image}
                     />

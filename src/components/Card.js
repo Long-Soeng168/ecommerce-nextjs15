@@ -21,14 +21,13 @@ export default function Card({ image, title, price, discount, id }) {
         isSelect ? "border-primary" : "border-white"
       } `}
     >
-      <div className="relative">
+      <div className="relative w-full">
         <Image
-          className="rounded-md border-[0.5px] aspect-[1/1] object-cover"
+          className="rounded-md border-[0.5px] w-full h-full aspect-[1/1] object-cover"
           src={`https://admin.thnal.org/assets/images/isbn/thumb/${image}`}
           alt=""
-          width={300}
-          height={300}
-          objectFit="center"
+          width={100}
+          height={100}
         />
         {discount != 0 && discount != null && (
           <span className="absolute px-1.5 font-bold text-sm rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
