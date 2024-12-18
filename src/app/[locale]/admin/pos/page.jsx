@@ -2,8 +2,31 @@ import POSHeader from "./components/pos-header";
 import POSFilter from "./components/pos-filter";
 import DataList from "./components/data-list";
 import Detail from "./components/Detail";
+import { Suspense } from "react";
+import MyLoadingAnimation from "@/components/ui/my-loading-animation";
+import { getCategories } from "@/services/categories-services";
 
-export default function Home() {
+export default async function Home(props) {
+  const categories = await getCategories({
+    orderBy: "name",
+    orderDir: "asc",
+  });
+  
+  const searchParams = await props.searchParams;
+  const search = searchParams?.search || "";
+  const currentPage = searchParams?.page || "1";
+  const perPage = searchParams?.perPage || "24";
+  const categoryId = searchParams?.categoryId || "";
+  const subCategoryId = searchParams?.subCategoryId || "";
+  const orderBy = searchParams?.orderBy || "id";
+  const orderDir = searchParams?.orderDir || "asc";
+  const priceFrom = searchParams?.priceFrom || "";
+  const priceTo = searchParams?.priceTo || "";
+  const yearFrom = searchParams?.yearFrom || "";
+  const yearTo = searchParams?.yearTo || "";
+  const authorId = searchParams?.authorId || "";
+  const publisherId = searchParams?.publisherId || "";
+
   return (
     <>
       <div className="flex mx-auto max-w-[1920px] ">
@@ -11,8 +34,42 @@ export default function Home() {
           <div className="sticky top-0 z-50 bg-white/50 backdrop-blur-md">
             <POSHeader />
           </div>
-          <POSFilter />
-          <DataList />
+          <POSFilter categories={categories} />
+          <Suspense
+          key={
+            " " +
+            search +
+            currentPage +
+            perPage +
+            categoryId +
+            subCategoryId +
+            orderBy +
+            orderDir +
+            priceFrom +
+            priceTo +
+            yearFrom +
+            yearTo +
+            authorId +
+            publisherId
+          }
+          fallback={<MyLoadingAnimation />}
+        >
+          <DataList
+            currentPage={currentPage}
+            perPage={perPage}
+            search={search}
+            categoryId={categoryId}
+            subCategoryId={subCategoryId}
+            orderBy={orderBy}
+            orderDir={orderDir}
+            priceFrom={priceFrom}
+            priceTo={priceTo}
+            yearFrom={yearFrom}
+            yearTo={yearTo}
+            authorId={authorId}
+            publisherId={publisherId}
+          />
+        </Suspense>
         </div>
         <div className="hidden lg:px-2 lg:border-x-2 border-primary w-[450px] lg:block">
           <Detail />

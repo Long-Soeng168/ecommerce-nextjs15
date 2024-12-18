@@ -41,7 +41,7 @@ const MyGallery = ({ image = "", images = [] }) => {
           width={600}
           height={600}
           className="w-full border-[0.5px] border-primary transition-transform duration-500 rounded-md cursor-pointer hover:scale-105"
-          src={IMAGE_BOOK_URL + image}
+          src={IMAGE_BOOK_URL + 'thumb/' + image}
           alt="Book Cover"
         />
       </a>
@@ -55,7 +55,7 @@ const MyGallery = ({ image = "", images = [] }) => {
                     width={100}
                     height={100}
                     className="w-full aspect-[1/1] border-[0.5px] border-primary hover:scale-95 transition-transform duration-500 ease-in-out object-contain p-0.5 rounded-md cursor-pointer"
-                    src={IMAGE_BOOK_URL + src}
+                    src={IMAGE_BOOK_URL + 'thumb/' + src}
                     alt={`Thumbnail ${index + 1}`}
                     loading="lazy" // Lazy load thumbnails
                   />

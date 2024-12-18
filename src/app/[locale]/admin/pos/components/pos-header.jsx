@@ -32,6 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import POSHeaderMenu from "./pos-header-menu";
+import POSSearch from "./pos-search";
 
 const POSHeader = () => {
   return (
@@ -55,21 +56,7 @@ const POSHeader = () => {
                       <SelectItem value="services">Services</SelectItem>
                     </SelectContent>
                   </Select>
-                  <div className="relative flex flex-1">
-                    <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
-                      <Search />
-                    </div>
-                    <Input
-                      className="w-full h-full pl-12 pr-20 border-0 border-l rounded-none rounded-tr-lg rounded-br-lg border-primary focus-visible:ring-primary focus-visible:ring-2"
-                      type="search"
-                      id="default-search"
-                      placeholder="Search Items..."
-                    />
-                    {/* Error here <button> tag */}
-                    <Button className="absolute right-1 top-1/2 -translate-y-[50%]">
-                      Search
-                    </Button>
-                  </div>
+                 <POSSearch />
                 </div>
               </form>
             </div>

@@ -23,7 +23,7 @@ const ProductCard = ({ product, endpoint = '/products' }) => {
               width={600}
               height={600}
               className="object-cover w-full border-[0.5px] border-primary rounded-md aspect-[6/9] font-moul"
-              src={IMAGE_BOOK_URL + product.image}
+              src={IMAGE_BOOK_URL + 'thumb/' + product.image}
               alt={product.title}
             />
           </Link>

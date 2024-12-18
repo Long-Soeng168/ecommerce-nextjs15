@@ -104,7 +104,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                           height={100}
                           className="object-cover border-[0.5px] border-primary w-full rounded-md aspect-[6/9]"
                           src={
-                            IMAGE_BOOK_URL + categoryMostBook?.books[0].image
+                            IMAGE_BOOK_URL + 'thumb/' + categoryMostBook?.books[0].image
                           }
                           alt={categoryMostBook?.books[0].title}
                         />
@@ -156,7 +156,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                         width={50}
                         height={50}
                         className="object-cover border-[0.5px] border-primary aspect-book w-full aspect-book"
-                        src={IMAGE_BOOK_URL + book.image}
+                        src={IMAGE_BOOK_URL + 'thumb/' + book.image}
                         alt={"Image's book"}
                       />
 

@@ -1,86 +1,81 @@
+"use client";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { IMAGE_CATE_URL } from "@/config/env";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { List } from "lucide-react";
 
-const categories = [
-  {
-    id: 1,
-    text: "Brew Equipment",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 2,
-    text: "Coffee",
-    icon: "/images/pos/coffee.png",
-  },
-  {
-    id: 3,
-    text: "Espresso",
-    icon: "/images/pos/drink.png",
-  },
-  {
-    id: 4,
-    text: "Instant + RTD",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 5,
-    text: "Ceramics",
-    icon: "/images/pos/coffee.png",
-  },
-  {
-    id: 6,
-    text: "Brew Equipment",
-    icon: "/images/pos/drink.png",
-  },
-  {
-    id: 7,
-    text: "Coffee",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 8,
-    text: "Espresso",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 9,
-    text: "Instant + RTD",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 10,
-    text: "Instant + RTD",
-    icon: "/images/pos/product2.jpg",
-  },
-  {
-    id: 11,
-    text: "Ceramics",
-    icon: "/images/pos/coffee.png",
-  },
-];
+export default function MyHomeSidebar({ categories, isModal = false }) {
+  const t = useTranslations("Index");
+  const locale = useLocale();
 
-const POSFilter = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const currentCategoryId = searchParams.get("categoryId")?.toString();
+  const currentSubCategoryId = searchParams.get("subCategoryId")?.toString();
+
+  const handleSetCategory = (categoryId) => {
+    const params = new URLSearchParams(searchParams);
+    if (categoryId) {
+      params.set("categoryId", categoryId);
+      params.delete("subCategoryId");
+      params.set("page", 1);
+    } else {
+      params.delete("categoryId");
+    }
+    if (isModal) {
+      replace(`/products?${params.toString()}`);
+    } else {
+      replace(`${pathname}?${params.toString()}`);
+    }
+  };
+
+  const handleSetSubCategory = (subCategoryId, categoryId) => {
+    const params = new URLSearchParams(searchParams);
+    if (subCategoryId) {
+      params.set("subCategoryId", subCategoryId);
+      params.set("categoryId", categoryId);
+      params.set("page", 1);
+    } else {
+      params.delete("subCategoryId");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div>
       <ScrollArea className="w-full px-2 pt-2 mt-2">
         <div className="flex pb-3 space-x-2 w-max">
-          <Button>
-            <p>All Categories</p>
+          <Button variant={currentCategoryId == null ? "default" : "outline"} onClick={() => handleSetCategory()}>
+            <p className="flex items-center gap-2">
+              <List /> All Categories
+            </p>
           </Button>
           {categories.map((category) => (
-            <Button key={category.id} variant="outline">
-              {category.icon && (
-                <Image src={category.icon} width={20} height={20} alt="" />
+            <Button
+              key={category.id}
+              variant={currentCategoryId == category.id ? "default" : "outline"}
+              onClick={() => handleSetCategory(category.id)}
+            >
+              {category.image && (
+                <Image
+                  src={IMAGE_CATE_URL + category.image}
+                  width={28}
+                  height={28}
+                  alt=""
+                  className="p-0.5 bg-white rounded"
+                />
               )}
-              <p>{category.text}</p>
+              <p>{category.name}</p>
             </Button>
           ))}
         </div>
-        <ScrollBar orientation="horizontal" className='text-primary' />
+        <ScrollBar orientation="horizontal" className="text-primary" />
       </ScrollArea>
     </div>
   );
-};
-
-export default POSFilter;
+}
