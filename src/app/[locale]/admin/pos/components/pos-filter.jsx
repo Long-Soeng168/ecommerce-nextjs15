@@ -55,7 +55,7 @@ export default function MyHomeSidebar({ categories, isModal = false }) {
               <List /> All Categories
             </p>
           </Button>
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <Button
               key={category.id}
               variant={currentCategoryId == category.id ? "default" : "outline"}

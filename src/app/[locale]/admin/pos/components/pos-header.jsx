@@ -83,7 +83,7 @@ const POSHeader = () => {
                       <span>Orders</span>
                     </Button>
                   </SheetTrigger>
-                  <SheetContent className="w-auto px-0 sm:max-w-auto">
+                  <SheetContent className="w-full px-0 sm:max-w-auto">
                     <SheetTitle className="hidden" />
                     <SheetDescription className="hidden" />
                     <Detail />

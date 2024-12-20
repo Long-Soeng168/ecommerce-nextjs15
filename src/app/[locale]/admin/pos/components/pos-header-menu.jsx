@@ -14,7 +14,7 @@ const POSHeaderMenu = ({className}) => {
     <div className={`${className}`}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 h-11 border-[0.5px]">
+          <Button variant="outline" size="sm" className="shrink-0 h-11 border-[0.5px]">
             <AlignLeft className="text-primary" />
           </Button>
         </DropdownMenuTrigger>

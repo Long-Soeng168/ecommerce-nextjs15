@@ -1,4 +1,4 @@
-import Card from "@/components/Card";
+import Card from "@/app/[locale]/admin/pos/components/Card";
 import MyPagination from "@/components/my-pagination";
 import { getBooks } from "@/services/books-services";
 
@@ -35,14 +35,11 @@ const DataList = async ({
   const products = results?.data;
   return (
     <>
-      <div className="grid items-start justify-start w-full grid-cols-2 gap-3 px-2 pr-4 my-2 mb-10 sm:grid-cols-3 xl:grid-cols-6 lg:grid-cols-4">
-        {products.map((item, index) => (
+      <div className="grid items-start justify-start w-full grid-cols-2 gap-4 px-2 pr-4 my-2 mb-10 sm:grid-cols-3 xl:grid-cols-6 lg:grid-cols-4">
+        {products?.map((item, index) => (
           <Card
-            key={index} // Use a unique key, such as `index` or a unique property from the `item` object
-            image={item.image}
-            title={item.title}
-            price={item.price}
-            discount={item.discount}
+            key={index}
+            product={item}
           />
         ))}
       </div>
