@@ -5,13 +5,22 @@ import Detail from "./components/Detail";
 import { Suspense } from "react";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import { getCategories } from "@/services/categories-services";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import SuccessDialog from "./components/success-dialog";
 
 export default async function Home(props) {
   const categories = await getCategories({
     orderBy: "name",
     orderDir: "asc",
   });
-  
+
   const searchParams = await props.searchParams;
   const search = searchParams?.search || "";
   const currentPage = searchParams?.page || "1";
@@ -36,45 +45,46 @@ export default async function Home(props) {
           </div>
           <POSFilter categories={categories} />
           <Suspense
-          key={
-            " " +
-            search +
-            currentPage +
-            perPage +
-            categoryId +
-            subCategoryId +
-            orderBy +
-            orderDir +
-            priceFrom +
-            priceTo +
-            yearFrom +
-            yearTo +
-            authorId +
-            publisherId
-          }
-          fallback={<MyLoadingAnimation />}
-        >
-          <DataList
-            currentPage={currentPage}
-            perPage={perPage}
-            search={search}
-            categoryId={categoryId}
-            subCategoryId={subCategoryId}
-            orderBy={orderBy}
-            orderDir={orderDir}
-            priceFrom={priceFrom}
-            priceTo={priceTo}
-            yearFrom={yearFrom}
-            yearTo={yearTo}
-            authorId={authorId}
-            publisherId={publisherId}
-          />
-        </Suspense>
+            key={
+              " " +
+              search +
+              currentPage +
+              perPage +
+              categoryId +
+              subCategoryId +
+              orderBy +
+              orderDir +
+              priceFrom +
+              priceTo +
+              yearFrom +
+              yearTo +
+              authorId +
+              publisherId
+            }
+            fallback={<MyLoadingAnimation />}
+          >
+            <DataList
+              currentPage={currentPage}
+              perPage={perPage}
+              search={search}
+              categoryId={categoryId}
+              subCategoryId={subCategoryId}
+              orderBy={orderBy}
+              orderDir={orderDir}
+              priceFrom={priceFrom}
+              priceTo={priceTo}
+              yearFrom={yearFrom}
+              yearTo={yearTo}
+              authorId={authorId}
+              publisherId={publisherId}
+            />
+          </Suspense>
         </div>
         <div className="hidden lg:px-2 lg:border-x-2 border-primary w-[450px] lg:block">
           <Detail />
         </div>
       </div>
+      <SuccessDialog />
       {/* 
       <main className="mx-auto md:grid md:grid-cols-12 max-w-screen-2xl">
         <section className="col-span-12 md:col-span-9 "></section>
