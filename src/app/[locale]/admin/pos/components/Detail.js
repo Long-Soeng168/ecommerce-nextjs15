@@ -35,7 +35,7 @@ import { BASE_API_URL, EXCHANGE_RATE, IMAGE_BOOK_URL } from "@/config/env";
 import { useEffect, useState } from "react";
 import CartItem from "./cart-item";
 
-export default function Detail() {
+export default function Detail({setIsOpenSheet = null}) {
   const { clearCart, cartItems, getTotalPrice } = usePOSCart();
   const [isMounted, setIsMounted] = useState(false);
   const [receivedDollar, setReceivedDollar] = useState(0);
@@ -45,7 +45,7 @@ export default function Detail() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getTotalRiel = () => {
+  const getTotalAfterDiscountRiel = () => {
     return discountType == "percentage"
       ? (
           (getTotalPrice() - (getTotalPrice() * discountAmount) / 100) *
@@ -58,16 +58,23 @@ export default function Detail() {
           .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
-  const getTotalDollar = () => {
+  const getTotalAfterDiscountDollar = () => {
     return discountType == "percentage"
       ? (getTotalPrice() - (getTotalPrice() * discountAmount) / 100).toFixed(2)
       : (getTotalPrice() - discountAmount).toFixed(2);
   };
 
+  const getTotalRecievedDollar = () => {
+    const rielToDollar = Number(receivedRiel / EXCHANGE_RATE); // Convert riel to dollars
+    const totalDollar = Number(receivedDollar); // Convert receivedDollar to a number
+
+    return (rielToDollar + totalDollar).toFixed(2); // Calculate and format to 2 decimal places
+  };
+
   const getReturnChangeDollar = () => {
     const rielToDollar = Number(receivedRiel / EXCHANGE_RATE); // Convert riel to dollars
     const totalDollar = Number(receivedDollar); // Convert receivedDollar to a number
-    const totalCostDollar = Number(getTotalDollar()); // Get the total cost in dollars
+    const totalCostDollar = Number(getTotalAfterDiscountDollar()); // Get the total cost in dollars
 
     if (!receivedDollar && !receivedRiel) return 0;
 
@@ -85,7 +92,7 @@ export default function Detail() {
     setError(null);
     const totalReceivedToDollar = Number(receivedRiel / EXCHANGE_RATE); // Convert riel to dollars
     const totalReceivedDollar = Number(receivedDollar);
-    if (totalReceivedToDollar + totalReceivedDollar < getTotalDollar()) {
+    if (totalReceivedToDollar + totalReceivedDollar < getTotalAfterDiscountDollar()) {
       setError("Total Recieved Less Than Total Cost");
       return null;
     }
@@ -93,8 +100,14 @@ export default function Detail() {
 
     const orderData = {
       customerId: 9999,
-      paymentId: 9999,
-      total: getTotalDollar(),
+      paymentTypeId: 9999,
+      discount: discountAmount,
+      discountType: discountType,
+      subtotal: getTotalPrice(),
+      total: getTotalAfterDiscountDollar(),
+      total_recieved_dollar: getTotalRecievedDollar(),
+      exchange_rate: EXCHANGE_RATE,
+      userId: user.id,
       items: cartItems.map((item) => ({
         id: item.id,
         title: item.title,
@@ -123,7 +136,13 @@ export default function Detail() {
       }
 
       // Handle success (e.g., navigate to the success page)
-      clearCart({ isShowDialog: false });
+      setDiscountAmount(0);
+      setReceivedDollar(0);
+      setReceivedRiel(0);
+      if(setIsOpenSheet != null){
+        setIsOpenSheet(false);
+      }
+      clearCart({ isShowDialog: true });
       // router.push("/cart/success");
     } catch (error) {
       setError(error.message);
@@ -202,6 +221,7 @@ export default function Detail() {
               </span>
               <input
                 onChange={(e) => setDiscountAmount(e.target.value)}
+                value={discountAmount > 0 && discountAmount}
                 type="number"
                 className="w-full px-1 border-[0.5px] border-primary h-full text-lg text-primary outline-none text-end no-spinner "
                 placeholder="0"
@@ -210,7 +230,7 @@ export default function Detail() {
           </div>
           <div className="flex justify-between pt-4 mt-4 text-2xl font-bold border-t">
             <p className="text-black">Total</p>
-            <p className="text-red-600">$ {getTotalDollar()}</p>
+            <p className="text-red-600">$ {getTotalAfterDiscountDollar()}</p>
           </div>
         </div>
 
@@ -258,7 +278,7 @@ export default function Detail() {
                   <p>Total ($) : </p>{" "}
                   <p className="text-3xl">
                     <span className="text-3xl font-semibold">
-                      {getTotalDollar()}
+                      {getTotalAfterDiscountDollar()}
                     </span>
                     <span>{" $"}</span>
                   </p>
@@ -267,7 +287,7 @@ export default function Detail() {
                   <p>Total (៛) : </p>{" "}
                   <p>
                     <span className="font-semibold tracking-wider">
-                      {getTotalRiel()}
+                      {getTotalAfterDiscountRiel()}
                     </span>
                     <span>{" រៀល"}</span>
                   </p>
@@ -339,6 +359,7 @@ export default function Detail() {
                       </span>
                       <Input
                         onChange={(e) => setReceivedDollar(e.target.value)}
+                        value={receivedDollar > 0 && receivedDollar}
                         type="number"
                         placeholder="0.00 $"
                         className="z-10 border rounded-none border-primary"
@@ -358,6 +379,7 @@ export default function Detail() {
                       </span>
                       <Input
                         onChange={(e) => setReceivedRiel(e.target.value)}
+                        value={receivedRiel > 0 && receivedRiel}
                         type="number"
                         placeholder="000 រៀល"
                         className="z-10 border rounded-none border-primary"
@@ -375,11 +397,17 @@ export default function Detail() {
                     >
                       Return Change
                     </label>
-                    <div className="flex gap-2 text-lg rounded-lg text-primary">
-                      <p>USD: </p> <p>{getReturnChangeDollar()} $</p>
+                    <div className="flex w-full gap-2 text-lg rounded-lg text-primary">
+                      <p>USD: </p>{" "}
+                      <p className="w-full overflow-auto">
+                        {getReturnChangeDollar()} $
+                      </p>
                     </div>
                     <div className="flex gap-2 text-lg rounded-lg text-primary">
-                      <p>KHR: </p> <p>{getReturnChangeRiel()} ៛</p>
+                      <p>KHR: </p>{" "}
+                      <p className="w-full overflow-auto">
+                        {getReturnChangeRiel()} ៛
+                      </p>
                     </div>
                   </div>
                 </div>

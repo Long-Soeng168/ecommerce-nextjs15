@@ -1,27 +1,6 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  AlignLeft,
-  Bell,
-  Hand,
-  Layout,
-  ListCheck,
-  ListChecksIcon,
-  ListEnd,
-  LogOut,
-  PanelTop,
-  Search,
-  ShoppingCart,
-} from "lucide-react";
-
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ListChecksIcon, ListEnd } from "lucide-react";
 import Detail from "@/app/[locale]/admin/pos/components/Detail";
 
 import {
@@ -33,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import POSHeaderMenu from "./pos-header-menu";
 import POSSearch from "./pos-search";
+import OrderButton from "./order-button";
 
 const POSHeader = () => {
   return (
@@ -56,7 +36,7 @@ const POSHeader = () => {
                       <SelectItem value="services">Services</SelectItem>
                     </SelectContent>
                   </Select>
-                 <POSSearch />
+                  <POSSearch />
                 </div>
               </form>
             </div>
@@ -65,7 +45,10 @@ const POSHeader = () => {
           <div className="flex items-center justify-between w-full gap-2 md:w-auto md:order-3">
             <POSHeaderMenu className="lg:hidden" />
             <div className="flex items-center gap-2">
-              <Button variant="outline" className="relative h-11 border-[0.5px]">
+              <Button
+                variant="outline"
+                className="relative h-11 border-[0.5px]"
+              >
                 <Link href="#" className="flex items-center gap-1">
                   <ListEnd className="text-primary" />
                   <span>Holds</span>
@@ -75,21 +58,7 @@ const POSHeader = () => {
                 </span>
               </Button>
 
-              <section className="lg:hidden">
-                <Sheet  modal={false}>
-                  <SheetTrigger asChild>
-                    <Button className="flex items-center border-[0.5px] h-11">
-                      <ListChecksIcon />
-                      <span>Orders</span>
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent className="w-full px-0 sm:max-w-auto">
-                    <SheetTitle className="hidden" />
-                    <SheetDescription className="hidden" />
-                    <Detail />
-                  </SheetContent>
-                </Sheet>
-              </section>
+             <OrderButton />
             </div>
           </div>
         </div>
