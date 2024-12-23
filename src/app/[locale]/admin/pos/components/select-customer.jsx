@@ -19,32 +19,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-const customers = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
-
-export default function SelectCustomer() {
+export default function SelectCustomer({customers, selectedCustomer, setSelectedCustomer}) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState(selectedCustomer || 0)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -53,10 +30,10 @@ export default function SelectCustomer() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between border-[0.5px] rounded-none"
+          className="w-[200px] overflow-x-auto justify-between border-[0.5px] rounded-none"
         >
           {value
-            ? customers.find((customer) => customer.value === value)?.label
+            ? customers.find((customer) => customer.id == value)?.name
             : "Select customer..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -67,20 +44,38 @@ export default function SelectCustomer() {
           <CommandList>
             <CommandEmpty>No customer found.</CommandEmpty>
             <CommandGroup>
-              {customers.map((customer) => (
-                <CommandItem
-                  key={customer.value}
-                  value={customer.value}
+            <CommandItem
+                  key={0}
+                  value={0}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                    setValue(0)
+                    setSelectedCustomer(0)
                     setOpen(false)
                   }}
                 >
-                  {customer.label}
+                  N/A
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === customer.value ? "opacity-100" : "opacity-0"
+                      value === 0 ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              {customers?.map((customer) => (
+                <CommandItem
+                  key={customer.id}
+                  value={customer.id}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue == value ? "" : customer.id)
+                    setSelectedCustomer(currentValue == value ? "0" : customer.id)
+                    setOpen(false)
+                  }}
+                >
+                  {customer.name}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      value === customer.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

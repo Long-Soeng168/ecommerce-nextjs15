@@ -63,9 +63,9 @@ export default async function Page({ params }) {
         <article>
           {blog?.image && (
             <Image
-              width={600}
-              height={600}
-              className="object-cover w-full rounded-md aspect-video"
+              width={1000}
+              height={1000}
+              className="w-full rounded-md"
               src={process.env.IMAGE_BLOG_URL + blog.image}
               alt={"Image's " + blog.name}
             />

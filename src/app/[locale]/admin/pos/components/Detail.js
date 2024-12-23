@@ -6,6 +6,8 @@ import {
   CircleDollarSignIcon,
   ListEnd,
   ListRestart,
+  ListXIcon,
+  RotateCw,
 } from "lucide-react";
 import {
   ScrollArea,
@@ -31,14 +33,27 @@ import {
 import SelectCustomer from "./select-customer";
 import { Input } from "@/components/ui/input";
 import { usePOSCart } from "@/contexts/POSContext";
-import { BASE_API_URL, EXCHANGE_RATE, IMAGE_BOOK_URL } from "@/config/env";
+import {
+  BASE_API_URL,
+  EXCHANGE_RATE,
+  IMAGE_BOOK_URL,
+  IMAGE_PAYMENT_URL,
+} from "@/config/env";
 import { useEffect, useState } from "react";
 import CartItem from "./cart-item";
 import SuccessDialog from "./success-dialog";
+import { usePOSDetailContext } from "@/contexts/POSDetailContext";
 
-export default function Detail({ setIsOpenSheet = null }) {
-  const { clearCart, cartItems, getTotalPrice } = usePOSCart();
+export default function Detail({ payments, customers }) {
   const [isMounted, setIsMounted] = useState(false);
+  const {
+    selectedCustomer,
+    setSelectedCustomer,
+    isOpenDialog,
+    setIsOpenDialog,
+  } = usePOSDetailContext();
+
+  const { clearCart, cartItems, getTotalPrice } = usePOSCart();
   const [receivedDollar, setReceivedDollar] = useState(0);
   const [receivedRiel, setReceivedRiel] = useState(0);
   const [discountAmount, setDiscountAmount] = useState(0);
@@ -46,7 +61,12 @@ export default function Detail({ setIsOpenSheet = null }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [selectedPaymentError, setSelectedPaymentError] = useState(null);
+
   const [isOpenSuccessSubmit, setIsOpenSuccessSubmit] = useState(false);
+  const [isShowBtnInSuccessSubmit, setIsShowBtnInSuccessSubmit] =
+    useState(false);
 
   const getTotalAfterDiscountRiel = () => {
     return discountType == "percentage"
@@ -63,15 +83,15 @@ export default function Detail({ setIsOpenSheet = null }) {
 
   const getTotalAfterDiscountDollar = () => {
     return discountType == "percentage"
-      ? (getTotalPrice() - (getTotalPrice() * discountAmount) / 100).toFixed(2)
-      : (getTotalPrice() - discountAmount).toFixed(2);
+      ? (getTotalPrice() - (getTotalPrice() * discountAmount) / 100)?.toFixed(2)
+      : (getTotalPrice() - discountAmount)?.toFixed(2);
   };
 
   const getTotalRecievedDollar = () => {
     const rielToDollar = Number(receivedRiel / EXCHANGE_RATE); // Convert riel to dollars
     const totalDollar = Number(receivedDollar); // Convert receivedDollar to a number
 
-    return (rielToDollar + totalDollar).toFixed(2); // Calculate and format to 2 decimal places
+    return (rielToDollar + totalDollar)?.toFixed(2); // Calculate and format to 2 decimal places
   };
 
   const getReturnChangeDollar = () => {
@@ -81,7 +101,7 @@ export default function Detail({ setIsOpenSheet = null }) {
 
     if (!receivedDollar && !receivedRiel) return 0;
 
-    return (rielToDollar + totalDollar - totalCostDollar).toFixed(2); // Calculate and format to 2 decimal places
+    return (rielToDollar + totalDollar - totalCostDollar)?.toFixed(2); // Calculate and format to 2 decimal places
   };
 
   const getReturnChangeRiel = () => {
@@ -93,20 +113,28 @@ export default function Detail({ setIsOpenSheet = null }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSelectedPaymentError(null);
+
+    if (!selectedPayment) {
+      setSelectedPaymentError("Please Select Payment Method.");
+      return null;
+    }
+
     const totalReceivedToDollar = Number(receivedRiel / EXCHANGE_RATE); // Convert riel to dollars
     const totalReceivedDollar = Number(receivedDollar);
     if (
       totalReceivedToDollar + totalReceivedDollar <
       getTotalAfterDiscountDollar()
     ) {
-      setError("Total Recieved Less Than Total Cost");
+      setError("Total Recieved Less Than Total Cost.");
       return null;
     }
+
     const user = JSON.parse(localStorage.getItem("user"));
 
     const orderData = {
-      customerId: 9999,
-      paymentTypeId: 9999,
+      customerId: selectedCustomer,
+      paymentTypeId: selectedPayment,
       discount: discountAmount,
       discountType: discountType,
       subtotal: getTotalPrice(),
@@ -114,8 +142,8 @@ export default function Detail({ setIsOpenSheet = null }) {
       total_recieved_dollar: getTotalRecievedDollar(),
       exchange_rate: EXCHANGE_RATE,
       userId: user.id,
-      staus: 1,
-      items: cartItems.map((item) => ({
+      status: 1,
+      items: cartItems?.map((item) => ({
         id: item.id,
         title: item.title,
         image: item.image,
@@ -146,10 +174,73 @@ export default function Detail({ setIsOpenSheet = null }) {
       setDiscountAmount(0);
       setReceivedDollar(0);
       setReceivedRiel(0);
+      setSelectedPayment(null);
+      setSelectedCustomer(0);
       // if (setIsOpenSheet != null) {
       //   setIsOpenSheet(false);
       // }
-      clearCart({ isShowDialog: true });
+      clearCart();
+      setIsShowBtnInSuccessSubmit(true);
+      setIsOpenSuccessSubmit(true);
+      // router.push("/cart/success");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleHold = async () => {
+    setError(null);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const orderData = {
+      customerId: selectedCustomer,
+      discount: discountAmount,
+      discountType: discountType,
+      subtotal: getTotalPrice(),
+      total: getTotalAfterDiscountDollar(),
+      userId: user.id,
+      status: 0,
+      items: cartItems?.map((item) => ({
+        id: item.id,
+        title: item.title,
+        image: item.image,
+        price: item.price,
+        discount: item.discount,
+        quantity: item.quantity,
+        type: item.type,
+      })),
+    };
+    // console.log(orderData);
+    // return null;
+    setLoading(true);
+
+    try {
+      const response = await fetch(BASE_API_URL + "/invoices", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to place the order. Please contact admin.");
+      }
+
+      // Handle success (e.g., navigate to the success page)
+      setDiscountAmount(0);
+      setReceivedDollar(0);
+      setReceivedRiel(0);
+      setSelectedPayment(null);
+      setSelectedCustomer(0);
+      // if (setIsOpenSheet != null) {
+      //   setIsOpenSheet(false);
+      // }
+      clearCart();
+      setIsShowBtnInSuccessSubmit(false);
       setIsOpenSuccessSubmit(true);
       // router.push("/cart/success");
     } catch (error) {
@@ -165,7 +256,7 @@ export default function Detail({ setIsOpenSheet = null }) {
   if (!isMounted) {
     return null;
   }
-  // if (!cartItems || cartItems.length === 0) {
+  // if (!cartItems || cartItems?.length === 0) {
   //   return (
   //     <section className="sticky z-50 mx-2 my-10 top-4">
   //       <div className="max-w-sm p-4 mx-auto bg-white rounded-lg shadow-lg">
@@ -196,9 +287,19 @@ export default function Detail({ setIsOpenSheet = null }) {
                 <th className="text-gray-500">Total</th>
                 <th className="text-gray-500"></th>
               </tr>
-              {cartItems.map((item, index) => (
-                <CartItem item={item} key={index} />
-              ))}
+              {cartItems?.length > 0 ? (
+                cartItems?.map((item, index) => (
+                  <CartItem item={item} key={index} />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="pt-10">
+                    <div className="flex justify-center text-primary">
+                      <ListXIcon /> No Data..
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </ScrollArea>
@@ -207,13 +308,17 @@ export default function Detail({ setIsOpenSheet = null }) {
           <div className="pt-4 space-y-3 border-t">
             <div className="flex justify-between text-lg">
               <p className="text-foreground">Customer</p>
-              <div>
-                <SelectCustomer />
+              <div key={" " + selectedCustomer}>
+                <SelectCustomer
+                  customers={customers}
+                  selectedCustomer={selectedCustomer}
+                  setSelectedCustomer={setSelectedCustomer}
+                />
               </div>
             </div>
             <div className="flex justify-between text-lg">
               <p className="text-foreground">Subtotal</p>
-              <p className="text-red-600 ">${getTotalPrice().toFixed(2)}</p>
+              <p className="text-red-600 ">${getTotalPrice()?.toFixed(2)}</p>
             </div>
             <div className="flex justify-between text-lg">
               <p className="flex items-center text-foreground">Discount</p>
@@ -247,7 +352,7 @@ export default function Detail({ setIsOpenSheet = null }) {
             </div>
           </div>
 
-          {cartItems.length > 0 && (
+          {cartItems?.length > 0 && (
             <Dialog>
               <div className="flex gap-2 mb-2">
                 <ShadCNButton
@@ -258,13 +363,26 @@ export default function Detail({ setIsOpenSheet = null }) {
                 >
                   <ListRestart /> Reset
                 </ShadCNButton>
-                <ShadCNButton
-                  size="mySize"
-                  variant="outline"
-                  className="w-full p-2 mb-2 rounded-lg"
-                >
-                  <ListEnd /> Hold
-                </ShadCNButton>
+                {loading ? (
+                  <ShadCNButton
+                    size="mySize"
+                    variant="outline"
+                    className="w-full p-2 mb-2 rounded-lg"
+                  >
+                    <RotateCw className=" animate-spin" /> Holding...
+                  </ShadCNButton>
+                ) : (
+                  <ShadCNButton
+                    onClick={() => {
+                      handleHold();
+                    }}
+                    size="mySize"
+                    variant="outline"
+                    className="w-full p-2 mb-2 rounded-lg"
+                  >
+                    <ListEnd /> Hold
+                  </ShadCNButton>
+                )}
 
                 <DialogTrigger asChild className="w-full">
                   <ShadCNButton
@@ -309,98 +427,109 @@ export default function Detail({ setIsOpenSheet = null }) {
                     </div>
                   </div>
                   {/* Payment Method */}
-                  <div className="flex items-center justify-between mt-4 mb-2 text-gray-700 text-start">
-                    <span>Payment Method</span>{" "}
-                    <div>
+                  <div className="flex items-center justify-between mt-4 font-semibold text-gray-700 text-start">
+                    <span>Payment Method</span>
+                    {/* <div>
                       (Customer Credit :{" "}
                       <span className="text-destructive">$ 321</span>)
-                    </div>
+                    </div> */}
                   </div>
                   <ScrollArea className="w-full pb-3 whitespace-nowrap">
                     <div className="flex items-center gap-2">
-                      <ShadCNButton variant="outline">
-                        <Image
-                          src="/images/pos/dollar.png"
-                          width={24}
-                          height={24}
-                          alt="image"
-                        ></Image>
-                        <p> Cash</p>
-                      </ShadCNButton>
-                      <ShadCNButton variant="outline">
-                        <Image
-                          src="/images/pos/credit.png"
-                          width={24}
-                          height={24}
-                          alt="image"
-                        ></Image>
-                        <p> Card</p>
-                      </ShadCNButton>
-                      <ShadCNButton variant="outline">
-                        <Image
-                          src="/images/pos/abaPay.png"
-                          width={24}
-                          height={24}
-                          alt="image"
-                        ></Image>
-                        <p> ABA</p>
-                      </ShadCNButton>
-                      <ShadCNButton variant="outline">
-                        <Image
-                          src="/images/pos/dollar.png"
-                          width={24}
-                          height={24}
-                          alt="image"
-                        ></Image>
-                        <p>Credit</p>
-                      </ShadCNButton>
+                      {payments?.map((payment) => {
+                        return (
+                          <ShadCNButton
+                            onClick={() => {
+                              setSelectedPaymentError(null);
+                              setSelectedPayment(payment.id);
+                            }}
+                            key={payment.id}
+                            variant={`${
+                              selectedPayment == payment.id
+                                ? "default"
+                                : "outline"
+                            }`}
+                          >
+                            <Image
+                              src={IMAGE_PAYMENT_URL + payment.image}
+                              width={30}
+                              height={30}
+                              alt=""
+                              className="p-0.5"
+                            ></Image>
+                            <p>{payment.name}</p>
+                          </ShadCNButton>
+                        );
+                      })}
                     </div>
                     <ScrollBar orientation="horizontal" />
+                    <p className="mt-1 text-destructive">
+                      {selectedPaymentError}
+                    </p>
                   </ScrollArea>
 
                   <section className="flex flex-wrap items-center">
                     <div className="flex-1">
                       {/* Received Amount */}
-                      <div className="mb-4">
+                      <div>
                         <label
                           htmlFor="received-dollar"
-                          className="block text-black text-[16px] font-medium mb-1 text-start"
+                          className="block text-black text-[16px] font-medium text-start"
                         >
                           Received In Dollar
                         </label>
                         <div className="flex">
-                          <span className="flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border border-primary">
+                          <span
+                            className={`flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border ${
+                              error ? "border-destructive" : "border-primary"
+                            }`}
+                          >
                             $
                           </span>
                           <Input
-                            onChange={(e) => setReceivedDollar(e.target.value)}
+                            onChange={(e) => {
+                              setError(null);
+                              setReceivedDollar(e.target.value);
+                            }}
                             value={receivedDollar > 0 && receivedDollar}
                             type="number"
                             placeholder="0.00 $"
-                            className="z-10 border rounded-none border-primary"
+                            className={`z-10 border rounded-none ${
+                              error ? "border-destructive" : "border-primary"
+                            }`}
                           />
                         </div>
                       </div>
-                      <div>
+                      <div className="mt-2">
                         <label
                           htmlFor="received-dollar"
-                          className="block text-black text-[16px] font-medium mb-1 text-start"
+                          className="block text-black text-[16px] font-medium text-start"
                         >
                           Received In Riel
                         </label>
                         <div className="flex">
-                          <span className="flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border border-primary">
+                          <span
+                            className={`flex w-10 items-center text-2xl text-primary justify-center translate-x-[1px] border ${
+                              error ? "border-destructive" : "border-primary"
+                            }`}
+                          >
                             ៛
                           </span>
                           <Input
-                            onChange={(e) => setReceivedRiel(e.target.value)}
+                            onChange={(e) => {
+                              setError(null);
+                              setReceivedRiel(e.target.value);
+                            }}
                             value={receivedRiel > 0 && receivedRiel}
                             type="number"
                             placeholder="000 រៀល"
-                            className="z-10 border rounded-none border-primary"
+                            className={`z-10 border rounded-none ${
+                              error ? "border-destructive" : "border-primary"
+                            }`}
                           />
                         </div>
                       </div>
+                      <p className="mt-1 text-destructive">{error}</p>
                     </div>
                     {/* Return Amount */}
 
@@ -429,15 +558,24 @@ export default function Detail({ setIsOpenSheet = null }) {
                   </section>
                 </>
                 <div className="mt-2">
-                  <p className="text-destructive">{error}</p>
-                  <ShadCNButton
-                    onClick={handleSubmit}
-                    size="mySize"
-                    variant="myStyle"
-                    className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
-                  >
-                    <CheckCircle /> {loading ? "Submiting..." : "Submit"}
-                  </ShadCNButton>
+                  {loading ? (
+                    <ShadCNButton
+                      size="mySize"
+                      variant="myStyle"
+                      className="w-full p-2 mt-4 mb-2 text-white bg-gray-600 rounded-lg cursor-not-allowed hover:bg-primary/90"
+                    >
+                      <RotateCw className=" animate-spin" /> Submiting...
+                    </ShadCNButton>
+                  ) : (
+                    <ShadCNButton
+                      onClick={handleSubmit}
+                      size="mySize"
+                      variant="myStyle"
+                      className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
+                    >
+                      <CheckCircle /> Submit
+                    </ShadCNButton>
+                  )}
                 </div>
               </DialogContent>
             </Dialog>
@@ -447,6 +585,7 @@ export default function Detail({ setIsOpenSheet = null }) {
       <SuccessDialog
         isOpen={isOpenSuccessSubmit}
         setIsOpen={setIsOpenSuccessSubmit}
+        isShowBtnInSuccessSubmit={isShowBtnInSuccessSubmit}
       />
     </>
   );

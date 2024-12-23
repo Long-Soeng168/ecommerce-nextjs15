@@ -1,5 +1,6 @@
 "use client";
 import { POSCartProvider } from "@/contexts/POSContext";
+import { POSDetailProvider } from "@/contexts/POSDetailContext";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -20,7 +21,9 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div>
-      <POSCartProvider>{children}</POSCartProvider>
+      <POSCartProvider>
+        <POSDetailProvider>{children}</POSDetailProvider>
+      </POSCartProvider>
     </div>
   );
 };

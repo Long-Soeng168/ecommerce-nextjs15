@@ -4,22 +4,19 @@ import DataList from "./components/data-list";
 import Detail from "./components/Detail";
 import { Suspense } from "react";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
-import { getCategories } from "@/services/categories-services";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { getCategories } from "@/services/categories-services"; 
 import SuccessDialog from "./components/success-dialog";
+import { getPayments } from "@/services/payments-services";
+import { getCustomers } from "@/services/customers-services";
 
 export default async function Home(props) {
   const categories = await getCategories({
     orderBy: "name",
     orderDir: "asc",
   });
+
+  const payments = await getPayments();
+  const customers = await getCustomers();
 
   const searchParams = await props.searchParams;
   const search = searchParams?.search || "";
@@ -41,7 +38,7 @@ export default async function Home(props) {
       <div className="flex mx-auto max-w-[1920px] ">
         <div className="flex-1 h-screen overflow-x-auto overflow-y-auto custom-scrollbar">
           <div className="sticky top-0 z-50 bg-white/50 backdrop-blur-md">
-            <POSHeader />
+            <POSHeader customers={customers} payments={payments} />
           </div>
           <POSFilter categories={categories} />
           <Suspense
@@ -81,7 +78,7 @@ export default async function Home(props) {
           </Suspense>
         </div>
         <div className="hidden lg:px-2 lg:border-x-2 border-primary w-[450px] lg:block">
-          <Detail />
+          <Detail payments={payments} customers={customers} />
         </div>
       </div>
       <SuccessDialog />

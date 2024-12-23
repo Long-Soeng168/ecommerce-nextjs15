@@ -15,7 +15,7 @@ import {
 
 import Detail from "@/app/[locale]/admin/pos/components/Detail";
 
-const OrderButton = () => {
+const OrderButton = ({customers, payments}) => {
   const { cartItems } = usePOSCart();
   const [isHydrated, setIsHydrated] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -48,7 +48,7 @@ const OrderButton = () => {
         <SheetContent className="w-full px-0 sm:max-w-auto">
           <SheetTitle className="hidden">Orders</SheetTitle>
           <SheetDescription className="hidden">Order Details</SheetDescription>
-          <Detail setIsOpenSheet={setIsOpen} />
+          <Detail customers={customers} payments={payments} />
         </SheetContent>
       </Sheet>
     </section>

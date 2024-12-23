@@ -16,13 +16,13 @@ const initialState = { cartItems: [] };
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_TO_CART": {
-      const itemExists = state.cartItems.find(
+      const itemExists = state.cartItems?.find(
         (item) => item.id === action.payload.id
       );
       if (itemExists) {
         return {
           ...state,
-          cartItems: state.cartItems.map((item) =>
+          cartItems: state.cartItems?.map((item) =>
             item.id === action.payload.id
               ? { ...item, quantity: item.quantity + 1 }
               : item
@@ -34,17 +34,35 @@ function cartReducer(state, action) {
         cartItems: [{ ...action.payload, quantity: 1 }, ...state.cartItems],
       };
     }
+    case "ADD_MULTIPLE_TO_CART": {
+      const updatedCartItems = [...state.cartItems];
+      action.payload.forEach((newItem) => {
+        const itemExists = updatedCartItems.find(
+          (item) => item.id === newItem.product_id
+        );
+        if (itemExists) {
+          itemExists.quantity += newItem.quantity || 1; // Default to 1 if quantity is not provided
+        } else {
+          updatedCartItems.push({
+            ...newItem,
+            quantity: newItem.quantity || 1,
+            id: newItem.product_id || newItem.id,
+          });
+        }
+      });
+      return { ...state, cartItems: updatedCartItems };
+    }
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cartItems: state.cartItems.filter(
+        cartItems: state.cartItems?.filter(
           (item) => item.id !== action.payload.id
         ),
       };
     case "UPDATE_QUANTITY":
       return {
         ...state,
-        cartItems: state.cartItems.map((item) =>
+        cartItems: state.cartItems?.map((item) =>
           item.id === action.payload.id
             ? {
                 ...item,
@@ -85,17 +103,22 @@ export function POSCartProvider({ children }) {
   }, [state]);
 
   const showDialog = (message) => {
-    // setDialogMessage(message);
-    // setIsDialogOpen(true);
+    setDialogMessage(message);
+    setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
     setIsDialogOpen(false);
   };
 
-  const addToCart = (product, isShowDialog = true) => {
+  const addToCart = (product, isShowDialog = false) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
     isShowDialog && showDialog(`${product.title} has been added to the cart.`);
+  };
+
+  const addMultipleToCart = (products, isShowDialog = false) => {
+    dispatch({ type: "ADD_MULTIPLE_TO_CART", payload: products });
+    isShowDialog && showDialog("Multiple items have been added to the cart.");
   };
 
   const removeFromCart = (product) => {
@@ -110,17 +133,19 @@ export function POSCartProvider({ children }) {
     });
   };
 
-  const clearCart = ({ isShowDialog = true }) => {
+  const clearCart = (isShowDialog = false) => {
     dispatch({ type: "CLEAR_CART" });
     isShowDialog && showDialog("Your cart has been cleared.");
   };
 
   const getTotalItemCount = () => {
-    return state.cartItems.length; // Access length directly, not as a method
+    return state.cartItems?.length; // Access length directly, not as a method
   };
   const getTotalPrice = () => {
-    return state.cartItems.reduce(
-      (total, item) => total + (item.price - (item.price * (item.discount/100))) * item.quantity,
+    return state.cartItems?.reduce(
+      (total, item) =>
+        total +
+        (item.price - item.price * (item.discount / 100)) * item.quantity,
       0
     );
   };
@@ -130,6 +155,7 @@ export function POSCartProvider({ children }) {
       value={{
         cartItems: state.cartItems,
         addToCart,
+        addMultipleToCart,
         removeFromCart,
         clearCart,
         handleQuantityChange,

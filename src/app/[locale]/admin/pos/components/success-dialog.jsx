@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 import Lottie from "lottie-react";
 import animationData from "/public/images/animations/success-animation.json";
@@ -19,36 +19,39 @@ export default function SuccessDialog({
   setIsOpen,
   title = "Success",
   message = "",
+  isShowBtnInSuccessSubmit = false,
 }) {
   return (
-    <AlertDialog open={isOpen} onOpenChange={(state) => setIsOpen(state)}>
-      <AlertDialogContent className="w-auto overflow-hidden">
-        <AlertDialogHeader>
-          <AlertDialogHeader className="flex items-center justify-center">
+    <Dialog open={isOpen} onOpenChange={(state) => setIsOpen(state)}>
+      <DialogContent className="w-auto overflow-hidden">
+        <DialogHeader>
+          <DialogHeader className="flex items-center justify-center">
             <Lottie
               animationData={animationData}
               className="flex items-center justify-center w-60"
               loop={false}
             />
-          </AlertDialogHeader>
-          <AlertDialogTitle className="text-center">{title}</AlertDialogTitle>
-          <AlertDialogDescription>{message}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter className={`mt-4 gap-2`}>
-          <Button
-            onClick={() => setIsOpen(false)}
-            type="button"
-            variant="outline"
-          >
-            <X />
-            Close
-          </Button>
-          <Button type="button">
-            <ReceiptTextIcon />
-            Print Invoice
-          </Button>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </DialogHeader>
+          <DialogTitle className="text-center">{title}</DialogTitle>
+          <DialogDescription>{message}</DialogDescription>
+        </DialogHeader>
+        {isShowBtnInSuccessSubmit && (
+          <DialogFooter className={`mt-4 gap-2`}>
+            <Button
+              onClick={() => setIsOpen(false)}
+              type="button"
+              variant="outline"
+            >
+              <X />
+              Close
+            </Button>
+            <Button type="button">
+              <ReceiptTextIcon />
+              Print Invoice
+            </Button>
+          </DialogFooter>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }

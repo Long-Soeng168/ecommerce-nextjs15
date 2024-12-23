@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ListChecksIcon, ListEnd } from "lucide-react";
-import Detail from "@/app/[locale]/admin/pos/components/Detail";
 
 import {
   Select,
@@ -13,8 +12,9 @@ import {
 import POSHeaderMenu from "./pos-header-menu";
 import POSSearch from "./pos-search";
 import OrderButton from "./order-button";
+import { Holds } from "./holds";
 
-const POSHeader = () => {
+const POSHeader = ({ customers, payments }) => {
   return (
     <>
       <header>
@@ -45,20 +45,9 @@ const POSHeader = () => {
           <div className="flex items-center justify-between w-full gap-2 md:w-auto md:order-3">
             <POSHeaderMenu className="lg:hidden" />
             <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                className="relative h-11 border-[0.5px]"
-              >
-                <Link href="#" className="flex items-center gap-1">
-                  <ListEnd className="text-primary" />
-                  <span>Holds</span>
-                </Link>
-                <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-2">
-                  2
-                </span>
-              </Button>
-
-             <OrderButton />
+             
+              <Holds />
+              <OrderButton customers={customers} payments={payments} />
             </div>
           </div>
         </div>
