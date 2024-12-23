@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/themacstore/Desktop/PROJECT_nextjs/ecommerce_nextjs15/src/app/[locale]/layout":["static/media/6e26156e1713bd4d-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
